@@ -1,0 +1,30 @@
+# To compile a file with functions for reading or moving (ie everything but the move function that calls
+#the sensors replace testMove by the name of your file and include the .h file you find in the regrouped_code 
+#directory. Note that: the update sensors value need to be included in your file that contains the main.
+# Take the testMove build as exemple and it should work!!
+
+testMove : testMove.c readFunctions.o moveFunctions.o detect_disting_functions.o testMove.c
+	gcc -lev3dev-c $^ -o $@
+
+
+#testReadsh : testReadsh.c readFunctions.o 
+#	gcc -lev3dev-c $^ -o $@
+
+readFunctions.o : readFunctions.c
+	gcc -lev3dev-c -c $< -o $@
+
+#testMoveFunctions : moveFunctions.o testMoveFunctions.c 
+#	gcc -lev3dev-c $@.c $< -o $@
+
+moveFunctions.o : moveFunctions.c
+	gcc -lev3dev-c -c $< -o $@
+
+detect_disting_functions.o : detect_disting_functions.c
+	gcc -lev3dev-c -c $< -o $@
+
+
+
+run:
+	./testMove
+
+
