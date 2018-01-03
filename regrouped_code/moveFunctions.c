@@ -240,6 +240,51 @@ if(ev3_search_tacho_plugged_in( S_MOTOR_PORT, S_MOTOR_EXT_PORT, motor + S,0))
 printf("Motors and servo Online\n");
 return ( 0 );
 }
+int moveThread(int speed, int timeInMs,int inf/*If we want to go until an obstacle is found*/,char D){
+	pthread_mutex_init(&myMutex , NULL ) ;
+	pthread_mutex_lock(&myMutex);
+	pthread_t sensorsThread;
+	struct timespec absDateToStop;
+	struct timeval now;
+	struct timeval startDate;
+	struct timeval stopDate;
+	int elapsedTime;
+	if(D=='B')
+	{
+		run_timed(-speed, -speed, timeInMs);
+		update_position(-timeInMs);//to have a negative distance
+		return 0;
+	}
+	//Calculating when the car must stop
+	gettimeofday(&now,NULL);
+	absDateToStop.tv_sec = time(NULL) + timeInMs / 1000;
+	absDateToStop.tv_nsec = now.tv_usec * 1000 + 1000 * 1000 * (timeInMs % 1000);
+	absDateToStop.tv_sec += absDateToStop.tv_nsec / (1000 * 1000 * 1000);
+	absDateToStop.tv_nsec %= (1000 * 1000 *1000);
+	int stopReason;
+	if(pthread_create(&sensorsThread, NULL, &readingSensors, NULL))
+	{
+		printf("Failed creating thread to detect obstacle\n");
+		return(2);
+	}
+	gettimeofday(&startDate,NULL);
+	run_forever(speed,speed);
+	if(inf==0) {
+		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
+		gettimeofday(&stopDate,NULL);
+		//For optimisation purposes the thread checking for obstacle will stop the car if obstacle is detected
+		stop_car(); // Make sure the car is stopped
+	}
+	else {
+		stopReason = pthread_cond_wait(&obstacleDetected, &myMutex);
+		gettimeofday(&stopDate,NULL);
+	}
+	elapsedTime =(stopDate.tv_sec*1000 + stopDate.tv_usec/1000) - (startDate.tv_sec*1000 + startDate.tv_usec/1000);
+	update_position(elapsedTime);
+	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
+	if(stopReason == 0) return elapsedTime;
+	else return 0; //TIMEDOUT 
+}
 
 void moveinf(int speed,char D){
 	//printf("moveinf before update\n");
