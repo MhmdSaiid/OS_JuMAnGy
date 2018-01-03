@@ -22,6 +22,11 @@
 #endif
 #include "scouting.h"
 
+
+#ifndef max
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#endif
+
 extern float x_position;
 extern float y_position;
 extern float velocity;
@@ -35,12 +40,18 @@ it will turn around the obstacle then avoid it and put the robot towards the ini
 	int distance = 5; //in cm
 	float x_init = x_position;
 	float y_init=y_position;
+	float xDecal;
+	float yDecal;
+	float xDecal2;
+	float yDecal2;
+	int side=1;
 	rotate_car(90, 'R', SPEED_CIRCULAR);
-	for(int side=1;	side<=5; side++){ //5 in order to do the missing part of the first side at the end
+	for(side=1;side<=5; side++){ //5 in order to do the missing part of the first side at the end
 
 		while(!end){
 			
-			move(SPEED_LINEAR,distance/velocity,0,'F');
+			move(SPEED_LINEAR,distance/velocity*1000,0,'F');
+			//move(SPEED_LINEAR,2000,0,'F');
 			rotate_car(90, 'L', SPEED_CIRCULAR);
 			if(!detect_obstacle()){
 				end=1;
@@ -56,15 +67,15 @@ it will turn around the obstacle then avoid it and put the robot towards the ini
 				}
 			}
 			else{
-				addToMap;
+				//addToMap;
 				rotate_car(90, 'R', SPEED_CIRCULAR);		
 			}
 			
 
 		}
 	}
-	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity, 0, 'F'); //longueur //go after the obstacle
+	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity*1000, 0, 'F'); //longueur //go after the obstacle
 	rotate_car(90, 'L', SPEED_CIRCULAR);
-	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity,0, 'F'); //largeur //realignment with initial position
-	rotate car(90, 'R', SPEED_CIRCULAR);
+	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity*1000,0, 'F'); //largeur //realignment with initial position
+	rotate_car(90, 'R', SPEED_CIRCULAR);
 }

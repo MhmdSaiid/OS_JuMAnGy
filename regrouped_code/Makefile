@@ -6,6 +6,9 @@
 DEPENDENCIES = readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o sensorsThread.o
 LIBRAIRIES = -lm  -lev3dev-c -lbluetooth -lpthread
 
+mainTestScout: mainTestScout.c $(DEPENDENCIES) scouting.o defines.h
+	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) scouting.o -o $@
+
 MainSensorsThread : MainSensorsThread.c $(DEPENDENCIES) defines.h
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
 
@@ -51,6 +54,9 @@ sensorsThread.o : sensorsThread.c
 MainBlue : MainBlue.c readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o
 	gcc -lm  -lev3dev-c -lbluetooth -lpthread $^ -o $@
 
+scouting.o : scouting.c
+	gcc -lev3dev-c -lpthread -c $< -o $@
+
 run:
 	./MainComplete
 
@@ -60,3 +66,4 @@ clean :
 	rm detect_disting_functions.o
 	rm readFunctions.o
 	rm positionFunctions.o
+	rm scouting.o
