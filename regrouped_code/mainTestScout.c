@@ -97,7 +97,7 @@ int main (void )
 	//if(obst==3) catch_object();
 	//rotate_car(100, 'R', SPEED_CIRCULAR);
 	limitObst();
-	moveinf(SPEED_LINEAR,Direct);	
+	//moveinf(SPEED_LINEAR,Direct);	
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
