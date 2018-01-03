@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
 #include "ev3.h"
 #include "ev3_port.h"
 #include "ev3_sensor.h"
@@ -38,7 +39,8 @@ extern float US_VAL;
 extern float ANG_VAL;
 extern bool TOUCHING;
 extern uint8_t motor[ 3 ];
-
+extern pthread_mutex_t myMutex;
+extern pthread_cond_t obstacleDetected;
 
 bool _check_pressed( uint8_t sn )
 {
@@ -108,13 +110,43 @@ float read_ang()
 	return angle;
 }
 
+void calibrate_gyro() // set as 0 currant angle --> better rotation
+{
+	uint8_t sn_compass;
+	while (!(ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0))) printf("Searching for Compass sensor...");
+	set_sensor_mode( sn_compass, "GYRO-CAL" );
+	ANG_VAL = read_ang();
+	set_sensor_mode( sn_compass, "GYRO-ANG" );
+}
+
 void update_sensors_value()
 {
+	//printf("Updating\n");
 	uint8_t sn_touch;
 	COLOR_VAL = read_light_color();
 	INTENSITY_VAL = read_light_intensity();
 	US_VAL = read_US();
 	ANG_VAL = read_ang();
 	TOUCHING = _check_pressed( sn_touch);
+
 }
 
+
+
+
+void *readingSensors(void)
+{
+	//printf("Hello from the thread\n");
+	uint8_t sn_touch;
+	long int i=0;
+	update_sensors_value();
+	while (!detect_obstacle())
+	{
+		update_sensors_value();
+		i++;
+	}
+	//printf("Nb Check = %d\n",i);
+	//printf("Obstacle Detected!!\n ");
+	stop_car();
+	pthread_cond_signal(&obstacleDetected);
+}
