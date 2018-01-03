@@ -2,9 +2,13 @@
 #the sensors replace testMove by the name of your file and include the .h file you find in the regrouped_code 
 #directory. Note that: the update sensors value need to be included in your file that contains the main.
 # Take the testMove build as exemple and it should work!!
+DEPENDENCIES = readFunctions.o moveFunctions.o detect_disting_functions.o posit$
 
-MainComplete : MainComplete.c readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o
-	gcc -lm  -lev3dev-c -lbluetooth -lpthread $^ -o $@
+MainComplete : MainComplete.c ${DEPENDENCIES} defines.h
+	gcc -lm  -lev3dev-c -lbluetooth -lpthread ${DEPENDENCIES} -o $@
+
+#MainComplete : MainComplete.c readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o
+#	gcc -lm  -lev3dev-c -lbluetooth -lpthread $^ -o $@
 
 MainScout : MainScout.c readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o
 	gcc -lm  -lev3dev-c -lbluetooth -lpthread $^ -o $@
