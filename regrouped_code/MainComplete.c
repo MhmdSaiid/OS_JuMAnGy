@@ -97,8 +97,8 @@ int main (void )
 	while(1){
 		moveinf(SPEED_LINEAR,Direct);
                 printf("Robot stopped because there is an obstacle\n");
-                obstacle_type obst = distinguish_obstacle();
-		if(obst==2) catch_object();
+                int obst = distinguish_obstacle();
+		if(obst==3) catch_object();
 		rotate_car(100, 'R', SPEED_CIRCULAR);
 		TOUCHED = _check_pressed( sn_touch);
                 if( TOUCHED )
