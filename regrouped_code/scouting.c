@@ -22,6 +22,10 @@
 #endif
 #include "scouting.h"
 
+extern float x_position;
+extern float y_position;
+extern float velocity;
+
 void limitObst(){
 /*
 this function is supposed to be used after detecting an obstacle during scouting.
