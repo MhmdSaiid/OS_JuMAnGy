@@ -22,3 +22,11 @@
 
 #define BACK_TIME_TO_CATCH_BALL	1000
 #define TIME_BACK 120 //20
+
+#define UNEXPLORED 0
+#define EMPTY 1
+#define UNMOVABLE 2
+#define MOVABLE 3
+#define BOUNDARIES 4
+#define ROBOT 5
+#define NONE 6
