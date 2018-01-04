@@ -227,7 +227,7 @@ int find_obst_size(int max_size, int count){
 	
 }
 
-obstacle_type distinguish_obstacle(void)
+int distinguish_obstacle(void)
 	/* written by J.D. */
 	/* unknown obstacles, we should also check at the beginning if there is not an obstacle already identified at this position */
 {
@@ -309,7 +309,7 @@ obstacle_type distinguish_obstacle(void)
 	sleep(10);*/
 /*    moveinf(speed,Direct);
     printf("Robot stopped because there is an obstacle\n");
-	obstacle_type obst = distinguish_obstacle();
+	int obst = distinguish_obstacle();
 	printf("next\n");        
 	//printf("%d",obst);
     TOUCHED = _check_pressed( sn_touch);
