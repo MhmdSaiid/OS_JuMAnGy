@@ -47,7 +47,8 @@ extern bool TOUCHING;
 extern float US_VAL;
 extern float ANG_VAL;
 
-
+extern pthread_mutex_t myMutex;
+extern pthread_cond_t obstacleDetected;
 
 
 /* Movement functions
