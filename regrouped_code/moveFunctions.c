@@ -138,7 +138,35 @@ if(D=='L')
 while(is_running());
 
 }
-
+void rotate_carPP(int angle,char D, int speed_circular) //Clockwise
+{
+	calibrate_gyro(); // Set currant angle to 0 --> better rotate
+	uint8_t nb_values = 10;
+	uint8_t i;
+	ANG_VAL = 0;
+	float init_angle = ANG_VAL;
+	printf("Init ANG VAL = %f\n",init_angle);
+	angle = abs(angle);
+	float final_angle;
+	if(D=='L')//Sensor value increase clockwise
+	{
+		final_angle = init_angle - angle;
+		angle = -angle;
+	}
+	else
+	{
+		final_angle = init_angle + angle;
+	}
+	if(D=='R') run_forever(speed_circular,-speed_circular);
+	if(D=='L') run_forever(-speed_circular, speed_circular);
+	//rotate_car(angle,D,speed_circular);
+	while(is_running())
+	{
+		ANG_VAL = read_ang();
+		if(D=='R' && ANG_VAL>final_angle-0) stop_car();
+		if(D=='L' && ANG_VAL<final_angle+0) stop_car();
+	}
+}
 void rotate_car2(int angle,char D,int speed_circular){
 	/*written by J.D.*/
 	if(angle<0)
