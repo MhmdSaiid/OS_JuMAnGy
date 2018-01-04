@@ -1,3 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "math.h"
+#include "ev3.h"
+#include "ev3_port.h"
+#ifndef MOVE_FUNC
+#define MOVE_FUNC
+#include "moveFunctions.h"
+#endif
+#ifndef READ_FUNC
+#define READ_FUNC
+#include "readFunctions.h"
+#endif
+#ifndef INITIALIZE
+#define INITIALIZE
+#include "defines.h"
+#endif
+#ifndef POS_FUNC
+#define POS_FUNC
+#include "positionFunctions.h"
+#endif
+#include "scouting.h"
+
 void limitObst(){
 /*
 this function is supposed to be used after detecting an obstacle during scouting.
