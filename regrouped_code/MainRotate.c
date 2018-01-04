@@ -94,6 +94,7 @@ int main (void )
 	printf("InitAng val = %f\n",ANG_VAL);
 	moveThread(SPEED_LINEAR, 5000, 0, 'F');
 	find_right_angle_obst();
+	find_right_angle_obst();
 	/*
 	rotate_carPP(90,'R',SPEED_CIRCULAR);
 	*/
