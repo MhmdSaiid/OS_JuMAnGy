@@ -72,12 +72,17 @@ void find_right_angle_obst(){
 	while (previous_dist >= current_dist) {
 		//while we are not at 90°
 		if(bool_right==1) {
+				run_forever(speed_circular,-speed_circular);
+		}
+		else{
+				run_forever(-speed_circular,speed_circular);
+		}
+		/*if(bool_right==1) {
 				rotate_car(7,'R', speed_circular);
 		}
 		else{
 				rotate_car(7,'L', speed_circular);
-		}
-		update_sensors_value();
+		}*/
 		US_VAL=read_US();
 		previous_dist = current_dist;
 		current_dist = US_VAL;
