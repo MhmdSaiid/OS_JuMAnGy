@@ -122,7 +122,7 @@ void stop_car( void )
 multi_set_tacho_command_inx( motor,TACHO_STOP);
 }
 
-void rotate_car(int angle, char D, int speed_circular) 
+void rotate_car(int angle, char D, int speed_circular)
 {
 if (angle<0)
 	angle=-angle;
@@ -197,7 +197,7 @@ void rotate_car2(int angle,char D,int speed_circular){
 		ANG_VAL=read_ang();
 		new_angle=ANG_VAL;
 	}
-	
+
 }
 
 
@@ -284,8 +284,9 @@ int moveThread(int speed, int timeInMs,int inf/*If we want to go until an obstac
 	update_position(elapsedTime);
 	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
 	if(stopReason == 0) return elapsedTime;
-	else return 0; //TIMEDOUT 
+	else return 0; //TIMEDOUT
 }
+#test
 
 void moveinf(int speed,char D){
 	//printf("moveinf before update\n");
@@ -344,7 +345,7 @@ int move(int speed, int time, int inf, char D){
 				update_position(partialTime);//to have a negative distance
 
 			}
-                        if(D=='B') 
+                        if(D=='B')
 			{
 				run_timed(-speed, -speed, partialTime);
 				update_position(-partialTime);//to have a negative distance
@@ -353,7 +354,8 @@ int move(int speed, int time, int inf, char D){
                 }
                 return 0;
 
-        }
+
+			}
 }
 
 
