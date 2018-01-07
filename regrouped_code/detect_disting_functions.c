@@ -133,7 +133,7 @@ void find_right_angle_obst(){
 		    //then we were not at the right angle, try again
 		    find_right_angle_obst();
 	}*/
-	ANG_VAL = read_ang()
+	ANG_VAL = read_ang();
 	angle+=ANG_VAL;
 	return;
 }
