@@ -26,6 +26,7 @@
 
 extern int max_speed;
 extern float x_position, y_position;
+extern int relative_angle
 extern int COLOR_VAL;
 extern float INTENSITY_VAL;
 extern bool TOUCHED;
@@ -134,7 +135,7 @@ void find_right_angle_obst(){
 		    find_right_angle_obst();
 	}*/
 	ANG_VAL = read_ang();
-	angle+=ANG_VAL;
+	relative_angle+=ANG_VAL;
 	return;
 }
 
