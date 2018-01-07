@@ -110,7 +110,7 @@ float read_ang()
 	return angle;
 }
 
-void calibrate_gyro() // set as 0 currant angle --> better rotation
+void calibrate_gyro() // set as 0 currant angle --> better rotations
 {
 	uint8_t sn_compass;
 	while (!(ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0))) printf("Searching for Compass sensor...");
