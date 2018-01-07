@@ -1,7 +1,7 @@
-#include <stdio.h>                                                                            
-#include <stdlib.h>                                                                           
-#include <string.h>                                                                           
-#include "ev3.h"                                                                              
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "ev3.h"
 #include "ev3_port.h"
 #include "ev3_sensor.h"
 #ifndef DETECT_FUNC
@@ -39,9 +39,13 @@ extern uint8_t motor[ 3 ];
 int detect_obstacle(void){
 	/* written by J.D*/
 	int dist_thresh = 120; //in mm
-	if (TOUCHING || (US_VAL<= dist_thresh))
+	if ( US_VAL<= dist_thresh )
 	{
 		return 1;
+	}
+	if (TOUCHING)
+	{
+		return 2;
 	}
 	if (US_VAL > dist_thresh)
 	{
@@ -108,7 +112,7 @@ void find_right_angle_obst(){
 	    //move left
 		printf("check translation left\n\n");
 	    rotate_car2(90,'L', speed_circular);
-		sleep(1); 
+		sleep(1);
 	    int bool_move=move(speed, time, 0,'F');
 		sleep(1);
 	    rotate_car2(90,'R', speed_circular);
@@ -155,11 +159,11 @@ int find_obst_size(int max_size, int count){
 	rotate_car(90, 'L', speed_circular);
 	//go_to(start_x, start_y+max_size);
 
-	int d=max_size;//cm 
+	int d=max_size;//cm
 	int v = 25; //cm/s
 	int time = 2000; //ms
 	printf("\n max_size : %d, speed : %d, d : %d, time : %d \n", max_size, abs_speed_linear, d, time);
-	//printf("\ntime :%d \n", time); 
+	//printf("\ntime :%d \n", time);
 	int bool_move = move(speed_linear, time, 0,'F');
 	if (bool_move==0) //if there were no additional obstacle that blocked the movement
 	{
@@ -230,7 +234,7 @@ int find_obst_size(int max_size, int count){
 			ANG_VAL=read_ang();
 			//printf(" \nafter rotating to the left : %f\n", ANG_VAL);
 			return 0;
-				
+
 		}
 		//rotate_car2(90,'R', speed_circular);
 		else {
@@ -242,7 +246,7 @@ int find_obst_size(int max_size, int count){
 			return max_size+1;
 		}
 	}
-	
+
 }
 
 int distinguish_obstacle(void)
@@ -261,7 +265,7 @@ int distinguish_obstacle(void)
 	//if (COLOR_VAL == "RED")
 	if(strcmp(color[val_color_object],"RED")==0)
 	{
-		printf("movable\n");        
+		printf("movable\n");
 		return MOVABLE;
 	}
 	/*if (!detect_obstacle())
@@ -328,7 +332,7 @@ int distinguish_obstacle(void)
 /*    moveinf(speed,Direct);
     printf("Robot stopped because there is an obstacle\n");
 	int obst = distinguish_obstacle();
-	printf("next\n");        
+	printf("next\n");
 	//printf("%d",obst);
     TOUCHED = _check_pressed( sn_touch);
     if( TOUCHED )
