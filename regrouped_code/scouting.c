@@ -31,7 +31,7 @@ extern float x_position;
 extern float y_position;
 extern float velocity;
 
-void limitObst(){
+void limitObst(int obstacleType){
 /*
 this function is supposed to be used after detecting an obstacle during scouting.
 it will turn around the obstacle then avoid it and put the robot towards the initial direction but after the obstacle
@@ -45,33 +45,36 @@ it will turn around the obstacle then avoid it and put the robot towards the ini
 	float xDecal2;
 	float yDecal2;
 	int side=1;
-	int time = (int)(distance/velocity*5000);
-	rotate_carPP(90, 'R', SPEED_CIRCULAR);
+	int time = (int)(distance/velocity*3000);
+	rotate_car(90, 'R', SPEED_CIRCULAR);
 	for(side=1;side<=5; side++){ //5 in order to do the missing part of the first side at the end
 		end=0;
 		printf("side : %d", side);
 		while(end==0){
 			
-			moveThread(SPEED_LINEAR,time,0,'F');
+			move(SPEED_LINEAR,time,0,'F');
 			//printf("d :%d, velocity : %f, time : %f", distance, velocity, distance/velocity*1000); 
 			//move(SPEED_LINEAR,2000,0,'F');
-			rotate_carPP(90, 'L', SPEED_CIRCULAR);
+			rotate_car(90, 'L', SPEED_CIRCULAR);
 			if(!detect_obstacle()){
+			//if there is no obstacle we reached the limit of this side
 				end=1;
 				if(side==1){
 					xDecal=abs(x_position-x_init);
 					yDecal=abs(y_position-y_init);
 					x_init=x_position;
 					y_init = y_position;
+//to save our relative position to the obstacle when we arrived to be able to continue moving straight the same line as we were following before encountering the obstacle
 				}
 				if (side==2){
 					xDecal2=abs(x_position-x_init);
 					yDecal2=abs(y_position-y_init);				
+// to save the lenght of the seconde size in order to go after that at the end of the function
 				}
 			}
 			else{
-				//addToMap;
-				rotate_carPP(90, 'R', SPEED_CIRCULAR);		
+				//addToMap(obstacleType);
+				rotate_car(90, 'R', SPEED_CIRCULAR);		
 			}
 			
 
@@ -81,4 +84,47 @@ it will turn around the obstacle then avoid it and put the robot towards the ini
 	rotate_car(90, 'L', SPEED_CIRCULAR);
 	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity*1000,0, 'F'); //largeur //realignment with initial position
 	rotate_car(90, 'R', SPEED_CIRCULAR);*/
+}
+
+int checkBoundary(int x,int y){
+	return 1;
+
+}
+
+void scouting(){
+	int distance = 5; //in cm
+	int time = (int)(distance/velocity*3000);
+	int obst;
+	int finished=0;
+	int boundaryMet=0;
+	int goingRight=1;
+	while(!finished){
+		boundaryMet=0;
+		printf("sens moving vers la droite : %d", goingRight);
+		while(!boundaryMet){
+			move(SPEED_LINEAR, 0, 1, 'F');
+			//stops when there is an obstacle or a boundary
+			if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
+				//if it is a boundary according to our linked list
+				if(goingRight){				
+					rotate_car(90,'L', SPEED_CIRCULAR);
+					move(SPEED_LINEAR,time, 0, 'F');
+					rotate_car(90,'L', SPEED_CIRCULAR);
+					goingRight=0;
+				}
+				else if(!goingRight){
+					rotate_car(90,'R', SPEED_CIRCULAR);
+					move(SPEED_LINEAR,time, 0, 'F');
+					rotate_car(90,'R', SPEED_CIRCULAR);
+					goingRight=1;
+				}
+				boundaryMet=1;
+			}
+			else {
+				obst=distinguish_obstacle();
+				limitObst(obst);
+			}
+		}
+	}
+
 }

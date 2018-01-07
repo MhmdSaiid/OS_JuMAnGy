@@ -93,7 +93,6 @@ int main (void )
 	move(SPEED_LINEAR, 5000, 0, 'F');
 	printf("Stoped");
 	find_right_angle_obst();
-	find_right_angle_obst();
 	/*
 	rotate_carPP(90,'R',SPEED_CIRCULAR);
 	*/
