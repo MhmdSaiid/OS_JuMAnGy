@@ -147,7 +147,7 @@ void *readingSensors(void)
 		i++;
 	}
 	//printf("Nb Check = %d\n",i);
-	//printf("Obstacle Detected!!\n ");
+	printf("Obstacle Detected!!\n ");
 	stop_car();
 	pthread_cond_signal(&obstacleDetected);
 	if(TOUCHING){
