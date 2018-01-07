@@ -149,7 +149,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	float init_angle = ANG_VAL;
 	printf("Init ANG VAL = %f\n",init_angle);
 	printf("Angle wanted = %d\n",angle);
-	printf("Direction = %s\n",D);
+	printf("Direction = %c\n",D);
 	angle = abs(angle);
 	float final_angle;
 	if(D=='L')//Sensor value increase clockwise
