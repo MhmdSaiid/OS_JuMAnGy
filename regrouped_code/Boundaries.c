@@ -93,10 +93,10 @@ int main (void )
 
  	while(1){
 
-	while(read_US()>10000){
+	while(read_US()>100){
 	move(SPEED_LINEAR,1000,1,'F');
 	rotate_car(90,'R',SPEED_CIRCULAR);
-	if(read_US()<10000)
+	if(read_US()<100)
 	rotate_car(90,'L',SPEED_CIRCULAR);
 	Sleep(150);
 	}
