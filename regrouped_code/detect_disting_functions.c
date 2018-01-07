@@ -58,6 +58,7 @@ void find_right_angle_obst(){
 	/* I didnt take into account the fact that a second obstacle could touch the first one and so become a problem , I think if it is turning towards the second one it will stop in front of this one instead of the first one*/
 	uint8_t i = 0;
 	calibrate_gyro();
+	ANG_VAL=0;
 	for(i;i<3;i++)
 	{
 	Sleep(1000);
@@ -132,7 +133,7 @@ void find_right_angle_obst(){
 		    //then we were not at the right angle, try again
 		    find_right_angle_obst();
 	}*/
-	ANG_VAl = read_ang()
+	ANG_VAL = read_ang()
 	angle+=ANG_VAL;
 	return;
 }
