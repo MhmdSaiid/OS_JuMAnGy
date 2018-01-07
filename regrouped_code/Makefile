@@ -3,7 +3,7 @@
 #directory. Note that: the update sensors value need to be included in your file that contains the main.
 # Take the testMove build as exemple and it should work!!
 
-DEPENDENCIES = readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o sensorsThread.o
+DEPENDENCIES = readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o
 LIBRAIRIES = -lm  -lev3dev-c -lbluetooth -lpthread
 
 Boundaries:  Boundaries.c $(DEPENDENCIES) defines.h
