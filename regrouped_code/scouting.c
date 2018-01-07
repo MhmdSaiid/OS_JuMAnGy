@@ -99,7 +99,9 @@ void scouting(){
 	int boundaryMet=0;
 	int goingRight=1;
 	while(!finished){
+		boundaryMet=0;
 		while(!boundaryMet){
+			printf("going
 			move(SPEED_LINEAR, 0, 1, 'F');
 			//stops when there is an obstacle or a boundary
 			if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
