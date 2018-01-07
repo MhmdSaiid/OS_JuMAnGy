@@ -90,9 +90,8 @@ int main (void )
 	//main code
 	int test;
 	int rotation_angle=90;
-	ANG_VAL=read_ang();
-	printf("InitAng val = %f\n",ANG_VAL);
-	moveThread(SPEED_LINEAR, 5000, 0, 'F');
+	move(SPEED_LINEAR, 5000, 0, 'F');
+	printf('Stoped');
 	find_right_angle_obst();
 	find_right_angle_obst();
 	/*
