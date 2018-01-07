@@ -9,3 +9,5 @@ float read_US();
 float read_ang();
 
 void update_sensors_value();
+
+void *readingSensors();
