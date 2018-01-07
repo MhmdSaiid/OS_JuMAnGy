@@ -148,5 +148,8 @@ void *readingSensors(void)
 	//printf("Nb Check = %d\n",i);
 	//printf("Obstacle Detected!!\n ");
 	stop_car();
+	if(TOUCHING){
+		move(SPEED_CIRCULAR,500,0,'B');
+	}
 	pthread_cond_signal(&obstacleDetected);
 }
