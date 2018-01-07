@@ -43,7 +43,17 @@
 
 #ifndef POS_FUNC
 #define POS_FUNC
-#include "defines.h"
+#include "positionFunctions.h"
+#endif
+
+#ifndef THREADSEND
+#define THREADSEND
+#include "sendPositionThread.h"
+#endif
+
+#ifndef THREADSENSORS
+#define THREADSENSORS
+#include "sensorsThread.h"
 #endif
 
 
@@ -60,7 +70,10 @@ float INTENSITY_VAL;
 bool TOUCHED;
 float US_VAL;
 float ANG_VAL;
-
+bool TOUCHING;
+int socket_number; //Defined by the thread that handles the socket
+pthread_mutex_t myMutex;
+pthread_cond_t obstacleDetected;
 
 
 int main (void )
