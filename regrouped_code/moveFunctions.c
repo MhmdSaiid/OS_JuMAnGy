@@ -162,10 +162,10 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 		final_angle = init_angle + angle;
 	}
 	relative_angle += angle;
-	/*
+
 	if(D=='R') run_forever(speed_circular,-speed_circular);
 	if(D=='L') run_forever(-speed_circular, speed_circular);
-*/
+
 	//rotate_car(angle,D,speed_circular);
 	bool turning=true;
 	float small_angle_to_turn = 10.0;
