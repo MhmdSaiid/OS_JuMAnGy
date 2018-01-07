@@ -110,7 +110,7 @@ void scouting(){
 					rotate_car(90,'L', SPEED_CIRCULAR);
 					goingRight=0;
 				}
-				else if(goingLeft){
+				else if(!goingRight){
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					move(SPEED_LINEAR,time, 0, 'F');
 					rotate_car(90,'R', SPEED_CIRCULAR);
