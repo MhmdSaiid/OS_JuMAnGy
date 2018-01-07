@@ -100,6 +100,7 @@ void scouting(){
 	int goingRight=1;
 	while(!finished){
 		boundaryMet=0;
+		printf("sens moving vers la droite : %d", movingRight);
 		while(!boundaryMet){
 			move(SPEED_LINEAR, 0, 1, 'F');
 			//stops when there is an obstacle or a boundary
