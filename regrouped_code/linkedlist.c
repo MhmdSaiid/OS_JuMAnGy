@@ -6,7 +6,8 @@
 float TRESHROTATION = 2.5;		//cms
 int XROBOT;		//cms
 int YROBOT;		//cms
-
+int XMAX;
+int YMAX;
 
 typedef struct position {
 	int x;
@@ -132,7 +133,23 @@ void print_map(uint8_t * map, int xmax, int ymax) {
 		}
 		printf("\n");
 	}
+	printf("\n\n");
 }
+
+uint8_t getFromMap(uint8_t * map, int x, int y) {
+	//Returns the element of the map at position x,y
+	return(map[x*YMAX*sizeof(uint8_t)+y]);
+}
+
+void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
+	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
+	if (x>0 && x< XMAX && y>0 && y<YMAX) {
+		map[x*YMAX*sizeof(uint8_t)+y] = type;
+	} else {
+		printf("out of bound\n");
+	}
+}
+
 
 void main() {
 	position_t * linkedList = initialize(5, 5);
@@ -177,7 +194,12 @@ void main() {
 		}
 		current=current->next;
 	}
+	XMAX = xmax;
+	YMAX = ymax;
 	printf("%d, %d\n", xmax, ymax);
 	uint8_t * map = initializeMap(boundariesList, xmax, ymax);
+	print_map(map, xmax, ymax);
+	printf("%u\n\n", getFromMap(map, 3,2));
+	setOnMap(map, 13, 10, 1);
 	print_map(map, xmax, ymax);
 }
