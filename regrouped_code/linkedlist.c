@@ -17,11 +17,11 @@ typedef struct position {
 } position_t;
 
 
-typedef struct boundarie {
+typedef struct boundary {
 	int x;
 	int y;
-	struct boundarie * next;
-} boundarie_t;
+	struct boundary * next;
+} boundary_t;
 
 
 position_t * push_to_last(position_t * last, int x, int y, uint8_t type) {
@@ -49,10 +49,10 @@ void push_to_first(position_t ** head, int x, int y, uint8_t type) {
 	*head = new_head;
 }
 
-void push_bound_to_first(boundarie_t ** head, int x, int y) {
+void push_bound_to_first(boundary_t ** head, int x, int y) {
 	//Gets x and y, the coordinates as cases (so 5 time less than cms)
-	boundarie_t * new_head;
-	new_head = malloc(sizeof(boundarie_t));
+	boundary_t * new_head;
+	new_head = malloc(sizeof(boundary_t));
 	new_head -> x = x;
 	new_head -> y = y;
 	new_head -> next = *head;
@@ -69,8 +69,8 @@ void print_pos_list(position_t * head) {
     }
 }
 
-void print_bound_list(boundarie_t * head) {
-    boundarie_t * current = head;
+void print_bound_list(boundary_t * head) {
+    boundary_t * current = head;
 
     while (current != NULL) {
         printf("%d, %d\n", current->x, current->y);
@@ -91,10 +91,10 @@ position_t * initialize(int x, int y) {
 
 
 
-boundarie_t * get_issuing_boundaries(boundarie_t * obstacles) {
+boundary_t * get_issuing_boundaries(boundary_t * obstacles) {
 	//Not sufficient, we need a "get issuing obstacles" too
-	boundarie_t * current = obstacles;
-	boundarie_t * issuing_boundaries = NULL;
+	boundary_t * current = obstacles;
+	boundary_t * issuing_boundaries = NULL;
 	while (current != NULL) {
 		int x = current->x;
 		int y = current->y;
@@ -109,7 +109,7 @@ boundarie_t * get_issuing_boundaries(boundarie_t * obstacles) {
 uint8_t* initializeMap(boundarie_t * obstacles, int xmax, int ymax) {
 	size_t size = sizeof(uint8_t);
 	uint8_t* map = malloc(size*xmax*ymax);
-	boundarie_t * current = obstacles;
+	boundary_t * current = obstacles;
 	while(current!=NULL) {
 		int x = current->x;
 		int y = current->y;
@@ -164,7 +164,7 @@ void main() {
 	}
 	print_pos_list(linkedList);
 	*/
-	boundarie_t * boundariesList = NULL;
+	boundary_t * boundariesList = NULL;
 	push_bound_to_first(&boundariesList, 1, 10);
 	push_bound_to_first(&boundariesList, 1, 9);
 	push_bound_to_first(&boundariesList, 1, 8);
