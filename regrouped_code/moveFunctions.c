@@ -166,7 +166,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	while(is_running())
 	{
 		ANG_VAL = read_ang();
-		printf("ANG_VAL = %f\n",ANG_VAL);
+		printf("final_angle = %f ,ANG_VAL = %f\n",final_angle,ANG_VAL);
 		if(D=='R' && ANG_VAL>final_angle-5) stop_car();
 		if(D=='L' && ANG_VAL<final_angle+5) stop_car();
 	}
