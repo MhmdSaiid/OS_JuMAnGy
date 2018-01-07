@@ -169,7 +169,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	//rotate_car(angle,D,speed_circular);
 	bool turning=true;
 	float small_angle_to_turn = 10.0;
-	while(turning)
+	while(is_running())
 	{
 		ANG_VAL = read_ang();
 		printf("final_angle = %f ,ANG_VAL = %f\n",final_angle,ANG_VAL);
