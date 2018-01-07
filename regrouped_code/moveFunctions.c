@@ -121,7 +121,7 @@ void stop_car( void )
 {
 multi_set_tacho_command_inx( motor,TACHO_STOP);
 }
-/*
+
 void rotate_car(int angle, char D, int speed_circular)
 {
 if (angle<0)
@@ -139,7 +139,7 @@ if(D=='L')
 while(is_running());
 
 }
-*/
+/*
 void rotate_car(int angle,char D, int speed_circular) //Clockwise
 {
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
@@ -171,6 +171,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 		ANG_VAL = read_ang();
 		printf("final_angle = %f ,ANG_VAL = %f\n",final_angle,ANG_VAL);
 		if(D=='R' && ANG_VAL>final_angle-5) {
+			printf("Stopping ")
 			stop_car();
 			turning = false;
 		}
@@ -181,7 +182,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	}
 	printf("Final angle = %f, Final compass angle =%f",final_angle,ANG_VAL);
 }
-
+*/
 
 void rotate_car2(int angle,char D,int speed_circular){
 	/*written by J.D.*/
