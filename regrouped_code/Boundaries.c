@@ -51,11 +51,6 @@
 #include "sendPositionThread.h"
 #endif
 
-#ifndef THREADSENSORS
-#define THREADSENSORS
-#include "sensorsThread.h"
-#endif
-
 
 extern const char const *color[];
 extern uint8_t motor[ 3 ];
