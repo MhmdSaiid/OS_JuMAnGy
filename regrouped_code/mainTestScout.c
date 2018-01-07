@@ -91,13 +91,14 @@ int main (void )
 	if( init_motors() > 0) return ( 1 );
 
 
-	moveinf(SPEED_LINEAR,Direct);
-        printf("Robot stopped because there is an obstacle\n");
+	//moveinf(SPEED_LINEAR,Direct);
+        //printf("Robot stopped because there is an obstacle\n");
         //int obst = distinguish_obstacle();
 	//if(obst==3) catch_object();
 	//rotate_car(100, 'R', SPEED_CIRCULAR);
-	limitObst();
-	//moveinf(SPEED_LINEAR,Direct);	
+	//limitObst();
+	//moveinf(SPEED_LINEAR,Direct);
+	scouting();	
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
