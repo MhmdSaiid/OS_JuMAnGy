@@ -282,7 +282,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	absDateToStop.tv_sec += absDateToStop.tv_nsec / (1000 * 1000 * 1000);
 	absDateToStop.tv_nsec %= (1000 * 1000 *1000);
 	int stopReason;
-	if(pthread_create(&sensorsThread, NULL, &readingSensors, thread);)
+	if(pthread_create(&sensorsThread, NULL, &readingSensors, thread))
 	{
 		printf("Failed creating thread to detect obstacle\n");
 		return(2);
