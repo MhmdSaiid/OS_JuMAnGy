@@ -84,12 +84,12 @@ int main (void )
 	move(SPEED_LINEAR,1000,1,'F');
 	rotate_car(90,'R',SPEED_CIRCULAR);
 	if(read_US()<10000)
-	rotate_car(90,'L',SPEED_CIRCULAR)l
+	rotate_car(90,'L',SPEED_CIRCULAR);
 	Sleep(150);
 	}
 	rotate_car(90,'L',SPEED_CIRCULAR);
 
-	if((x_position>80)&&(x_position<100) && (y_position>10)&&(y_position<30)) 
+	if((x_position>80)&&(x_position<100) && (y_position>10)&&(y_position<30))
 	break;
 
 
