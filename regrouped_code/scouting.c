@@ -102,7 +102,7 @@ void scouting(){
 		while(!boundaryMet){
 			move(SPEED_LINEAR, 0, 1, 'F');
 			//stops when there is an obstacle or a boundary
-			if(check_boundary()) {
+			if(checkBoundary()) {
 				//if it is a boundary according to our linked list
 				if(goingRight){				
 					rotate_car(90,'L', SPEED_CIRCULAR);
