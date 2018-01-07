@@ -145,7 +145,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
 	uint8_t nb_values = 10;
 	uint8_t i;
-	ANG_VAL = 0;
+	ANG_VAL = read_ang();
 	float init_angle = ANG_VAL;
 	printf("Init ANG VAL = %f\n",init_angle);
 	angle = abs(angle);
