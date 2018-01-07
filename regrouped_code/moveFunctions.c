@@ -165,12 +165,19 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	if(D=='R') run_forever(speed_circular,-speed_circular);
 	if(D=='L') run_forever(-speed_circular, speed_circular);
 	//rotate_car(angle,D,speed_circular);
-	while(is_running())
+	bool turning=true;
+	while(turning)
 	{
 		ANG_VAL = read_ang();
 		printf("final_angle = %f ,ANG_VAL = %f\n",final_angle,ANG_VAL);
-		if(D=='R' && ANG_VAL>final_angle-5) stop_car();
-		if(D=='L' && ANG_VAL<final_angle+5) stop_car();
+		if(D=='R' && ANG_VAL>final_angle-5) {
+			stop_car();
+			turning = false;
+		}
+		if(D=='L' && ANG_VAL<final_angle+5) {
+			stop_car();
+			turning = false;
+		}
 	}
 	printf("Final angle = %f, Final compass angle =%f",final_angle,ANG_VAL);
 }
