@@ -146,7 +146,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	uint8_t nb_values = 10;
 	uint8_t i;
 	ANG_VAL = read_ang();
-	float init_angle = ANG_VAL;
+	float init_angle = 0;
 	printf("Init ANG VAL = %f\n",init_angle);
 	printf("Angle wanted = %d\n",angle);
 	printf("Direction = %c\n",D);
