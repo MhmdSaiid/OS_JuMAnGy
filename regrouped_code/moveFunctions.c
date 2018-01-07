@@ -121,7 +121,7 @@ void stop_car( void )
 {
 multi_set_tacho_command_inx( motor,TACHO_STOP);
 }
-
+/*
 void rotate_car(int angle, char D, int speed_circular)
 {
 if (angle<0)
@@ -139,7 +139,8 @@ if(D=='L')
 while(is_running());
 
 }
-void rotate_carPP(int angle,char D, int speed_circular) //Clockwise
+*/
+void rotate_car(int angle,char D, int speed_circular) //Clockwise
 {
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
 	uint8_t nb_values = 10;
@@ -241,7 +242,7 @@ if(ev3_search_tacho_plugged_in( S_MOTOR_PORT, S_MOTOR_EXT_PORT, motor + S,0))
 printf("Motors and servo Online\n");
 return ( 0 );
 }
-int moveThread(int speed, int timeInMs,int inf/*If we want to go until an obstacle is found*/,char D){
+int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is found*/,char D){
 	pthread_mutex_init(&myMutex , NULL ) ;
 	pthread_mutex_lock(&myMutex);
 	pthread_t sensorsThread;
@@ -286,8 +287,8 @@ int moveThread(int speed, int timeInMs,int inf/*If we want to go until an obstac
 	if(stopReason == 0) return elapsedTime;
 	else return 0; //TIMEDOUT
 }
-#test
-
+//test
+/*
 void moveinf(int speed,char D){
 	//printf("moveinf before update\n");
 	update_sensors_value();
@@ -320,7 +321,7 @@ void moveinf(int speed,char D){
 }
 
 int move(int speed, int time, int inf, char D){
-        /*written by J.D.*/
+        /*written by J.D.
 	int tacho_count;
         get_tacho_count_per_m(motor[L],&tacho_count);
         //printf("count per m = %d\n",tacho_count);
@@ -357,7 +358,7 @@ int move(int speed, int time, int inf, char D){
 
 			}
 }
-
+*/
 
 int opened_servo = 0;
 int ball_catched;
