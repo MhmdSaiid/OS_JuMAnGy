@@ -153,5 +153,5 @@ void *readingSensors(void)
 	if(TOUCHING){
 		move(SPEED_CIRCULAR,500,0,'B');
 	}
-
+	exit;
 }
