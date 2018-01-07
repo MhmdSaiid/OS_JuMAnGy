@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-float TRESHROTATION = 2.5;
-int XROBOT;
-int YROBOT;
+float TRESHROTATION = 2.5;		//cms
+int XROBOT;		//cms
+int YROBOT;		//cms
 
 
 typedef struct position {
@@ -49,6 +49,7 @@ void push_to_first(position_t ** head, int x, int y, uint8_t type) {
 }
 
 void push_bound_to_first(boundarie_t ** head, int x, int y) {
+	//Gets x and y, the coordinates as cases (so 5 time less than cms)
 	boundarie_t * new_head;
 	new_head = malloc(sizeof(boundarie_t));
 	new_head -> x = x;
@@ -90,12 +91,13 @@ position_t * initialize(int x, int y) {
 
 
 boundarie_t * get_issuing_boundaries(boundarie_t * obstacles) {
+	//Not sufficient, we need a "get issuing obstacles" too
 	boundarie_t * current = obstacles;
 	boundarie_t * issuing_boundaries = NULL;
 	while (current != NULL) {
 		int x = current->x;
 		int y = current->y;
-		if( (XROBOT-x)*(XROBOT-x) + (YROBOT-y)*(YROBOT-y) <= TRESHROTATION*TRESHROTATION ) {
+		if( (XROBOT-x*5)*(XROBOT-x*5) + (YROBOT-y*5)*(YROBOT-y*5) <= TRESHROTATION*TRESHROTATION ) {
 			push_bound_to_first(&issuing_boundaries, x, y);
 		}
 		current = current->next;
@@ -103,8 +105,34 @@ boundarie_t * get_issuing_boundaries(boundarie_t * obstacles) {
 	return(issuing_boundaries);
 }
 
+uint8_t* initializeMap(boundarie_t * obstacles, int xmax, int ymax) {
+	size_t size = sizeof(uint8_t);
+	uint8_t* map = malloc(size*xmax*ymax);
+	boundarie_t * current = obstacles;
+	while(current!=NULL) {
+		int x = current->x;
+		int y = current->y;
+		map[x*ymax*size+y] = 4;
+		current = current->next;
+	}
+	for (int i=0; i<xmax; i++){
+		for (int j=0; j<ymax; j++) {
+			if (map[i*ymax*size+j] != 4) {
+				map[i*ymax*size+j] = 0;
+			}
+		}
+	}
+	return(map);
+}
 
-
+void print_map(uint8_t * map, int xmax, int ymax) {
+	for (int y=0; y<ymax; y++) {
+		for(int x=0; x<xmax; x++) {
+			printf("%u", map[x*ymax*sizeof(uint8_t)+y]);
+		}
+		printf("\n");
+	}
+}
 
 void main() {
 	position_t * linkedList = initialize(5, 5);
@@ -137,4 +165,19 @@ void main() {
 	YROBOT = 4;
 	print_bound_list(get_issuing_boundaries(boundariesList));
 
+	int xmax = 0;
+	int ymax = 0;
+	boundarie_t * current = boundariesList;
+	while (current != NULL) {
+		if (current->x > xmax-1) {
+			xmax = current->x+1;
+		}
+		if (current->y > ymax-1) {
+			ymax = current->y+1;
+		}
+		current=current->next;
+	}
+	printf("%d, %d\n", xmax, ymax);
+	uint8_t * map = initializeMap(boundariesList, xmax, ymax);
+	print_map(map, xmax, ymax);
 }
