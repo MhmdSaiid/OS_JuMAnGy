@@ -174,10 +174,12 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 		ANG_VAL = read_ang();
 		printf("final_angle = %f ,ANG_VAL = %f\n",final_angle,ANG_VAL);
 		if(D=='R' && ANG_VAL>final_angle-5) {
+			printf("Stoppin Right");
 			stop_car();
 			break;
 		}
 		if(D=='L' && ANG_VAL<final_angle+5) {
+			printf("Stoppin Left");
 			stop_car();
 			break;
 		}
