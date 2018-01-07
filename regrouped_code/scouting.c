@@ -93,7 +93,7 @@ int checkBoundary(int x,int y){
 
 void scouting(){
 	int distance = 5; //in cm
-	int time = (int)(distance/velocity*3000);
+	int time = (int)(distance/velocity*4000);
 	int obst;
 	int finished=0;
 	int boundaryMet=0;
@@ -106,13 +106,15 @@ void scouting(){
 			//stops when there is an obstacle or a boundary
 			if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
 				//if it is a boundary according to our linked list
-				if(goingRight){				
+				if(goingRight){	
+					move(SPEED_LINEAR, time/2, 0, 'B'); //goes back a little in order to have enough place to rotate			
 					rotate_car(90,'L', SPEED_CIRCULAR);
 					move(SPEED_LINEAR,time, 0, 'F');
 					rotate_car(90,'L', SPEED_CIRCULAR);
 					goingRight=0;
 				}
 				else if(!goingRight){
+					move(SPEED_LINEAR, time/2, 0, 'B');
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					move(SPEED_LINEAR,time, 0, 'F');
 					rotate_car(90,'R', SPEED_CIRCULAR);
