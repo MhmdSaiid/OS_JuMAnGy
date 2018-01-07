@@ -116,6 +116,7 @@ void calibrate_gyro() // set as 0 currant angle --> better rotation
 	while (!(ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0))) printf("Searching for Compass sensor...");
 	set_sensor_mode( sn_compass, "GYRO-CAL" );
 	ANG_VAL = read_ang();
+	Sleep(100);
 	set_sensor_mode( sn_compass, "GYRO-ANG" );
 }
 
