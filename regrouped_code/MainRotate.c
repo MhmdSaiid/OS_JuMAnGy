@@ -91,7 +91,7 @@ int main (void )
 	int test;
 	int rotation_angle=90;
 	move(SPEED_LINEAR, 5000, 0, 'F');
-	printf('Stoped');
+	printf("Stoped");
 	find_right_angle_obst();
 	find_right_angle_obst();
 	/*
