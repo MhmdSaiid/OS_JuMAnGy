@@ -4,6 +4,8 @@
 #include <math.h>
 
 float TRESHROTATION = 2.5;
+int XROBOT;
+int YROBOT;
 
 
 typedef struct position {
@@ -87,21 +89,18 @@ position_t * initialize(int x, int y) {
 
 
 
-boundarie_t * get_issuing_boundaries(int xrobot, int yrobot, boundarie_t * obstacles) {
-	int minx = xrobot - TRESHROTATION;
-	int maxx = xrobot + TRESHROTATION;
-	int miny = yrobot - TRESHROTATION;
-	int maxy = yrobot + TRESHROTATION;
+boundarie_t * get_issuing_boundaries(boundarie_t * obstacles) {
 	boundarie_t * current = obstacles;
 	boundarie_t * issuing_boundaries = NULL;
 	while (current != NULL) {
 		int x = current->x;
 		int y = current->y;
-		if( (xrobot-x)*(xrobot-x) + (yrobot-y)*(yrobot-y) <= TRESHROTATION*TRESHROTATION ) {
+		if( (XROBOT-x)*(XROBOT-x) + (YROBOT-y)*(YROBOT-y) <= TRESHROTATION*TRESHROTATION ) {
 			push_bound_to_first(&issuing_boundaries, x, y);
 		}
+		current = current->next;
 	}
-
+	return(issuing_boundaries);
 }
 
 
@@ -134,7 +133,8 @@ void main() {
 	push_bound_to_first(&boundariesList, 2, 0);
 	push_bound_to_first(&boundariesList, 20, 0);
 	push_bound_to_first(&boundariesList, 15, 10);
-
-	print_bound_list(get_issuing_boundaries(4,4,boundariesList));
+	XROBOT = 4;
+	YROBOT = 4;
+	print_bound_list(get_issuing_boundaries(boundariesList));
 
 }
