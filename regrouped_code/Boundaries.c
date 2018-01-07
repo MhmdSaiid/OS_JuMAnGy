@@ -96,10 +96,11 @@ int main (void )
 	while(read_US()>100){
 	move(SPEED_LINEAR,1000,0,'F');
 	rotate_car(90,'R',SPEED_CIRCULAR);
-	if(read_US()<200)
-	rotate_car(90,'L',SPEED_CIRCULAR);
+	if(read_US()<200)	rotate_car(90,'L',SPEED_CIRCULAR);
+	else break 
 	Sleep(150);
 	}
+
 	rotate_car(90,'L',SPEED_CIRCULAR);
 
 	if((x_position>80)&&(x_position<100) && (y_position>10)&&(y_position<30))

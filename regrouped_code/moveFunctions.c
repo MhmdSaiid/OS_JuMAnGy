@@ -283,7 +283,8 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	absDateToStop.tv_sec += absDateToStop.tv_nsec / (1000 * 1000 * 1000);
 	absDateToStop.tv_nsec %= (1000 * 1000 *1000);
 	int stopReason;
-	if(pthread_create(&sensorsThread, NULL, &readingSensors, NULL))
+	pthread_t thread = pthread_create(&sensorsThread, NULL, &readingSensors, NULL);
+	if(thread)
 	{
 		printf("Failed creating thread to detect obstacle\n");
 		return(2);
@@ -305,6 +306,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
 	if(stopReason == 0) return elapsedTime;
 	else return 0; //TIMEDOUT
+	pthread_cancel(thread)
 }
 //test
 /*
