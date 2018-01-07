@@ -86,7 +86,7 @@ it will turn around the obstacle then avoid it and put the robot towards the ini
 	rotate_car(90, 'R', SPEED_CIRCULAR);*/
 }
 
-int checkBoundary(){
+int checkBoundary(int x,int y){
 	return 1;
 
 }
@@ -102,7 +102,7 @@ void scouting(){
 		while(!boundaryMet){
 			move(SPEED_LINEAR, 0, 1, 'F');
 			//stops when there is an obstacle or a boundary
-			if(checkBoundary()) {
+			if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
 				//if it is a boundary according to our linked list
 				if(goingRight){				
 					rotate_car(90,'L', SPEED_CIRCULAR);
