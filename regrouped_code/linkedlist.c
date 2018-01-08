@@ -156,8 +156,10 @@ uint8_t* initializeMap(boundary_t * obstacles) {
 		map[x*ymax*size+y] = 4;
 		current = current->next;
 	}
-	for (int i=0; i<xmax; i++){
-		for (int j=0; j<ymax; j++) {
+	int i;
+	int j;
+	for (i=0; i<xmax; i++){
+		for (j=0; j<ymax; j++) {
 			if (map[i*ymax*size+j] != 4) {
 				map[i*ymax*size+j] = 0;
 			}
@@ -169,8 +171,10 @@ uint8_t* initializeMap(boundary_t * obstacles) {
 void print_map(uint8_t * map) {
 	int xmax = XMAX;
 	int ymax = YMAX;
-	for (int y=0; y<ymax; y++) {
-		for(int x=0; x<xmax; x++) {
+	int y;
+	int x;
+	for (y=0; y<ymax; y++) {
+		for(x=0; x<xmax; x++) {
 			printf("%u", map[x*ymax*sizeof(uint8_t)+y]);
 		}
 		printf("\n");
@@ -202,8 +206,10 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 	int ymax = (int) MAX(round((YROBOT + THRESHROTATION) / 5), 0);
 	//printf("%f, %f, %f, %f\n", (XROBOT - THRESHROTATION) / 5, (XROBOT + THRESHROTATION) / 5, (YROBOT - THRESHROTATION) / 5, (YROBOT + THRESHROTATION) / 5);
 	//printf("x = %d to %d,  y = %d to %d\n", xmin, xmax, ymin, ymax);
-	for (int i = xmin; i <= xmax; i++) {
-		for (int j = ymin; j <= ymax; j++) {
+	int i;
+	int j;
+	for (i = xmin; i <= xmax; i++) {
+		for (j = ymin; j <= ymax; j++) {
 			if (getFromMap(map, i, j) == 4) {
 				push_bound_to_first(&issuing_obstacles, i, j);
 			}
