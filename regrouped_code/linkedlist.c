@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "linkedlist.h"
 
 float TRESHROTATION = 2.5;		//cms
 int XROBOT;		//cms
@@ -9,6 +10,7 @@ int YROBOT;		//cms
 int XMAX;
 int YMAX;
 
+uint8_t * map;
 typedef struct position {
 	int x;
 	int y;
@@ -197,7 +199,7 @@ void main() {
 	XMAX = xmax;
 	YMAX = ymax;
 	printf("%d, %d\n", xmax, ymax);
-	uint8_t * map = initializeMap(boundariesList, xmax, ymax);
+	map = initializeMap(boundariesList, xmax, ymax);
 	print_map(map, xmax, ymax);
 	printf("%u\n\n", getFromMap(map, 3,2));
 	setOnMap(map, 13, 10, 1);

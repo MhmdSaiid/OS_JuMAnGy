@@ -21,6 +21,7 @@
 #include "positionFunctions.h"
 #endif
 #include "scouting.h"
+#include "linkedlist.h"
 
 
 #ifndef max
@@ -30,7 +31,7 @@
 extern float x_position;
 extern float y_position;
 extern float velocity;
-
+extern uint8_t * map;
 void limitObst(int obstacleType){
 /*
 this function is supposed to be used after detecting an obstacle during scouting.
@@ -87,7 +88,11 @@ it will turn around the obstacle then avoid it and put the robot towards the ini
 }
 
 int checkBoundary(int x,int y){
-	return 1;
+	uint8_t valueFromMap=getFromMap(map,x,y);
+	if(valueFromMap == BOUNDARIES){
+		return 1;
+	}
+	return 0;
 
 }
 

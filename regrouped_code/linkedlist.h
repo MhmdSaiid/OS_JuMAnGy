@@ -1,0 +1,12 @@
+position_t * push_to_last(position_t * last, int x, int y, uint8_t type);
+void push_to_first(position_t ** head, int x, int y, uint8_t type) ;
+void push_bound_to_first(boundary_t ** head, int x, int y);
+void print_pos_list(position_t * head);
+void print_bound_list(boundary_t * head);
+position_t * initialize(int x, int y) ;
+boundary_t * get_issuing_boundaries(boundary_t * obstacles);
+uint8_t* initializeMap(boundarie_t * obstacles, int xmax, int ymax);
+void print_map(uint8_t * map, int xmax, int ymax);
+uint8_t getFromMap(uint8_t * map, int x, int y);
+void setOnMap(uint8_t * map, int x, int y, uint8_t type);
+void main();
