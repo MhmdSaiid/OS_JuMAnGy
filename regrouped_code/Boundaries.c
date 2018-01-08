@@ -91,6 +91,7 @@ int main (void )
 	while(read_US()>100){
 	move(SPEED_LINEAR,1000,0,'F');
 	rotate_car(90,'L',SPEED_CIRCULAR);
+	Sleep(500);
 	if(read_US()<200)	rotate_car(90,'R',SPEED_CIRCULAR);
 	else break;
 	Sleep(150);
