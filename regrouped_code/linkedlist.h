@@ -1,3 +1,17 @@
+typedef struct position {
+	int x;
+	int y;
+	uint8_t type;
+	struct position * next;
+} position_t;
+
+
+typedef struct boundary {
+	int x;
+	int y;
+	struct boundary * next;
+} boundary_t;
+
 position_t * push_to_last(position_t * last, int x, int y, uint8_t type);
 void push_to_first(position_t ** head, int x, int y, uint8_t type) ;
 void push_bound_to_first(boundary_t ** head, int x, int y);
