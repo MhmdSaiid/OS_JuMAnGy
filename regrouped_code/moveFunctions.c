@@ -297,6 +297,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	}
 	else {
 		stopReason = pthread_cond_wait(&obstacleDetected, &myMutex);
+		stop_car();
 		gettimeofday(&stopDate,NULL);
 	}
 	elapsedTime =(stopDate.tv_sec*1000 + stopDate.tv_usec/1000) - (startDate.tv_sec*1000 + startDate.tv_usec/1000);

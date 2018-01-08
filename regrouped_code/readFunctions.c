@@ -148,8 +148,6 @@ void *readingSensors(void)
 	}
 	//printf("Nb Check = %d\n",i);
 	printf("Obstacle Detected!!\n ");
-	stop_car();
 	pthread_cond_signal(&obstacleDetected);
-	printf("Hello from thread\n");
 	exit;
 }
