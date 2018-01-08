@@ -292,18 +292,20 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	run_forever(speed,speed);
 	if(inf==0) {
 		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
+		pthread_join(&sensorsThread);
 		gettimeofday(&stopDate,NULL);
 		//For optimisation purposes the thread checking for obstacle will stop the car if obstacle is detected
 		stop_car(); // Make sure the car is stopped
 	}
 	else {
 		stopReason = pthread_cond_wait(&obstacleDetected, &myMutex);
+		pthread_join(&sensorsThread);
 		stop_car();
 		gettimeofday(&stopDate,NULL);
 	}
 	elapsedTime =(stopDate.tv_sec*1000 + stopDate.tv_usec/1000) - (startDate.tv_sec*1000 + startDate.tv_usec/1000);
 	update_position(elapsedTime);
-	pthread_join(sensorsThread);
+
 	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
 	if(stopReason == 0) return elapsedTime;
 	else return 0; //TIMEDOUT
