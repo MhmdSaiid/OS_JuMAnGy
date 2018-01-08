@@ -294,7 +294,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	if(inf==0) {
 		timeout = false;
 		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
-		timout = true;
+		timeout = true;
 		pthread_join(&sensorsThread);
 		gettimeofday(&stopDate,NULL);
 		//For optimisation purposes the thread checking for obstacle will stop the car if obstacle is detected
