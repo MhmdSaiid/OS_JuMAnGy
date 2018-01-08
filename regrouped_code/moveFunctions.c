@@ -303,10 +303,10 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	}
 	elapsedTime =(stopDate.tv_sec*1000 + stopDate.tv_usec/1000) - (startDate.tv_sec*1000 + startDate.tv_usec/1000);
 	update_position(elapsedTime);
+	pthread_join(sensorsThread);
 	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
 	if(stopReason == 0) return elapsedTime;
 	else return 0; //TIMEDOUT
-	while(pthread_join(sensorsThread)!=0) printf("Killing thread\n");
 }
 
 //test
