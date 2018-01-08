@@ -2,15 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "linkedlist.h"
 
-float TRESHROTATION = 2.5;		//cms
+float THRESHROTATION = 8;		//mapcoordinates
 int XROBOT;		//cms
 int YROBOT;		//cms
-int XMAX;
-int YMAX;
+int XMAX;		//cms
+int YMAX;		//cms
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
 
-uint8_t * map;
+
 typedef struct position {
 	int x;
 	int y;
@@ -93,22 +94,25 @@ position_t * initialize(int x, int y) {
 
 
 
-boundary_t * get_issuing_boundaries(boundary_t * obstacles) {
+/*boundary_t * get_issuing_boundaries(boundary_t * obstacles) {
 	//Not sufficient, we need a "get issuing obstacles" too
 	boundary_t * current = obstacles;
 	boundary_t * issuing_boundaries = NULL;
 	while (current != NULL) {
 		int x = current->x;
 		int y = current->y;
-		if( (XROBOT-x*5)*(XROBOT-x*5) + (YROBOT-y*5)*(YROBOT-y*5) <= TRESHROTATION*TRESHROTATION ) {
+		if( (XROBOT-x*5)*(XROBOT-x*5) + (YROBOT-y*5)*(YROBOT-y*5) <= THRESHROTATION*THRESHROTATION ) {
 			push_bound_to_first(&issuing_boundaries, x, y);
 		}
 		current = current->next;
 	}
 	return(issuing_boundaries);
 }
+*/
 
-uint8_t* initializeMap(boundarie_t * obstacles, int xmax, int ymax) {
+
+
+uint8_t* initializeMap(boundary_t * obstacles, int xmax, int ymax) {
 	size_t size = sizeof(uint8_t);
 	uint8_t* map = malloc(size*xmax*ymax);
 	boundary_t * current = obstacles;
@@ -148,10 +152,30 @@ void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	if (x>0 && x< XMAX && y>0 && y<YMAX) {
 		map[x*YMAX*sizeof(uint8_t)+y] = type;
 	} else {
-		printf("out of bound\n");
+		printf("out of bound: %d, %d\n", x, y);
 	}
 }
 
+
+boundary_t * get_issuing_obstacles(uint8_t * map) {
+	//Gets robot's position (in CMs, care) and returns a linked list of obstacles in a square from THRESH * THRESH (not a circle)
+
+	boundary_t * issuing_obstacles = NULL;
+	int xmin = (int) MIN(round((XROBOT - THRESHROTATION) / 5), XMAX-1);
+	int xmax = (int) MAX(round((XROBOT + THRESHROTATION) / 5), 0);
+	int ymin = (int) MIN(round((YROBOT - THRESHROTATION) / 5), YMAX-1);
+	int ymax = (int) MAX(round((YROBOT + THRESHROTATION) / 5), 0);
+	//printf("%f, %f, %f, %f\n", (XROBOT - THRESHROTATION) / 5, (XROBOT + THRESHROTATION) / 5, (YROBOT - THRESHROTATION) / 5, (YROBOT + THRESHROTATION) / 5);
+	//printf("x = %d to %d,  y = %d to %d\n", xmin, xmax, ymin, ymax);
+	for (int i = xmin; i <= xmax; i++) {
+		for (int j = ymin; j <= ymax; j++) {
+			if (getFromMap(map, i, j) == 4) {
+				push_bound_to_first(&issuing_obstacles, i, j);
+			}
+		}
+	}
+	return(issuing_obstacles);
+}
 
 void main() {
 	position_t * linkedList = initialize(5, 5);
@@ -180,13 +204,11 @@ void main() {
 	push_bound_to_first(&boundariesList, 2, 0);
 	push_bound_to_first(&boundariesList, 20, 0);
 	push_bound_to_first(&boundariesList, 15, 10);
-	XROBOT = 4;
-	YROBOT = 4;
-	print_bound_list(get_issuing_boundaries(boundariesList));
+
 
 	int xmax = 0;
 	int ymax = 0;
-	boundarie_t * current = boundariesList;
+	boundary_t * current = boundariesList;
 	while (current != NULL) {
 		if (current->x > xmax-1) {
 			xmax = current->x+1;
@@ -199,9 +221,12 @@ void main() {
 	XMAX = xmax;
 	YMAX = ymax;
 	printf("%d, %d\n", xmax, ymax);
-	map = initializeMap(boundariesList, xmax, ymax);
+
+	XROBOT = 20;
+	YROBOT = 20;
+	uint8_t * map = initializeMap(boundariesList, xmax, ymax);
+	setOnMap(map, (int) (XROBOT+2.5)/5, (int) ((YROBOT+2.5)/5), 2);
 	print_map(map, xmax, ymax);
-	printf("%u\n\n", getFromMap(map, 3,2));
-	setOnMap(map, 13, 10, 1);
-	print_map(map, xmax, ymax);
+	printf("issuing obstacles:\n");
+	print_bound_list(get_issuing_obstacles(map));
 }
