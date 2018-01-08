@@ -66,7 +66,7 @@ but after the obstacle in the same scouting line drawn
 		move(SPEED_LINEAR,time,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 		US_VAL = read_US();
-		if (!detect_obstacle() && abs(relative_angle-angleTracker)==180 && y_position== (y_init) ){
+		if (abs(relative_angle-angleTracker)==180 && y_position== (y_init) ){
 			rotate_car(180, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 			break;
 		}
@@ -115,7 +115,7 @@ but after the obstacle in the same scouting line drawn
 	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity*1000,0, 'F'); //largeur //realignment with initial position
 	rotate_car(90, 'R', SPEED_CIRCULAR);*/
 }
-
+/*
 int checkBoundary(int x,int y){
 	uint8_t valueFromMap=getFromMap(map,x,y);
 	if(valueFromMap == BOUNDARIES){
@@ -124,7 +124,7 @@ int checkBoundary(int x,int y){
 	return 0;
 
 }
-
+*/
 void scouting(){
 	int distance = 5; //in cm
 	int time = (int)(distance/velocity*4000);
