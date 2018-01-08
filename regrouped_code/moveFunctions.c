@@ -49,7 +49,7 @@ extern float ANG_VAL;
 
 extern pthread_mutex_t myMutex;
 extern pthread_cond_t obstacleDetected;
-extern timout;
+extern timeout;
 
 
 /* Movement functions
