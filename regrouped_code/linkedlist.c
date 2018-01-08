@@ -70,7 +70,8 @@ void add_bound_line(boundary_t ** head, float xbeg, float ybeg, float xend, floa
 	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
 	float x = (float) round(xbeg);
 	float y = round(ybeg);
-	for (int i = 0; i < nb_blocks; i++) {
+	int i;
+	for (i = 0; i < nb_blocks; i++) {
 		push_bound_to_first(head, round(x), round(y));
 		x += dx/nb_blocks;
 		y += dy/nb_blocks;
