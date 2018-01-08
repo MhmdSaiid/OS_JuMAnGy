@@ -310,6 +310,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	update_position(elapsedTime);
 
 	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
+	Sleep(500);
 	if(stopReason == 0) return elapsedTime;
 	else return 0; //TIMEDOUT
 }
