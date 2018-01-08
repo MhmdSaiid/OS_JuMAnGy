@@ -49,6 +49,7 @@ extern float ANG_VAL;
 
 extern pthread_mutex_t myMutex;
 extern pthread_cond_t obstacleDetected;
+extern timeout;
 
 
 /* Movement functions
@@ -184,6 +185,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 		}
 	}
 	printf("Final angle = %f, Final compass angle =%f",final_angle,ANG_VAL);
+	Sleep(250);
 }
 
 
@@ -291,22 +293,26 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	gettimeofday(&startDate,NULL);
 	run_forever(speed,speed);
 	if(inf==0) {
+		timeout = false;
 		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
+		timeout = true;
+		pthread_join(&sensorsThread);
 		gettimeofday(&stopDate,NULL);
 		//For optimisation purposes the thread checking for obstacle will stop the car if obstacle is detected
 		stop_car(); // Make sure the car is stopped
 	}
 	else {
 		stopReason = pthread_cond_wait(&obstacleDetected, &myMutex);
+		pthread_join(&sensorsThread);
 		stop_car();
 		gettimeofday(&stopDate,NULL);
 	}
 	elapsedTime =(stopDate.tv_sec*1000 + stopDate.tv_usec/1000) - (startDate.tv_sec*1000 + startDate.tv_usec/1000);
 	update_position(elapsedTime);
+
 	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
 	if(stopReason == 0) return elapsedTime;
 	else return 0; //TIMEDOUT
-	while(pthread_join(sensorsThread)!=0) printf("Killing thread\n");
 }
 
 //test

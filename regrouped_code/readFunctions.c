@@ -41,6 +41,7 @@ extern bool TOUCHING;
 extern uint8_t motor[ 3 ];
 extern pthread_mutex_t myMutex;
 extern pthread_cond_t obstacleDetected;
+extern bool timeout;
 
 bool _check_pressed( uint8_t sn )
 {
@@ -144,6 +145,11 @@ void *readingSensors(void)
 	while (!detect_obstacle())
 	{
 		update_sensors_value();
+		if(timeout)
+		{
+			printf("Timedout so stopping\n");
+			exit;
+		}
 		i++;
 	}
 	//printf("Nb Check = %d\n",i);
