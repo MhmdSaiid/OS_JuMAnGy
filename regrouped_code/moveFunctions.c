@@ -185,6 +185,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 		}
 	}
 	printf("Final angle = %f, Final compass angle =%f",final_angle,ANG_VAL);
+	Sleep(250);
 }
 
 
@@ -310,7 +311,6 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	update_position(elapsedTime);
 
 	pthread_mutex_unlock(&myMutex); //Obstacle Detected if(inf){ return 1; }
-	Sleep(500);
 	if(stopReason == 0) return elapsedTime;
 	else return 0; //TIMEDOUT
 }
