@@ -21,7 +21,7 @@
 #include "positionFunctions.h"
 #endif
 #include "scouting.h"
-#include "linkedlist.h"
+//#include "linkedlist.h"
 
 
 #ifndef max
@@ -30,7 +30,14 @@
 
 extern float x_position;
 extern float y_position;
+extern int relative_angle;
 extern float velocity;
+extern int COLOR_VAL;
+extern float INTENSITY_VAL;
+extern bool TOUCHING;
+extern float US_VAL;
+extern float ANG_VAL;
+
 extern uint8_t * map;
 void limitObst(int obstacleType){
 /*
@@ -48,10 +55,10 @@ but after the obstacle in the same scouting line drawn
 	float yDecal2;
 	int side=1;
 	int time = (int)(distance/velocity*3000);
-	char directionsGoingRight[2] = ['R','L'];
+	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
 	if (relative_angle<10) directionIndex = 0;
-	if (relative_angle>170 && (relative_angle<190) directionIndex = 1;
+	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 1;
 	bool besideObstacle = true;
 	int angleTracker = relative_angle;
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);

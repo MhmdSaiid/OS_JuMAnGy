@@ -61,7 +61,7 @@ extern uint8_t motor[ 3 ];
 
 float x_position = 60.0;
 float y_position = 30.0;
-int relative_angle = 90;
+int relative_angle = 0;
 float velocity = 30.0; //25 cm per second for speed linear = 50
 float val=3.141592/180.0;
 int COLOR_VAL;
@@ -97,7 +97,7 @@ int main (void )
 	//if(obst==3) catch_object();
 	//rotate_car(100, 'R', SPEED_CIRCULAR);
 	//limitObst();
-	moveinf(SPEED_LINEAR,Direct);
+	move(SPEED_LINEAR,0,1,Direct);
 	scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
