@@ -313,7 +313,7 @@ int distinguish_obstacle(void)
 		printf("robot\n");
 		return ROBOT;
 	}
-	
+
 	//if (COLOR_VAL == "RED")
 	if(strcmp(color[val_color_object],"RED")==0)
 	{
@@ -322,7 +322,7 @@ int distinguish_obstacle(void)
 			return MOVABLE;
 		}
 		printf("red but unmovable");
-		return UNMOVABLE
+		return UNMOVABLE;
 	}
 
 	printf("not red \n");
