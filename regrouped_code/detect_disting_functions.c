@@ -251,7 +251,7 @@ int find_obst_size(int max_size, int count){
 
 }
 
-int distinguish_obstacle(void)
+int distinguish_obstacleOld(void)
 	/* written by J.D. */
 	/* unknown obstacles, we should also check at the beginning if there is not an obstacle already identified at this position */
 {
@@ -297,6 +297,38 @@ int distinguish_obstacle(void)
 	return UNMOVABLE;
 }
 
+int distinguish_obstacle(void)
+	/* written by J.D. */
+	/* unknown obstacles, we should also check at the beginning if there is not an obstacle already identified at this position */
+{
+	int threshold = 50;
+	float old_distance = US_VAL;
+	int val_color_object = COLOR_VAL;
+	update_sensors_value();
+
+	sleep(2); //wait for 2 seconds in order to see if the object has moved, if yes, it was a robot
+	update_sensors_value();
+	float new_distance = US_VAL;
+	if (abs(new_distance-old_distance)>threshold){
+		printf("robot\n");
+		return ROBOT;
+	}
+	
+	//if (COLOR_VAL == "RED")
+	if(strcmp(color[val_color_object],"RED")==0)
+	{
+		if(INTENSITY_VAL>=3){
+			printf("movable\n");
+			return MOVABLE;
+		}
+		printf("red but unmovable");
+		return UNMOVABLE
+	}
+
+	printf("not red \n");
+	printf("unmovable");
+	return UNMOVABLE;
+}
 /*int main (void )
 {
     uint8_t sn_touch;
