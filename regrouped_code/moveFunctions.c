@@ -182,7 +182,6 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 			break;
 		}
 	}
-	printf("Final angle = %f, Final compass angle =%f",final_angle,ANG_VAL);
 	Sleep(250);
 }
 
