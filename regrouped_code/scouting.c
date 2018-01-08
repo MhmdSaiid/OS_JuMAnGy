@@ -32,6 +32,12 @@ extern float x_position;
 extern float y_position;
 extern int relative_angle;
 extern float velocity;
+extern int COLOR_VAL;
+extern float INTENSITY_VAL;
+extern bool TOUCHING;
+extern float US_VAL;
+extern float ANG_VAL;
+
 extern uint8_t * map;
 void limitObst(int obstacleType){
 /*
