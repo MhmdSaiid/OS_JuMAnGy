@@ -1,6 +1,7 @@
 position_t * push_to_last(position_t * last, int x, int y, uint8_t type);
 void push_to_first(position_t ** head, int x, int y, uint8_t type) ;
 void push_bound_to_first(boundary_t ** head, int x, int y);
+add_bound_line(boundary_t ** head, float start_x, float start_y,float new_x,float new_y);
 void print_pos_list(position_t * head);
 void print_bound_list(boundary_t * head);
 position_t * initialize(int x, int y) ;
