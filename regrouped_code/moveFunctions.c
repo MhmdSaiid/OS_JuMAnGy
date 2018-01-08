@@ -174,12 +174,10 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	{
 		ANG_VAL = read_ang();
 		if(D=='R' && ANG_VAL>final_angle-5) {
-			printf("Stoppin Right");
 			stop_car();
 			break;
 		}
 		if(D=='L' && ANG_VAL<final_angle+5) {
-			printf("Stoppin Left");
 			stop_car();
 			break;
 		}
@@ -297,7 +295,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
 		timeout = true;
 		pthread_join(&sensorsThread);
-		printf("Succedded join");
+		printf("Succedded join\n");
 		gettimeofday(&stopDate,NULL);
 		//For optimisation purposes the thread checking for obstacle will stop the car if obstacle is detected
 		stop_car(); // Make sure the car is stopped
@@ -305,7 +303,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	else {
 		stopReason = pthread_cond_wait(&obstacleDetected, &myMutex);
 		pthread_join(&sensorsThread);
-		printf("Succedded join");
+		printf("Succedded join\n");
 		stop_car();
 		gettimeofday(&stopDate,NULL);
 	}
