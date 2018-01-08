@@ -49,6 +49,7 @@ extern float ANG_VAL;
 
 extern pthread_mutex_t myMutex;
 extern pthread_cond_t obstacleDetected;
+extern timout;
 
 
 /* Movement functions
@@ -291,7 +292,9 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	gettimeofday(&startDate,NULL);
 	run_forever(speed,speed);
 	if(inf==0) {
+		timeout = false;
 		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
+		timout = true;
 		pthread_join(&sensorsThread);
 		gettimeofday(&stopDate,NULL);
 		//For optimisation purposes the thread checking for obstacle will stop the car if obstacle is detected

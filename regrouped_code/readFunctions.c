@@ -144,6 +144,11 @@ void *readingSensors(void)
 	while (!detect_obstacle())
 	{
 		update_sensors_value();
+		if(timeout)
+		{
+			printf("Timedout so stopping\n");
+			exit;
+		}
 		i++;
 	}
 	//printf("Nb Check = %d\n",i);
