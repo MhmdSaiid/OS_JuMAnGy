@@ -41,7 +41,7 @@ extern bool TOUCHING;
 extern uint8_t motor[ 3 ];
 extern pthread_mutex_t myMutex;
 extern pthread_cond_t obstacleDetected;
-extern bool timeout;git pus
+extern bool timeout;
 
 bool _check_pressed( uint8_t sn )
 {
