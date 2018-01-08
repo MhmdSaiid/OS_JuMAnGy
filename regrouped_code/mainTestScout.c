@@ -73,7 +73,7 @@ bool TOUCHING;
 int socket_number; //Defined by the thread that handles the socket
 pthread_mutex_t myMutex;
 pthread_cond_t obstacleDetected;
-
+bool timeout = false;
 
 int main (void )
 {
@@ -98,7 +98,7 @@ int main (void )
 	//rotate_car(100, 'R', SPEED_CIRCULAR);
 	//limitObst();
 	//moveinf(SPEED_LINEAR,Direct);
-	scouting();	
+	scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
@@ -112,4 +112,3 @@ int main (void )
 
 	return 0;
 }
-
