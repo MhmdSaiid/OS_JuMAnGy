@@ -57,8 +57,8 @@ but after the obstacle in the same scouting line drawn
 	int time = (int)(distance/velocity*3000);
 	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
-	if (relative_angle<10) directionIndex = 0;
-	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 1;
+	if (relative_angle<10) directionIndex = 1; //goig right
+	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 0; //goig left
 	bool besideObstacle = true;
 	int angleTracker = relative_angle;
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
@@ -71,6 +71,7 @@ but after the obstacle in the same scouting line drawn
 			break;
 		}
 			else if (!detect_obstacle()){
+				printf("No Obstacle detected\n");
 				move(SPEED_LINEAR,floor(time*1.5),0,'F');
 		}
 	}

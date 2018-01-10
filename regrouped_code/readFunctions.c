@@ -138,7 +138,7 @@ void update_sensors_value()
 
 void *readingSensors(void)
 {
-	printf("Hello from the thread\n");
+	//printf("Hello from the thread\n");
 	uint8_t sn_touch;
 	long int i=0;
 	update_sensors_value();
@@ -147,7 +147,7 @@ void *readingSensors(void)
 		update_sensors_value();
 		if(timeout)
 		{
-			printf("Timedout so stopping\n");
+			//printf("Timedout so stopping\n");
 			return;
 		}
 		i++;
