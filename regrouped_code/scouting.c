@@ -76,7 +76,7 @@ but after the obstacle in the same scouting line drawn
 		if (!detect_obstacle()){
 				printf("No Obstacle detected Us = %f\n",US_VAL);
 				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
-				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*),0,'F');
+				obstacleWhileMoving = move(SPEED_LINEAR,floor(time),0,'F');
 				rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR); //get some distance from the obstacle
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
 				if(obstacleWhileMoving){
