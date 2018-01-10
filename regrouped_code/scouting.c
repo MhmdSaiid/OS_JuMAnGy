@@ -64,15 +64,21 @@ but after the obstacle in the same scouting line drawn
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
 		move(SPEED_LINEAR,time,0,'F');
+		printf("Turning %c\n",directionsGoingRight[(directionIndex+1)%2]);
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 		US_VAL = read_US();
 		if (abs(relative_angle-angleTracker)==180 && y_position== (y_init) ){
 			rotate_car(180, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 			break;
 		}
-			else if (!detect_obstacle()){
+		if (!detect_obstacle()){
 				printf("No Obstacle detected\n");
 				move(SPEED_LINEAR,floor(time*1.5),0,'F');
+		}
+		else{
+			printf("Obstacle is still here\n");
+			printf("Turning %c\n",directionsGoingRight[directionIndex]);
+			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
 	}
 /*
