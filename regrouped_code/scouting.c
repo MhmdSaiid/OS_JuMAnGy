@@ -75,6 +75,9 @@ but after the obstacle in the same scouting line drawn
 		}
 		if (!detect_obstacle()){
 				printf("No Obstacle detected Us = %f\n",US_VAL);
+				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
+				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
+				rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR); //get some distance from the obstacle
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
 				if(obstacleWhileMoving){
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
@@ -83,11 +86,11 @@ but after the obstacle in the same scouting line drawn
 					if (side==3){
 						printf("DONE\n");
 						//going back to end of obstacle
-						rotate_car(180, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
-						move(SPEED_LINEAR,floor(time*1.5),0,'F');
-						rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
+						rotate_car(180, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 						move(SPEED_LINEAR,floor(time*1.5),0,'F');
 						rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
+						move(SPEED_LINEAR,floor(time*1.5),0,'F');
+						rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 						break;
 					}
 					else side++;
