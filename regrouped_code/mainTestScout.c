@@ -105,10 +105,5 @@ int main (void )
                 printf("*** ( EV3 ) Bye! ***\n");
 //		break;
         }
-
-
-
-
-
 	return 0;
 }

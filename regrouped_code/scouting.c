@@ -81,6 +81,7 @@ but after the obstacle in the same scouting line drawn
 				}
 				else{
 					if (side==3){
+						printf("DONE\n");
 						break;
 					}
 					else side++;
