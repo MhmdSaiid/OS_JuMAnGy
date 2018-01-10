@@ -53,7 +53,7 @@ but after the obstacle in the same scouting line drawn
 	float yDecal;
 	float xDecal2;
 	float yDecal2;
-	int side=1;
+	//int side=1;
 	int time = (int)(distance/velocity*3000);
 	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
