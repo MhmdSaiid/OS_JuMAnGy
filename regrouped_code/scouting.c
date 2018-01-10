@@ -87,9 +87,9 @@ but after the obstacle in the same scouting line drawn
 						printf("DONE\n");
 						//going back to end of obstacle
 						rotate_car(180, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
-						move(SPEED_LINEAR,floor(time*1.5),0,'F');
+						move(SPEED_LINEAR,floor(time*3),0,'F');
 						rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
-						move(SPEED_LINEAR,floor(time*1.5),0,'F');
+						move(SPEED_LINEAR,floor(time*3),0,'F');
 						rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 						return;
 					}
@@ -175,7 +175,7 @@ void scouting(){
 					goingRight=0;
 				}
 				else if(!goingRight){
-					move(SPEED_LINEAR, time*2, 0, 'B');
+					move(SPEED_LINEAR, time/2, 0, 'B');
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					move(SPEED_LINEAR,time, 0, 'F');
 					rotate_car(90,'R', SPEED_CIRCULAR);
