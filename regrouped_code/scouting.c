@@ -175,7 +175,7 @@ void scouting(){
 					goingRight=0;
 				}
 				else if(!goingRight){
-					move(SPEED_LINEAR, time/2, 0, 'B');
+					move(SPEED_LINEAR, time*2, 0, 'B');
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					move(SPEED_LINEAR,time, 0, 'F');
 					rotate_car(90,'R', SPEED_CIRCULAR);
