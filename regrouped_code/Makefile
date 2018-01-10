@@ -14,6 +14,7 @@ Boundaries.o:  Boundaries.c
 	gcc -lev3dev-c -lpthread -c $< -o $@
 
 mainTestScout: mainTestScout.c $(DEPENDENCIES) scouting.o defines.h
+	git pull
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) scouting.o -o $@
 
 MainSensorsThread : MainSensorsThread.c $(DEPENDENCIES) defines.h
