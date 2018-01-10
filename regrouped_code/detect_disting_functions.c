@@ -60,8 +60,6 @@ void find_right_angle_obst(){
 	uint8_t i = 0;
 	calibrate_gyro();
 	ANG_VAL=0;
-	for(i;i<3;i++)
-	{
 	Sleep(1000);
 	//update_sensors_value();
 	US_VAL = read_US();
@@ -103,8 +101,6 @@ void find_right_angle_obst(){
 		//printf("previous %f, new %f \n", previous_dist, current_dist);
 	}
 	stop_car();
-
-	}
 	//we can have finished but may be not if we are too close of one corner of the object
 	//so we check if its ok or if it is the not lucky case
 	/*sleep(10);
