@@ -63,6 +63,7 @@ but after the obstacle in the same scouting line drawn
 	int angleTracker = relative_angle;
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 	int obstacleWhileMoving;
+	uint8_t side=1;
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
 		move(SPEED_LINEAR,time,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
@@ -77,6 +78,12 @@ but after the obstacle in the same scouting line drawn
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
 				if(obstacleWhileMoving){
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
+				}
+				else{
+					if (side==3){
+						break
+					}
+					else side++;
 				}
 		}
 		else{
