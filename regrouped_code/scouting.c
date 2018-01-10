@@ -72,11 +72,11 @@ but after the obstacle in the same scouting line drawn
 			break;
 		}
 		if (!detect_obstacle()){
-				printf("No Obstacle detected\n");
+				printf("No Obstacle detected Us = %f\n",US_VAL);
 				move(SPEED_LINEAR,floor(time*1.5),0,'F');
 		}
 		else{
-			printf("Obstacle is still here\n");
+			printf("Obstacle is still here \n");
 			printf("Turning %c\n",directionsGoingRight[directionIndex]);
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
