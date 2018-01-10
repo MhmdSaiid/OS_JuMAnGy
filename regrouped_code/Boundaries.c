@@ -3,6 +3,9 @@
 #include <string.h>
 #include <stdint.h>
 #include "math.h"
+#include "ev3.h"
+#include "ev3_port.h"
+#include "math.h"
 #include "defines.h"
 #include "Boundaries.h"
 #include "readFunctions.h"
@@ -32,7 +35,7 @@ float new_y;
 				rotate_car(90,'L',SPEED_CIRCULAR);
 				start_x=x_position;
 				start_y=y_position;
-			
+
 			}
 			else {
 				start_x=x_position;
@@ -48,5 +51,3 @@ float new_y;
 		break;
 	}
 }
-
-
