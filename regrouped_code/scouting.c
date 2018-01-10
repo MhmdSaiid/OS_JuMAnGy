@@ -80,7 +80,7 @@ but after the obstacle in the same scouting line drawn
 				rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR); //get some distance from the obstacle
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
 				if(obstacleWhileMoving){
-					find_right_angle_obst();
+					//find_right_angle_obst();
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				}
 				else{
