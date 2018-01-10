@@ -56,7 +56,7 @@ extern timeout;
 */
 void run_forever( int l_speed, int r_speed )
 {
-printf("run forever\n");
+//printf("run forever\n");
 int left_speed = l_speed* MAX_SPEED/100;
 int right_speed = r_speed* MAX_SPEED/100;
 //printf("left speed =%d \n",left_speed);
@@ -148,9 +148,6 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	uint8_t i;
 	ANG_VAL = read_ang();
 	float init_angle = 0;
-	printf("Init ANG VAL = %f\n",init_angle);
-	printf("Angle wanted = %d\n",angle);
-	printf("Direction = %c\n",D);
 	angle = abs(angle);
 	float final_angle;
 	if(D=='L')//Sensor value increase clockwise
