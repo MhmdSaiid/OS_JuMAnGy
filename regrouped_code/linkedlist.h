@@ -25,4 +25,4 @@ uint8_t* initializeMap(boundary_t * obstacles);
 void print_map(uint8_t * map);
 uint8_t getFromMap(uint8_t * map, int x, int y);
 void setOnMap(uint8_t * map, int x, int y, uint8_t type);
-void main();
+//void main();
