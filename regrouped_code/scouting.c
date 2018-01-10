@@ -76,7 +76,7 @@ but after the obstacle in the same scouting line drawn
 				printf("No Obstacle detected Us = %f\n",US_VAL);
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
 				if(obstacleWhileMoving){
-					rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
+					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				}
 		}
 		else{
