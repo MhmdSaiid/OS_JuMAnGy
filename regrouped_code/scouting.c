@@ -187,7 +187,7 @@ void scouting(){
 				//obst=distinguish_obstacle();
 				limitObst(obst);
 				finished=true;
-				return
+				return;
 			}
 		}
 	}
