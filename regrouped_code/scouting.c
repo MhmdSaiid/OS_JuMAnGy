@@ -65,9 +65,9 @@ but after the obstacle in the same scouting line drawn
 	int obstacleWhileMoving;
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
 		move(SPEED_LINEAR,time,0,'F');
-		printf("Turning %c\n",directionsGoingRight[(directionIndex+1)%2]);
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 		US_VAL = read_US();
+		printf("y_position= %f\n",y_position);
 		if (abs(relative_angle-angleTracker)==180 && y_position== (y_init) ){
 			rotate_car(180, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 			break;
@@ -81,7 +81,6 @@ but after the obstacle in the same scouting line drawn
 		}
 		else{
 			printf("Obstacle is still here \n");
-			printf("Turning %c\n",directionsGoingRight[directionIndex]);
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
 	}
