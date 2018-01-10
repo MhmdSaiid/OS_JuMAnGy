@@ -81,7 +81,7 @@ but after the obstacle in the same scouting line drawn
 				}
 				else{
 					if (side==3){
-						break
+						break;
 					}
 					else side++;
 				}
