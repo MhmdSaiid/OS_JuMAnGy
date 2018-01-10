@@ -179,7 +179,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 			break;
 		}
 	}
-	Sleep(250);
+	Sleep(500);
 }
 
 

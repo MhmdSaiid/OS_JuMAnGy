@@ -10,7 +10,7 @@
 #define S_MOTOR_EXT_PORT EXT_PORT__NONE_
 
 #define SPEED_LINEAR    35 //50  //for linear motion
-#define SPEED_CIRCULAR  10  //for circular motion
+#define SPEED_CIRCULAR  20  //for circular motion
 #define SPEED_SERVO	30
 #define DEGREE_TO_COUNT( d )  (( d ) * 180 / 90 )
 #define MAX_SPEED 	1050  /* Motor maximal speed */
