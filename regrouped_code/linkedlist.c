@@ -64,12 +64,12 @@ void push_bound_to_first(boundary_t ** head, int x, int y) {
 
 void add_bound_line(boundary_t ** head, float xbeg, float ybeg, float xend, float yend) {
 	//saves a list of blocks into the boudary list
-	float dx = xend - xbeg;
-	float dy = yend - ybeg;
+	float dx = (xend - xbeg)/5;
+	float dy = (yend - ybeg)/5;
 	printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
 	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
-	float x = (float) round(xbeg);
-	float y = round(ybeg);
+	float x = (float) round(xbeg/5);
+	float y = round(ybeg/5);
 	int i;
 	for (i = 0; i < nb_blocks; i++) {
 		push_bound_to_first(head, round(x), round(y));
@@ -217,6 +217,18 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 		}
 	}
 	return(issuing_obstacles);
+}
+uint8_t * small_stadium_map(int x_dimension, int y_dimension){
+	boundary_t * boundariesList = NULL;
+	add_bound_line(&boundariesList, 0, 0, x_dimension, 0);
+	add_bound_line(&boundariesList, x_dimension, 0, x_dimension, y_dimension);
+	add_bound_line(&boundariesList, x_dimension, y_dimension, 0, y_dimension);
+	add_bound_line(&boundariesList, 0, y_dimension, 0, 0);
+	XMAX = floor(x_dimension/5);
+	YMAX = floor(y_dimension/5);
+	uint8_t * map = initializeMap(boundariesList);
+	print_map(map);
+	return map;
 }
 /*
 void main() {
