@@ -231,7 +231,7 @@ void main() {
 		last = push_to_last(last, x, y, type);
 	}
 	print_pos_list(linkedList);
-	*/
+	
 	boundary_t * boundariesList = NULL;
 
 	add_bound_line(&boundariesList, 2, 10, 15, 10);
