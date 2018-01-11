@@ -27,7 +27,8 @@ int compt=0;
  	while(1){
 		while(read_US()>100){ //while we don't meet an obstacle that is to say when we dont reach the next boundary
 			move(SPEED_LINEAR,1000,0,'F');
-			new_x=x_position;
+      Sleep(50);
+      new_x=x_position;
 			new_y=y_position;
 			add_bound_line(&boundaries,start_x,start_y,new_x,new_y);
 			rotate_car(90,'R',SPEED_CIRCULAR);
