@@ -81,6 +81,7 @@ pthread_mutex_t myMutex;
 pthread_cond_t obstacleDetected;
 bool timeout = false;
 uint8_t * map;
+boundary_t * boundaries=NULL;
 //something
 int main (void )
 {
