@@ -31,7 +31,7 @@ float angle = 90.0;
 			move(SPEED_LINEAR,1000,0,'F');
       new_x=x_position;
 			new_y=y_position;
-			//add_bound_line(&boundaries,start_x,start_y,new_x,new_y);
+			add_bound_line(&boundaries,start_x,start_y,new_x,new_y);
 			rotate_car(90.0,'R',SPEED_CIRCULAR);
 			//Sleep(500);
 			if(read_US()<200){ //if the boundary is still there
