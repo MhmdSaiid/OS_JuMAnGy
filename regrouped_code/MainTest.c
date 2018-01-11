@@ -96,7 +96,7 @@ int main (void )
   printf("ElapsedTime = %d\n",elapsedTime);
   printf("relative angle = %f\n",relative_angle);
   printf("x_position = %f, y_position = %f",x_position,y_position);
-  rotate(90,'L',SPEED_CIRCULAR);
+  rotate_car(90,'L',SPEED_CIRCULAR);
   printf("\nElapsedTime = %d\n",elapsedTime);
   printf("relative angle = %f\n",relative_angle);
   printf("x_position = %f, y_position = %f",x_position,y_position);
