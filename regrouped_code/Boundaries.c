@@ -19,6 +19,8 @@ extern boundary_t ** boundaries;
 
 void bound(void )
 {
+float initial_position_x = x_position;
+float initial_position_y = y_position;
 
 float start_x = x_position;
 float start_y = y_position;
@@ -49,9 +51,9 @@ float angle = 90.0;
 			//compt+=1;
 		}
 		rotate_car(angle,'L',SPEED_CIRCULAR);
-		//start_x = x_position;
-		//start_y = y_position;
-		if( abs(x_position-start_x)<20 && abs(y_position-start_y)<20) ){ //returned to initial position ?
+		start_x = x_position;
+		start_y = y_position;
+		if( abs(x_position-initial_position_x)<20 && abs(y_position-initial_position_y)<20) ){ //returned to initial position ?
 		//if(compt==3){
 			break;
 		}
