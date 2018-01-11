@@ -74,8 +74,6 @@ bool TOUCHING;
 int socket_number; //Defined by the thread that handles the socket
 pthread_mutex_t myMutex;
 pthread_cond_t obstacleDetected;
-bool timeout = false;
-boundary_t * boundaries=NULL;
 
 int main (void )
 {
