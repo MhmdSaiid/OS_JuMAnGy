@@ -218,7 +218,7 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 	}
 	return(issuing_obstacles);
 }
-
+/*
 void main() {
 	position_t * linkedList = initialize(5, 5);
 	position_t * last = linkedList;
@@ -262,3 +262,4 @@ void main() {
 	printf("issuing obstacles:\n");
 	print_bound_list(get_issuing_obstacles(map));
 }
+*/
