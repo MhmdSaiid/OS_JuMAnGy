@@ -178,7 +178,6 @@ void scouting(){
 			new_y=y_position;
 			//addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 			//stops when there is an obstacle or a boundary
-			//if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
 			printf("US_VAL = %f\n",US_VAL);
 			if(checkBoundary( (US_VAL/10*cos(relative_angle)+x_position), (y_position +US_VAL/10*sin(relative_angle)) ){
 				//if it is a boundary according to our array
