@@ -81,9 +81,11 @@ but after the obstacle in the same scouting line drawn
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
 				if(obstacleWhileMoving){
 					//find_right_angle_obst();
+					setOnMap(map, x_position, y_position, obstacleType);
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				}
 				else{
+					setOnMap(map, x_position, y_position, obstacleType);
 					if (side==3){
 						printf("DONE\n");
 						//going back to end of obstacle
@@ -176,8 +178,8 @@ void scouting(){
 			addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 			//stops when there is an obstacle or a boundary
 			//if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
-			if(false){ //The map is not defined yet
-				//if it is a boundary according to our linked list
+			if(checkBoundary( US_VAL+(x_position*cos(relative_angle)+y_position*sin(relative_angle)) ){
+				//if it is a boundary according to our array
 				if(goingRight){
 					move(SPEED_LINEAR, time/2, 0, 'B'); //goes back a little in order to have enough place to rotate
 					rotate_car(90,'L', SPEED_CIRCULAR);
