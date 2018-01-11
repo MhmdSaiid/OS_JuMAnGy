@@ -116,7 +116,7 @@ int main (void )
 	getSize(boundaries);
 	uint8_t * map=initializeMap(boundaries);
 	print_map(map);
-	scouting();
+	//scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
