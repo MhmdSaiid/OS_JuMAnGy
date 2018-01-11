@@ -2,4 +2,4 @@
 
 The Team
 
-Justine DELOMENIE Gautier DERVAUX Armand PERON Moammed SAEED
+Justine DELOMENIE Gautier DERVAUX Armand PERON Mohammed SAEED
