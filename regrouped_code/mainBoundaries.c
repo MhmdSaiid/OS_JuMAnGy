@@ -111,9 +111,8 @@ int main (void )
 	//limitObst();
 	//move(SPEED_LINEAR,0,1,Direct);
 	//scouting();
-	
-	bound();
 
+	bound();
 	getSize(boundaries);
 	uint8_t * map=initializeMap(boundaries);
 	print_map(map);
