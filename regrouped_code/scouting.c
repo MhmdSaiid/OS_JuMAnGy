@@ -57,8 +57,8 @@ but after the obstacle in the same scouting line drawn
 	int time = (int)(distance/velocity*3000);
 	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
-	if (relative_angle<10) directionIndex = 1; //goig right
-	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 0; //goig left
+	if (relative_angle<10) directionIndex = 1; //going right
+	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 0; //going left
 	bool besideObstacle = true;
 	int angleTracker = relative_angle;
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
@@ -98,6 +98,7 @@ but after the obstacle in the same scouting line drawn
 				}
 		}
 		else{
+			setOnMap(map,x_position, y_position, obstacleType);
 			printf("Obstacle is still here \n");
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
@@ -143,7 +144,7 @@ but after the obstacle in the same scouting line drawn
 	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity*1000,0, 'F'); //largeur //realignment with initial position
 	rotate_car(90, 'R', SPEED_CIRCULAR);*/
 }
-/*
+
 int checkBoundary(int x,int y){
 	uint8_t valueFromMap=getFromMap(map,x,y);
 	if(valueFromMap == BOUNDARIES){
@@ -152,7 +153,7 @@ int checkBoundary(int x,int y){
 	return 0;
 
 }
-*/
+
 void scouting(){
 	int distance = 5; //in cm
 	int time = (int)(distance/velocity*4000);
@@ -160,32 +161,53 @@ void scouting(){
 	int finished=0;
 	int boundaryMet=0;
 	int goingRight=1;
+	float former_x = x_position;
+	float former_y = y_position;
+	float new_x;
+	float new_y;
 	while(!finished){
 		boundaryMet=0;
 		while(!boundaryMet){
+			former_x=x_position;
+			former_y=y_position;
 			move(SPEED_LINEAR, 0, 1, 'F');
+			new_x=x_position;
+			new_y=y_position;
+			addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 			//stops when there is an obstacle or a boundary
 			//if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
-			if(false){ //The map is not definied yet
+			if(false){ //The map is not defined yet
 				//if it is a boundary according to our linked list
 				if(goingRight){
 					move(SPEED_LINEAR, time/2, 0, 'B'); //goes back a little in order to have enough place to rotate
 					rotate_car(90,'L', SPEED_CIRCULAR);
+					former_x=x_position;
+					former_y=y_position;
 					move(SPEED_LINEAR,time, 0, 'F');
+					new_x=x_position;
+					new_y=y_position;
+					addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,'L', SPEED_CIRCULAR);
 					goingRight=0;
 				}
 				else if(!goingRight){
 					move(SPEED_LINEAR, time/2, 0, 'B');
 					rotate_car(90,'R', SPEED_CIRCULAR);
+					former_x=x_position;
+					former_y=y_position;
 					move(SPEED_LINEAR,time, 0, 'F');
+					new_x=x_position;
+					new_y=y_position;
+					addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					goingRight=1;
 				}
 				boundaryMet=1;
 			}
 			else {
-				//obst=distinguish_obstacle();
+				obst=distinguish_obstacle();
+				setOnMap(map, x_position, y_position, obst);
+				printf("obstacle of type : %d", obst);
 				limitObst(obst);
 				finished=true;
 				return;
