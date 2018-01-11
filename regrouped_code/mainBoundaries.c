@@ -112,10 +112,10 @@ int main (void )
 	//move(SPEED_LINEAR,0,1,Direct);
 	//scouting();
 	bound();
-	
+
 	getSize(boundaries);
 	uint8_t * map=initializeMap(boundaries);
-	printMap(map);
+	print_map(map);
 
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
