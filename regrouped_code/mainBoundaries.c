@@ -114,7 +114,6 @@ int main (void )
 	//rotate_car(90,'R',SPEED_CIRCULAR);
 	bound();
 
-	bound();
 	getSize(boundaries);
 	uint8_t * map=initializeMap(boundaries);
 	print_map(map);
