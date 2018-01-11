@@ -3,7 +3,7 @@
 #directory. Note that: the update sensors value need to be included in your file that contains the main.
 # Take the testMove build as exemple and it should work!!
 
-DEPENDENCIES = readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o #linkedlist.o Boundaries.o
+DEPENDENCIES = readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o scouting.o #linkedlist.o Boundaries.o
 LIBRAIRIES = -lm  -lev3dev-c -lbluetooth -lpthread
 
 mainBoundaries : mainBoundaries.c $(DEPENDENCIES) linkedlist.o Boundaries.o defines.h
@@ -15,8 +15,8 @@ Boundaries.o:  Boundaries.c
 MainTest: MainTest.c $(DEPENDENCIES)
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
 
-mainTestScout: mainTestScout.c $(DEPENDENCIES) scouting.o defines.h
-	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) scouting.o -o $@
+mainTestScout: mainTestScout.c $(DEPENDENCIES) defines.h
+	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
 
 MainSensorsThread : MainSensorsThread.c $(DEPENDENCIES) defines.h
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
