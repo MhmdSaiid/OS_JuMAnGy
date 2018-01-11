@@ -57,7 +57,7 @@
 #include "scouting.h"
 #endif
 
-#include "linkedList.h"
+#include "linkedlist.h"
 
 #include "Boundaries.c"
 extern const char const *color[];
