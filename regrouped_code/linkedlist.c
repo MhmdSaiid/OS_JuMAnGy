@@ -152,8 +152,8 @@ uint8_t* initializeMap(boundary_t * obstacles) {
 	uint8_t* map = malloc(size*xmax*ymax);
 	boundary_t * current = obstacles;
 	while(current!=NULL) {
-		int x = MAX(current->x,0) ;
-		int y = MAX(current->y, 0);
+		int x = current->x;
+		int y = current->y;
 		map[x*ymax*size+y] = 4;
 		current = current->next;
 	}
@@ -191,7 +191,7 @@ uint8_t getFromMap(uint8_t * map, int x, int y) {
 void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
 	if (x>0 && x< XMAX && y>0 && y<YMAX) {
-		map[(int)((floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5)))] = type;
+		map[x*YMAX*sizeof(uint8_t)+y] = type;
 	} else {
 		printf("out of bound: %d, %d\n", x, y);
 	}
@@ -218,7 +218,7 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 	}
 	return(issuing_obstacles);
 }
-/*
+
 void main() {
 	position_t * linkedList = initialize(5, 5);
 	position_t * last = linkedList;
@@ -231,23 +231,14 @@ void main() {
 		last = push_to_last(last, x, y, type);
 	}
 	print_pos_list(linkedList);
+	*/
 	boundary_t * boundariesList = NULL;
-	push_bound_to_first(&boundariesList, 1, 10);
-	push_bound_to_first(&boundariesList, 1, 9);
-	push_bound_to_first(&boundariesList, 1, 8);
-	push_bound_to_first(&boundariesList, 2, 7);
-	push_bound_to_first(&boundariesList, 2, 6);
-	push_bound_to_first(&boundariesList, 2, 5);
-	push_bound_to_first(&boundariesList, 2, 4);
-	push_bound_to_first(&boundariesList, 2, 3);
-	push_bound_to_first(&boundariesList, 2, 2);
-	push_bound_to_first(&boundariesList, 2, 1);
-	push_bound_to_first(&boundariesList, 2, 0);
-	push_bound_to_first(&boundariesList, 20, 0);
-	push_bound_to_first(&boundariesList, 15, 10);
 
+	add_bound_line(&boundariesList, 2, 10, 15, 10);
 	add_bound_line(&boundariesList, 15, 10, 20, 0);
-
+	add_bound_line(&boundariesList, 20, 0, 0, 0);
+	add_bound_line(&boundariesList, 0, 0, 2, 5);
+	add_bound_line(&boundariesList, 2, 5, 2, 10);
 	int xmax = 0;
 	int ymax = 0;
 	boundary_t * current = boundariesList;
@@ -270,4 +261,4 @@ void main() {
 	print_map(map);
 	printf("issuing obstacles:\n");
 	print_bound_list(get_issuing_obstacles(map));
-}*/
+}
