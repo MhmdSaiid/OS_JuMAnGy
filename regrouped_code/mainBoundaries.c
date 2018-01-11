@@ -73,7 +73,7 @@ extern uint8_t motor[ 3 ];
 float x_position = 60.0;
 float y_position = 30.0;
 float relative_angle = 0;
-float velocity = 30.0; //25 cm per second for speed linear = 50
+float velocity = SPEED_LINEAR/2; //25 cm.s per second for speed linear = 50
 float val=3.141592/180.0;
 int COLOR_VAL;
 float INTENSITY_VAL;
