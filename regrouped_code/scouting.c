@@ -175,7 +175,7 @@ void scouting(){
 			move(SPEED_LINEAR, 0, 1, 'F');
 			new_x=x_position;
 			new_y=y_position;
-			addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
+			//addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 			//stops when there is an obstacle or a boundary
 			//if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
 			if(checkBoundary( US_VAL+(x_position*cos(relative_angle)), US_VAL+(y_position*sin(relative_angle))) ){
@@ -188,7 +188,7 @@ void scouting(){
 					move(SPEED_LINEAR,time, 0, 'F');
 					new_x=x_position;
 					new_y=y_position;
-					addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
+					//addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,'L', SPEED_CIRCULAR);
 					goingRight=0;
 				}
@@ -200,7 +200,7 @@ void scouting(){
 					move(SPEED_LINEAR,time, 0, 'F');
 					new_x=x_position;
 					new_y=y_position;
-					addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
+					//addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					goingRight=1;
 				}
