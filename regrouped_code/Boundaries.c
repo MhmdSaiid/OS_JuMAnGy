@@ -21,7 +21,7 @@ void bound(void )
 {
 
 float start_x = x_position;
-float start_y=y_position;
+float start_y = y_position;
 float new_x;
 float new_y;
 //int compt=0;
@@ -49,9 +49,9 @@ float angle = 90.0;
 			//compt+=1;
 		}
 		rotate_car(angle,'L',SPEED_CIRCULAR);
-		start_x=x_position;
-		start_y=y_position;
-		if((x_position>80)&&(x_position<100) && (y_position>10)&&(y_position<30)){ //returned to initial position ?
+		//start_x = x_position;
+		//start_y = y_position;
+		if( abs(x_position-start_x)<20 && abs(y_position-start_y)<20) ){ //returned to initial position ?
 		//if(compt==3){
 			break;
 		}
