@@ -44,8 +44,9 @@ int compt=0;
 				break; //maybe turn right ?
 			}
 			Sleep(150);
-			compt+=1;
+			
 		}
+		compt+=1;
 		rotate_car(90,'L',SPEED_CIRCULAR);
 		start_x=x_position;
 		start_y=y_position;
