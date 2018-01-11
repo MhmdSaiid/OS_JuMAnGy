@@ -54,7 +54,7 @@ but after the obstacle in the same scouting line drawn
 	float xDecal2;
 	float yDecal2;
 	//int side=1;
-	int time = (int)(distance/velocity*3000);
+	int time = (int)(distance/velocity*1000);
 	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
 	if (relative_angle<10) directionIndex = 1; //going right
@@ -98,7 +98,7 @@ but after the obstacle in the same scouting line drawn
 				}
 		}
 		else{
-			setOnMap(map,x_position, y_position, obstacleType);
+			//setOnMap(map,x_position, y_position, obstacleType);
 			printf("Obstacle is still here \n");
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}

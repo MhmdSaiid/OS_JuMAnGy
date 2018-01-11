@@ -148,7 +148,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	uint8_t i;
 	ANG_VAL = read_ang();
 	float init_angle = 0;
-	angle = (float)abs(angle);
+	angle = abs(angle);
 	float final_angle;
 	if(D=='L')//Sensor value increase clockwise
 	{
@@ -159,7 +159,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	{
 		final_angle = init_angle + angle;
 	}
-	relative_angle -= angle; //Gyro opposite direction as gyro 
+	relative_angle -= angle; //Gyro opposite direction as gyro
 	printf("In rotate relative_angle = %f\n",relative_angle);
 
 	if(D=='R') run_forever(speed_circular,-speed_circular);
