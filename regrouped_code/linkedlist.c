@@ -275,7 +275,7 @@ void main() {
 }
 */
 /*
-function check_area(int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
+bool check_area_obstacle(int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
 
 }
 */
