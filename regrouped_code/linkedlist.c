@@ -185,13 +185,13 @@ void print_map(uint8_t * map) {
 
 uint8_t getFromMap(uint8_t * map, int x, int y) {
 	//Returns the element of the map at position x,y
-	return(map[x*YMAX*sizeof(uint8_t)+y]);
+	return(map[floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5)]);
 }
 
 void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
 	if (x>0 && x< XMAX && y>0 && y<YMAX) {
-		map[x*YMAX*sizeof(uint8_t)+y] = type;
+		map[floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5)] = type;
 	} else {
 		printf("out of bound: %d, %d\n", x, y);
 	}
@@ -211,7 +211,7 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 	int j;
 	for (i = xmin; i <= xmax; i++) {
 		for (j = ymin; j <= ymax; j++) {
-			if (getFromMap(map, i, j) == 4) {
+			if (getFromMap(map, i*5, j*5) == 4) {
 				push_bound_to_first(&issuing_obstacles, i, j);
 			}
 		}
@@ -231,7 +231,7 @@ void main() {
 		last = push_to_last(last, x, y, type);
 	}
 	print_pos_list(linkedList);
-	
+
 	boundary_t * boundariesList = NULL;
 
 	add_bound_line(&boundariesList, 2, 10, 15, 10);
