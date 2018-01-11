@@ -30,7 +30,7 @@
 
 extern float x_position;
 extern float y_position;
-extern int relative_angle;
+extern float relative_angle;
 extern float velocity;
 extern int COLOR_VAL;
 extern float INTENSITY_VAL;

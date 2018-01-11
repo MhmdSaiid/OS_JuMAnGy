@@ -3,7 +3,7 @@
 extern float velocity;
 extern float val;
 extern float x_position,y_position;
-extern int relative_angle;
+extern float relative_angle;
 
 #include "positionFunctions.h"
 #include <math.h>
@@ -13,4 +13,3 @@ void update_position(int time){
 	x_position += distance*cos(relative_angle*val);
 	y_position += distance*sin(relative_angle*val);
 }
-
