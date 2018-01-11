@@ -274,3 +274,8 @@ void main() {
 	print_bound_list(get_issuing_obstacles(map));
 }
 */
+/*
+function check_area(int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
+
+}
+*/
