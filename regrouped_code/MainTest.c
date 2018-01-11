@@ -101,7 +101,7 @@ int main (void )
 	//int elapsedTime = move(SPEED_LINEAR,time,0,'F');
   //find_right_angle_obst();
 	uint8_t * map = small_stadium_map(120,100);
-	scout();
+	scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
