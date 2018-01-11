@@ -174,7 +174,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 			stop_car();
 			break;
 		}
-		if(D=='L' && ANG_VAL<final_angle+10) {
+		if(D=='L' && ANG_VAL<(final_angle+20)) {
 			stop_car();
 			break;
 		}
