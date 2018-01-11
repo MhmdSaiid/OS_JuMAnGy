@@ -152,8 +152,8 @@ uint8_t* initializeMap(boundary_t * obstacles) {
 	uint8_t* map = malloc(size*xmax*ymax);
 	boundary_t * current = obstacles;
 	while(current!=NULL) {
-		int x = current->x;
-		int y = current->y;
+		int x = MAX(current->x,0) ;
+		int y = MAX(current->y, 0);
 		map[x*ymax*size+y] = 4;
 		current = current->next;
 	}
