@@ -91,19 +91,21 @@ int main (void )
 	printf("Sensors online\n");
 	if( init_motors() > 0) return ( 1 );
 
-  int time = floor(70/velocity);
+  int time = floor(70/velocity)*1000;
+  printf("time = %d\n",time);
 	int elapsedTime = move(SPEED_LINEAR,time,0,'F');
+  Sleep(50);
   printf("ElapsedTime = %d\n",elapsedTime);
   printf("relative angle = %f\n",relative_angle);
-  printf("x_position = %f, y_position = %f",x_position,y_position);
+  printf("x_position = %f, y_position = %f\n",x_position,y_position);
   rotate_car(90,'L',SPEED_CIRCULAR);
   printf("\nElapsedTime = %d\n",elapsedTime);
   printf("relative angle = %f\n",relative_angle);
-  printf("x_position = %f, y_position = %f",x_position,y_position);
+  printf("x_position = %f, y_position = %f\n",x_position,y_position);
   move(SPEED_LINEAR,time,1,'F');
   printf("\nElapsedTime = %d\n",elapsedTime);
   printf("relative angle = %f\n",relative_angle);
-  printf("x_position = %f, y_position = %f",x_position,y_position);
+  printf("x_position = %f, y_position = %f\n",x_position,y_position);
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {

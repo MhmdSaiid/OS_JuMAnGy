@@ -40,7 +40,7 @@ enum { L, R, S};
 #endif
 extern const char const *color[];
 extern float x_position, y_position;
-extern int relative_angle;
+extern float relative_angle;
 extern int COLOR_VAL;
 extern float INTENSITY_VAL;
 extern bool TOUCHING;
