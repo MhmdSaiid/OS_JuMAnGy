@@ -100,7 +100,7 @@ but after the obstacle in the same scouting line drawn
 				}
 		}
 		else{
-			//setOnMap(map,x_position, y_position, obstacleType);
+			setOnMap(map,x_position, y_position, obstacleType);
 			printf("Obstacle is still here \n");
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
