@@ -57,6 +57,9 @@
 #include "scouting.h"
 #endif
 
+#include "linkedList.h"
+
+#include "Boundaries.c"
 extern const char const *color[];
 extern uint8_t motor[ 3 ];
 
