@@ -99,7 +99,7 @@ int main (void )
   printf("time = %d\n",time);
 	int elapsedTime = move(SPEED_LINEAR,time,0,'F');
   //find_right_angle_obst();
-	uint8_t * map = small_stadium_map();
+	uint8_t * map = small_stadium_map(120,100);
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
