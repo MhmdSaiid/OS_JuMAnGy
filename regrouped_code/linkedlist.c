@@ -66,7 +66,7 @@ void add_bound_line(boundary_t ** head, float xbeg, float ybeg, float xend, floa
 	//saves a list of blocks into the boudary list
 	float dx = (xend - xbeg)/5;
 	float dy = (yend - ybeg)/5;
-	printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
+	//printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
 	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
 	float x = (float) round(xbeg/5);
 	float y = round(ybeg/5);
@@ -75,7 +75,7 @@ void add_bound_line(boundary_t ** head, float xbeg, float ybeg, float xend, floa
 		push_bound_to_first(head, round(x), round(y));
 		x += dx/nb_blocks;
 		y += dy/nb_blocks;
-		printf("%f, %f\n", x, y);
+		//printf("%f, %f\n", x, y);
 	}
 }
 
