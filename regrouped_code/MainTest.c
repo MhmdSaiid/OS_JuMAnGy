@@ -59,7 +59,7 @@
 
 #include "linkedlist.h"
 
-#include "Boundaries.c"
+//#include "Boundaries.c"
 extern const char const *color[];
 extern uint8_t motor[ 3 ];
 
