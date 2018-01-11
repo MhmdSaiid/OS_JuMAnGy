@@ -191,7 +191,7 @@ uint8_t getFromMap(uint8_t * map, int x, int y) {
 void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
 	if (x>0 && x< XMAX && y>0 && y<YMAX) {
-		map[x*YMAX*sizeof(uint8_t)+y] = type;
+		map[floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5)] = type;
 	} else {
 		printf("out of bound: %d, %d\n", x, y);
 	}
