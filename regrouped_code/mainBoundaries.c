@@ -111,6 +111,7 @@ int main (void )
 	//limitObst();
 	//move(SPEED_LINEAR,0,1,Direct);
 	//scouting();
+	rotate_car(90,'R',SPEED_CIRCULAR);
 	bound();
 
 	getSize(boundaries);
