@@ -30,10 +30,10 @@ int compt=0;
       new_x=x_position;
 			new_y=y_position;
 			add_bound_line(&boundaries,start_x,start_y,new_x,new_y);
-			rotate_car(90,'R',SPEED_CIRCULAR);
+			rotate_car(90.0,'R',SPEED_CIRCULAR);
 			//Sleep(500);
 			if(read_US()<200){ //if the boundary is still there
-				rotate_car(90,'L',SPEED_CIRCULAR);
+				rotate_car(90.0,'L',SPEED_CIRCULAR);
 				start_x=x_position;
 				start_y=y_position;
 
@@ -46,7 +46,7 @@ int compt=0;
 			Sleep(150);
 			compt+=1;
 		}
-		rotate_car(90,'L',SPEED_CIRCULAR);
+		rotate_car(90.0,'L',SPEED_CIRCULAR);
 		start_x=x_position;
 		start_y=y_position;
 		//if((x_position>80)&&(x_position<100) && (y_position>10)&&(y_position<30)) //returned to initial position ?
