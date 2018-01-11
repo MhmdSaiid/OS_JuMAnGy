@@ -60,10 +60,10 @@
 extern const char const *color[];
 extern uint8_t motor[ 3 ];
 
-float x_position = 15.0;
-float y_position = 20.0;
-int relative_angle = 0;
-float velocity = 17.5; //25 cm.s per second for speed linear = 50
+float x_position = 60.0;
+float y_position = 30.0;
+int relative_angle = 90;
+float velocity = SPEED_LINEAR/2; //25 cm.s per second for speed linear = 50
 float val=3.141592/180.0;
 int COLOR_VAL;
 float INTENSITY_VAL;
@@ -91,9 +91,18 @@ int main (void )
 	printf("Sensors online\n");
 	if( init_motors() > 0) return ( 1 );
 
-
-	int elapsedTime = move(SPEED_LINEAR,Direct,1,'F');
+  int time = floor(70/velocity);
+	int elapsedTime = move(SPEED_LINEAR,time,0,'F');
   printf("ElapsedTime = %d\n",elapsedTime);
+  printf("relative angle = %f\n",relative_angle);
+  printf("x_position = %f, y_position = %f",x_position,y_position);
+  rotate_car(90,'L',SPEED_CIRCULAR);
+  printf("\nElapsedTime = %d\n",elapsedTime);
+  printf("relative angle = %f\n",relative_angle);
+  printf("x_position = %f, y_position = %f",x_position,y_position);
+  move(SPEED_LINEAR,time,1,'F');
+  printf("\nElapsedTime = %d\n",elapsedTime);
+  printf("relative angle = %f\n",relative_angle);
   printf("x_position = %f, y_position = %f",x_position,y_position);
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
