@@ -23,14 +23,13 @@ float start_y=y_position;
 float new_x;
 float new_y;
 int compt=0;
-
+float angle = 90.0;
  	while(1){
 		while(read_US()>100){ //while we don't meet an obstacle that is to say when we dont reach the next boundary
 			move(SPEED_LINEAR,1000,0,'F');
       new_x=x_position;
 			new_y=y_position;
 			add_bound_line(&boundaries,start_x,start_y,new_x,new_y);
-      float angle = 90;
 			rotate_car(angle,'R',SPEED_CIRCULAR);
 			//Sleep(500);
 			if(read_US()<200){ //if the boundary is still there
