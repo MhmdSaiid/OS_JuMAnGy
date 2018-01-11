@@ -33,7 +33,7 @@ int compt=0;
 			rotate_car(90.0,'R',SPEED_CIRCULAR);
 			//Sleep(500);
 			if(read_US()<200){ //if the boundary is still there
-				rotate_car(90.0,'L',SPEED_CIRCULAR);
+				rotate_car((float)90,'L',SPEED_CIRCULAR);
 				start_x=x_position;
 				start_y=y_position;
 
