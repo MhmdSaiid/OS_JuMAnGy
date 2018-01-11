@@ -11,7 +11,7 @@
 #include "readFunctions.h"
 #include "linkedlist.h"
 #include "moveFunctions.h"
-
+#include "scouting.h"
 extern float x_position;
 extern float y_position;
 extern boundary_t ** boundaries;
