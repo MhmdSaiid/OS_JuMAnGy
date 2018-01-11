@@ -178,7 +178,7 @@ void scouting(){
 			addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 			//stops when there is an obstacle or a boundary
 			//if(checkBoundary(floor(x_position/5),floor(y_position/5))) {
-			if(checkBoundary( US_VAL+(x_position*cos(relative_angle)), US_VAL+(y_position*sin(relative_angle)) ){
+			if(checkBoundary( US_VAL+(x_position*cos(relative_angle)), US_VAL+(y_position*sin(relative_angle))) ){
 				//if it is a boundary according to our array
 				if(goingRight){
 					move(SPEED_LINEAR, time/2, 0, 'B'); //goes back a little in order to have enough place to rotate
