@@ -185,13 +185,13 @@ void print_map(uint8_t * map) {
 
 uint8_t getFromMap(uint8_t * map, int x, int y) {
 	//Returns the element of the map at position x,y
-	return(map[floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5)]);
+	return(map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))]);
 }
 
 void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
 	if (x>0 && x< XMAX && y>0 && y<YMAX) {
-		map[floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5)] = type;
+		map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))] = type;
 	} else {
 		printf("out of bound: %d, %d\n", x, y);
 	}
