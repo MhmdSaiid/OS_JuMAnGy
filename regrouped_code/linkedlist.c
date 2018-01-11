@@ -224,7 +224,7 @@ uint8_t * small_stadium_map(int x_dimension, int y_dimension){
 	add_bound_line(&boundariesList, x_dimension, 0, x_dimension, y_dimension);
 	add_bound_line(&boundariesList, x_dimension, y_dimension, 0, y_dimension);
 	add_bound_line(&boundariesList, 0, y_dimension, 0, 0);
-	getSize(&boundariesList);
+	getSize(boundariesList);
 	uint8_t * map = initializeMap(boundariesList);
 	print_map(map);
 	return map;
