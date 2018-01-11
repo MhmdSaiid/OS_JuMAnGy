@@ -80,7 +80,7 @@ int socket_number; //Defined by the thread that handles the socket
 pthread_mutex_t myMutex;
 pthread_cond_t obstacleDetected;
 bool timeout = false;
-
+uint8_t * map = small_stadium_map(120,100);
 int main (void )
 {
 	uint8_t sn_touch;
@@ -100,7 +100,7 @@ int main (void )
   printf("time = %d\n",time);
 	//int elapsedTime = move(SPEED_LINEAR,time,0,'F');
   //find_right_angle_obst();
-	uint8_t * map = small_stadium_map(120,100);
+
 	scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
