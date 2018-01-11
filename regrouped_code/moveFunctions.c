@@ -148,7 +148,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	uint8_t i;
 	ANG_VAL = read_ang();
 	float init_angle = 0;
-	angle = abs(angle);
+	angle = (float)abs(angle);
 	float final_angle;
 	if(D=='L')//Sensor value increase clockwise
 	{
