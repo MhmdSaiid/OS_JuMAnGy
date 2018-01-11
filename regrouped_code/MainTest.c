@@ -94,7 +94,7 @@ int main (void )
   int time = floor(70/velocity)*1000;
   printf("time = %d\n",time);
 	int elapsedTime = move(SPEED_LINEAR,time,0,'F');
-  limitObst(0);
+  find_right_angle_obst();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
