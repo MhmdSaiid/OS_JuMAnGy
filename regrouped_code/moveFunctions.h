@@ -1,6 +1,6 @@
 void run_forever( int l_speed, int r_speed );
 
-void rotate_car(int angle,char D,int speed_circular);
+void rotate_car(float angle,char D,int speed_circular);
 
 void rotate_car2(int angle, char D, int speed_circular);
 

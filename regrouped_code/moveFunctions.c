@@ -141,7 +141,7 @@ while(is_running());
 
 }
 
-void rotate_car(int angle,char D, int speed_circular) //Clockwise
+void rotate_car(float angle,char D, int speed_circular) //Clockwise
 {
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
 	uint8_t nb_values = 10;

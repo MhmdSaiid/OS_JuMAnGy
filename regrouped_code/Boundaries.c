@@ -44,15 +44,14 @@ int compt=0;
 				break; //maybe turn right ?
 			}
 			Sleep(150);
-			
+			compt+=1;
 		}
-		compt+=1;
 		rotate_car(90,'L',SPEED_CIRCULAR);
 		start_x=x_position;
 		start_y=y_position;
 		//if((x_position>80)&&(x_position<100) && (y_position>10)&&(y_position<30)) //returned to initial position ?
-		if(compt==3){		
+		if(compt==3){
 			break;
 		}
-	}	
+	}
 }
