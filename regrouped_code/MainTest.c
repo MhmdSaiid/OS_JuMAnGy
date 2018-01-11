@@ -94,7 +94,8 @@ int main (void )
   int time = floor(70/velocity)*1000;
   printf("time = %d\n",time);
 	int elapsedTime = move(SPEED_LINEAR,time,0,'F');
-  find_right_angle_obst();
+  //find_right_angle_obst();
+	uint8_t * map = small_stadium_map();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
