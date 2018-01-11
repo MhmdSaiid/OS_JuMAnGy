@@ -160,6 +160,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 		final_angle = init_angle + angle;
 	}
 	relative_angle += angle;
+	printf("In rotate relative_angle = %f\n",relative_angle);
 
 	if(D=='R') run_forever(speed_circular,-speed_circular);
 	if(D=='L') run_forever(-speed_circular, speed_circular);
