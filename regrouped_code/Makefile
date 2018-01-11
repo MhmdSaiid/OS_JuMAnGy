@@ -12,8 +12,8 @@ mainBoundaries : mainBoundaries.c $(DEPENDENCIES) linkedlist.o Boundaries.o defi
 Boundaries.o:  Boundaries.c
 	gcc -lev3dev-c -lpthread -c $< -o $@
 
-MainTest: MainTest.c $(DEPENDENCIES)
-	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
+MainTest: MainTest.c $(DEPENDENCIES) linkedlist.o
+	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) linkedlist.o -o $@
 
 mainTestScout: mainTestScout.c $(DEPENDENCIES) defines.h
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
