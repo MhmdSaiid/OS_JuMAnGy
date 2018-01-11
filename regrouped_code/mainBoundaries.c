@@ -111,12 +111,14 @@ int main (void )
 	//limitObst();
 	//move(SPEED_LINEAR,0,1,Direct);
 	//scouting();
+	//rotate_car(90,'R',SPEED_CIRCULAR);
+	bound();
 
 	bound();
 	getSize(boundaries);
 	uint8_t * map=initializeMap(boundaries);
 	print_map(map);
-	
+
 	//scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
