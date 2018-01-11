@@ -18,7 +18,6 @@ extern boundary_t ** boundaries;
 
 void bound(void )
 {
-rotate_car(90,'R',SPEED_CIRCULAR);
 float start_x = x_position;
 float start_y=y_position;
 float new_x;
