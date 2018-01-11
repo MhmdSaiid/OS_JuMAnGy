@@ -22,29 +22,29 @@ void bound(void )
 float initial_position_x = x_position;
 float initial_position_y = y_position;
 
-float start_x = x_position;
-float start_y = y_position;
-float new_x;
-float new_y;
+float start_boundary_x = x_position;
+float start_boundary_y = y_position;
+float end_boundary_x;
+float end_boundary_y;
 //int compt=0;
 float angle = 90.0;
  	while(1){
 		while(read_US()>100){ //while we don't meet an obstacle that is to say when we dont reach the next boundary
 			move(SPEED_LINEAR,1000,0,'F');
-      new_x=x_position;
-			new_y=y_position;
-			add_bound_line(&boundaries,start_x,start_y,new_x,new_y);
+      end_boundary_x=x_position;
+			end_boundary_y=y_position;
+			add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y);
 			rotate_car(90.0,'R',SPEED_CIRCULAR);
 			//Sleep(500);
 			if(read_US()<200){ //if the boundary is still there
 				rotate_car(angle,'L',SPEED_CIRCULAR);
-				start_x=x_position;
-				start_y=y_position;
+				start_boundary_x=x_position;
+				start_boundary_y=y_position;
 
 			}
 			else {
-				start_x=x_position;
-				start_y=y_position;
+				start_boundary_x=x_position;
+				start_boundary_x=y_position;
 				break; //maybe turn right ?
 			}
 			Sleep(150);
