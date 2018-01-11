@@ -111,6 +111,7 @@ int main (void )
 	//limitObst();
 	//move(SPEED_LINEAR,0,1,Direct);
 	//scouting();
+	
 	bound();
 
 	getSize(boundaries);
