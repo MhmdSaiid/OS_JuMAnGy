@@ -152,7 +152,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 	float final_angle;
 	if(D=='L')//Sensor value increase clockwise
 	{
-		final_angle = init_angle - angle;
+		final_angle = init_angle - angle + 5;
 		angle = -angle;
 	}
 	else
@@ -174,7 +174,7 @@ void rotate_car(int angle,char D, int speed_circular) //Clockwise
 			stop_car();
 			break;
 		}
-		if(D=='L' && ANG_VAL<final_angle+7) {
+		if(D=='L' && ANG_VAL<final_angle+5) {
 			stop_car();
 			break;
 		}
