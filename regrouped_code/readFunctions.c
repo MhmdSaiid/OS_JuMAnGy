@@ -147,7 +147,7 @@ void *readingSensors(void)
 		update_sensors_value();
 		if(timeout)
 		{
-			//printf("Timedout so stopping\n");
+			printf("Timedout so stopping\n");
 			return;
 		}
 		i++;
