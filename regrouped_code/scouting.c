@@ -177,11 +177,11 @@ void scouting(){
 		move(SPEED_LINEAR, 0, 1, 'F');
 		new_x=x_position;
 		new_y=y_position;
-		add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
+		add_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)), EMPTY);
 		//stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
 		if(checkBoundary( (US_VAL/10*cos(relative_angle)+x_position), (y_position +(US_VAL/10*sin(relative_angle)) )) ){
-			//if it is a boundary according to our array
+			//if it is a boundary according to our array do a 180 to scout another line
 			printf("Bounary met\n");
 			print_map(map);
 			move(SPEED_LINEAR, time/2, 0, 'B'); //goes back a little in order to have enough place to rotate
@@ -200,7 +200,6 @@ void scouting(){
 			setOnMap(map, x_position, y_position, obst);
 			printf("obstacle of type : %d", obst);
 			limitObst(obst);
-			finished=true;
 		}
 	}
 }
