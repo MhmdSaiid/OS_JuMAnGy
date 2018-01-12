@@ -20,7 +20,7 @@
 #define MSG_STOP   2
 #define MSG_KICK    3
 #define MSG_POSITION 4
-#define MSG_MAPDATA     5
+#define MSG_MAPDATA  5
 #define MSG_MAPDONE 6
 #define Sleep( msec ) usleep(( msec ) * 1000 )
 
@@ -58,6 +58,26 @@ void send_position(int s, float x,float y) {
 	write(s, string, 9);
 }
 
+void send_map(map){
+  uint8_t mapPixel;
+  *((uint16_t *) string) = msgId++;
+  for (x=0; x<XMAX; x++){
+		for (y=0; y<YMAX; y++) {
+			mapPixel = getFromMap(map,x,y);
+      string[2] = TEAM_ID;
+      string[3] = 0xFF;
+      string[4] = MSG_MAPDATA;
+      string[5] = i;          /* x */
+      string[6] = 0x00;
+      string[7] = y1;             /* y */
+      string[8]= 0x00;
+      string[9]= mapPixel*20;
+      string[10]=mapPixel*20;
+      string[11]= mapPixel*20;
+      write(s, string, 12);
+		}
+	}
+}
 int init_bluetooth_game()
 {
   char string[58];
@@ -124,10 +144,10 @@ void robot () {
 
   printf ("I'm sending my map...\n");
 
-  /* MAP data is in the form MAPDATA | X  X |Y  Y | R | G | B 
+  /* MAP data is in the form MAPDATA | X  X |Y  Y | R | G | B
 
   /* Create 1 square green obstacle and 1 round red obstacle
-  /* Send only the outline 
+  /* Send only the outline
   x1 = rand() % 30;
   y1= rand() % 30;
 
@@ -136,9 +156,9 @@ void robot () {
     string[2] = TEAM_ID;
     string[3] = 0xFF;
     string[4] = MSG_MAPDATA;
-    string[5] = i;          /* x 
+    string[5] = i;          /* x
     string[6] = 0x00;
-    string[7] = y1;             /* y 
+    string[7] = y1;             /* y
     string[8]= 0x00;
     string[9]= 0;
     string[10]=254;
@@ -151,9 +171,9 @@ void robot () {
     string[2] = TEAM_ID;
     string[3] = 0xFF;
     string[4] = MSG_MAPDATA;
-    string[5] = i;          /* x 
+    string[5] = i;          /* x
     string[6] = 0x00;
-    string[7] = y1+10;          /* y 
+    string[7] = y1+10;          /* y
     string[8]= 0x00;
     string[9]= 0;
     string[10]=254;
@@ -166,9 +186,9 @@ void robot () {
     string[2] = TEAM_ID;
     string[3] = 0xFF;
     string[4] = MSG_MAPDATA;
-    string[5] = x1;          /* x 
+    string[5] = x1;          /* x
     string[6] = 0x00;
-    string[7] = j;              /* y 
+    string[7] = j;              /* y
     string[8]= 0x00;
     string[9]= 0;
     string[10]=254;
@@ -182,9 +202,9 @@ void robot () {
     string[2] = TEAM_ID;
     string[3] = 0xFF;
     string[4] = MSG_MAPDATA;
-    string[5] = x1+10;          /* x 
+    string[5] = x1+10;          /* x
     string[6] = 0x00;
-    string[7] = j;              /* y 
+    string[7] = j;              /* y
     string[8]= 0x00;
     string[9]= 0;
     string[10]=254;
@@ -204,9 +224,9 @@ void robot () {
         string[2] = TEAM_ID;
         string[3] = 0xFF;
         string[4] = MSG_MAPDATA;
-        string[5] = i;          /* x 
+        string[5] = i;          /* x
         string[6] = 0x00;
-        string[7] = j;          /* y 
+        string[7] = j;          /* y
         string[8]= 0x00;
         string[9]= 254;
         string[10]=0;
@@ -240,22 +260,22 @@ int main(int argc, char **argv) {
   struct sockaddr_rc addr = { 0 };
   int status;
 
-  /* allocate a socket 
+  /* allocate a socket
   s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
 
-  /* set the connection parameters (who to connect to) 
+  /* set the connection parameters (who to connect to)
   addr.rc_family = AF_BLUETOOTH;
   addr.rc_channel = (uint8_t) 1;
   str2ba (SERV_ADDR, &addr.rc_bdaddr);
 
-  /* connect to server 
+  /* connect to server
   status = connect(s, (struct sockaddr *)&addr, sizeof(addr));
 
-  /* if connected 
+  /* if connected
   if( status == 0 ) {
     char string[58];
 
-    /* Wait for START message 
+    /* Wait for START message
     read_from_server (s, string, 9);
     if (string[4] == MSG_START) {
       printf ("Received start message!\n");
