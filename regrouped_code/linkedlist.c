@@ -64,18 +64,18 @@ void push_bound_to_first(boundary_t ** head, int x, int y) {
 
 void add_bound_line(boundary_t ** head, float xbeg, float ybeg, float xend, float yend) {
 	//saves a list of blocks into the boudary list
-	float dx = (xend - xbeg)/5;
-	float dy = (yend - ybeg)/5;
-	//printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
+	float dx = xend - xbeg;
+	float dy = yend - ybeg;
+	printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
 	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
-	float x = (float) round(xbeg/5);
-	float y = round(ybeg/5);
+	float x = (float) round(xbeg);
+	float y = round(ybeg);
 	int i;
 	for (i = 0; i < nb_blocks; i++) {
 		push_bound_to_first(head, round(x), round(y));
 		x += dx/nb_blocks;
 		y += dy/nb_blocks;
-		//printf("%f, %f\n", x, y);
+		printf("%f, %f\n", x, y);
 	}
 }
 
@@ -185,13 +185,13 @@ void print_map(uint8_t * map) {
 
 uint8_t getFromMap(uint8_t * map, int x, int y) {
 	//Returns the element of the map at position x,y
-	return(map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))]);
+	return(map[x*YMAX*sizeof(uint8_t)+y]);
 }
 
 void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
 	if (x>0 && x< XMAX && y>0 && y<YMAX) {
-		map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))] = type;
+		map[x*YMAX*sizeof(uint8_t)+y] = type;
 	} else {
 		printf("out of bound: %d, %d\n", x, y);
 	}
@@ -211,25 +211,14 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 	int j;
 	for (i = xmin; i <= xmax; i++) {
 		for (j = ymin; j <= ymax; j++) {
-			if (getFromMap(map, i*5, j*5) == 4) {
+			if (getFromMap(map, i, j) == 4) {
 				push_bound_to_first(&issuing_obstacles, i, j);
 			}
 		}
 	}
 	return(issuing_obstacles);
 }
-uint8_t * small_stadium_map(int x_dimension, int y_dimension){
-	boundary_t * boundariesList = NULL;
-	add_bound_line(&boundariesList, 0, 0, x_dimension, 0);
-	add_bound_line(&boundariesList, x_dimension, 0, x_dimension, y_dimension);
-	add_bound_line(&boundariesList, x_dimension, y_dimension, 0, y_dimension);
-	add_bound_line(&boundariesList, 0, y_dimension, 0, 0);
-	getSize(boundariesList);
-	uint8_t * map = initializeMap(boundariesList);
-	print_map(map);
-	return map;
-}
-/*
+
 void main() {
 	position_t * linkedList = initialize(5, 5);
 	position_t * last = linkedList;
@@ -242,7 +231,7 @@ void main() {
 		last = push_to_last(last, x, y, type);
 	}
 	print_pos_list(linkedList);
-
+	*/
 	boundary_t * boundariesList = NULL;
 
 	add_bound_line(&boundariesList, 2, 10, 15, 10);
@@ -273,9 +262,3 @@ void main() {
 	printf("issuing obstacles:\n");
 	print_bound_list(get_issuing_obstacles(map));
 }
-*/
-/*
-bool check_area_obstacle(int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
-
-}
-*/
