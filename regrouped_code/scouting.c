@@ -149,6 +149,8 @@ but after the obstacle in the same scouting line drawn
 
 int checkBoundary(int x,int y){
 	printf("x = %d, y = %d\n",x,y);
+	int x_dimension = 4;
+	int y_dimension = 4;
 	if(check_area_obstacle(map, x, y, x_dimension, y_dimension, BOUNDARIES)){
 		return 1;
 	}
@@ -175,7 +177,7 @@ void scouting(){
 			move(SPEED_LINEAR, 0, 1, 'F');
 			new_x=x_position;
 			new_y=y_position;
-			//addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
+			add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 			//stops when there is an obstacle or a boundary
 			printf("US_VAL = %f\n",US_VAL);
 			if(checkBoundary( (US_VAL/10*cos(relative_angle)+x_position), (y_position +(US_VAL/10*sin(relative_angle)) )) ){
@@ -188,7 +190,7 @@ void scouting(){
 					move(SPEED_LINEAR,time, 0, 'F');
 					new_x=x_position;
 					new_y=y_position;
-					//addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
+					add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,'L', SPEED_CIRCULAR);
 					goingRight=0;
 				}
@@ -200,7 +202,7 @@ void scouting(){
 					move(SPEED_LINEAR,time, 0, 'F');
 					new_x=x_position;
 					new_y=y_position;
-					//addLineOf(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
+					add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					goingRight=1;
 				}
