@@ -61,7 +61,7 @@ int detect_obstacle(void){
 void find_right_angle_obst(){
 	/* I didnt take into account the fact that a second obstacle could touch the first one and so become a problem , I think if it is turning towards the second one it will stop in front of this one instead of the first one*/
 	uint8_t i = 0;
-	int distance = 5; //in cm
+	int distance = 3; //in cm
 	int timeToStop = (int)(distance/velocity*1000);
 	move(SPEED_LINEAR,timeToStop,0,'B');
 	calibrate_gyro();
