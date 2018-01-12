@@ -292,7 +292,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	run_forever(speed,speed);
 	if(inf==0) {
 		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
-		printf("Stopped looking for obstacle"\n);
+		printf("Stopped looking for obstacle\n");
 		stop_car();
 		timeout = true;
 		pthread_join(&sensorsThread);
