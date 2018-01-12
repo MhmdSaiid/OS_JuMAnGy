@@ -269,7 +269,7 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 	for(xrel = 0; xrel < x_dimension; xrel ++) {
 		for (yrel = 0; yrel < y_dimension; yrel ++) {
 			if (floor(x_offset/5) + xrel < XMAX && floor(y_offset/5) + yrel < YMAX) {
-				uint8_t mapValue=,getFromMap(map, x_offset + 5*xrel, y_offset + 5*yrel);
+				uint8_t mapValue=getFromMap(map, x_offset + 5*xrel, y_offset + 5*yrel);
 				printf("object in map = %d",mapValue);
 				if (getFromMap(map, x_offset + 5*xrel, y_offset + 5*yrel) == obstacle_type) {
 					is_there = true;
