@@ -74,7 +74,7 @@ void find_right_angle_obst(){
 	int speed_circular = (int) (SPEED_CIRCULAR*2/3);
 	int speed_linear = SPEED_LINEAR;
 	int bool_right=0 ; // boolean 1 is right 0 is left
-	char * rotationDirection={'L','R'};
+	char rotationDirection[2]={'L','R'};
 
 	int time = 1000;
 	rotate_car(20,'R', speed_circular);
