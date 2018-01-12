@@ -58,7 +58,7 @@
 #endif
 #ifndef LINKEDLIST
 #define LINKEDLIST
-#define SCOUT
+#define LINKEDLIST
 #include "linkedlist.h"
 
 #include "Boundaries.h"

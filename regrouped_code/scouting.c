@@ -2,11 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include <unistd.h>
 #include "math.h"
 #include "ev3.h"
 #include "ev3_port.h"
+#include "ev3_sensor.h"
+#include "ev3_tacho.h"
+// WIN32 /////////////////////////////////////////
+#ifdef __WIN32__
 
+#include <windows.h>
+
+// UNIX //////////////////////////////////////////
+#else
+#include <unistd.h>
+#define Sleep( msec ) usleep(( msec ) * 1000 )
+
+//////////////////////////////////////////////////
+#endif
+#ifndef DETECT_FUNC
+#define DETECT_FUNC
+#include "detect_disting_functions.h"
+#endif
 #ifndef MOVE_FUNC
 #define MOVE_FUNC
 #include "moveFunctions.h"
@@ -15,17 +31,34 @@
 #define READ_FUNC
 #include "readFunctions.h"
 #endif
+
 #ifndef INITIALIZE
 #define INITIALIZE
 #include "defines.h"
 #endif
+
+#ifndef BT
+#define BT
+#include "bluetoothFunctions.h"
+#endif
+
 #ifndef POS_FUNC
 #define POS_FUNC
 #include "positionFunctions.h"
 #endif
-#include "scouting.h"
-#include "linkedlist.h"
 
+#ifndef THREADSEND
+#define THREADSEND
+#include "sendPositionThread.h"
+#endif
+
+#ifndef SCOUT
+#define SCOUT
+#include "scouting.h"
+#endif
+
+#include "linkedlist.h"
+#include "Boundaries.h"
 
 #ifndef max
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
