@@ -64,18 +64,18 @@ void push_bound_to_first(boundary_t ** head, int x, int y) {
 
 void add_bound_line(boundary_t ** head, float xbeg, float ybeg, float xend, float yend) {
 	//saves a list of blocks into the boudary list
-	float dx = xend - xbeg;
-	float dy = yend - ybeg;
-	printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
+	float dx = (xend - xbeg)/5;
+	float dy = (yend - ybeg)/5;
+	//printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
 	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
-	float x = (float) round(xbeg);
-	float y = round(ybeg);
+	float x = (float) round(xbeg/5);
+	float y = round(ybeg/5);
 	int i;
 	for (i = 0; i < nb_blocks; i++) {
 		push_bound_to_first(head, round(x), round(y));
 		x += dx/nb_blocks;
 		y += dy/nb_blocks;
-		printf("%f, %f\n", x, y);
+		//printf("%f, %f\n", x, y);
 	}
 }
 
@@ -92,7 +92,6 @@ void print_bound_list(boundary_t * head) {
     boundary_t * current = head;
 
     while (current != NULL) {
-        printf("%d, %d\n", current->x, current->y);
         current = current->next;
     }
 }
@@ -147,6 +146,7 @@ void getSize(boundary_t * boundaries) {
 
 uint8_t* initializeMap(boundary_t * obstacles) {
 	size_t size = sizeof(uint8_t);
+	getSize(obstacles);
 	int xmax = XMAX;
 	int ymax = YMAX;
 	uint8_t* map = malloc(size*xmax*ymax);
@@ -185,17 +185,52 @@ void print_map(uint8_t * map) {
 
 uint8_t getFromMap(uint8_t * map, int x, int y) {
 	//Returns the element of the map at position x,y
-	return(map[x*YMAX*sizeof(uint8_t)+y]);
+	return(map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))]);
 }
 
 void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
-	if (x>0 && x< XMAX && y>0 && y<YMAX) {
-		map[x*YMAX*sizeof(uint8_t)+y] = type;
+	if (x>0 && floor(x/5)< XMAX && y>0 && floor(y/5)<YMAX) {
+		map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))] = type;
 	} else {
 		printf("out of bound: %d, %d\n", x, y);
 	}
 }
+
+void add_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, uint8_t type) {
+	float dx = (xend - xbeg);
+	float dy = (yend - ybeg);
+	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
+	float x = xbeg;
+	float y = ybeg;
+	int i;
+	for (i = 0; i < nb_blocks/5; i++) {
+		setOnMap(map, x, y, type);
+		x += 5*dx/nb_blocks;
+		y += 5*dy/nb_blocks;
+	}
+}
+
+
+bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
+	int xrel;
+	int yrel;
+	bool is_there = false;
+	for(xrel = 0; xrel < x_dimension; xrel ++) {
+		for (yrel = 0; yrel < y_dimension; yrel ++) {
+			if (floor(x_offset/5) + xrel < XMAX && floor(y_offset/5) + yrel < YMAX) {
+				if (getFromMap(map, x_offset + 5*xrel, y_offset + 5*yrel) == obstacle_type) {
+					is_there = true;
+					return(is_there);
+				}
+			}
+		}
+	}
+	return(is_there);
+}
+
+
+
 
 boundary_t * get_issuing_obstacles(uint8_t * map) {
 	//Gets robot's position (in CMs, care) and returns a linked list of obstacles in a square from THRESH * THRESH (not a circle)
@@ -211,54 +246,45 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 	int j;
 	for (i = xmin; i <= xmax; i++) {
 		for (j = ymin; j <= ymax; j++) {
-			if (getFromMap(map, i, j) == 4) {
+			if (getFromMap(map, i*5, j*5) == 4) {
 				push_bound_to_first(&issuing_obstacles, i, j);
 			}
 		}
 	}
 	return(issuing_obstacles);
 }
+uint8_t * small_stadium_map(int x_dimension, int y_dimension){
+	boundary_t * boundariesList = NULL;
+	add_bound_line(&boundariesList, 0, 0, x_dimension, 0);
+	add_bound_line(&boundariesList, x_dimension, 0, x_dimension, y_dimension);
+	add_bound_line(&boundariesList, x_dimension, y_dimension, 0, y_dimension);
+	add_bound_line(&boundariesList, 0, y_dimension, 0, 0);
+	getSize(boundariesList);
+	uint8_t * map = initializeMap(boundariesList);
+	print_map(map);
+	return map;
+}
 
+
+
+/*
 void main() {
-	position_t * linkedList = initialize(5, 5);
-	position_t * last = linkedList;
 	uint8_t type = 1;
 	int x = 5;
 	int y = 5;
-	/*for(int i = 0; i < 15; i++){
-		x += 3;
-		y += 4;
-		last = push_to_last(last, x, y, type);
-	}
-	print_pos_list(linkedList);
-	*/
+
 	boundary_t * boundariesList = NULL;
 
-	add_bound_line(&boundariesList, 2, 10, 15, 10);
-	add_bound_line(&boundariesList, 15, 10, 20, 0);
-	add_bound_line(&boundariesList, 20, 0, 0, 0);
-	add_bound_line(&boundariesList, 0, 0, 2, 5);
-	add_bound_line(&boundariesList, 2, 5, 2, 10);
-	int xmax = 0;
-	int ymax = 0;
-	boundary_t * current = boundariesList;
-	while (current != NULL) {
-		if (current->x > xmax-1) {
-			xmax = current->x+1;
-		}
-		if (current->y > ymax-1) {
-			ymax = current->y+1;
-		}
-		current=current->next;
-	}
-	XMAX = xmax;
-	YMAX = ymax;
-	printf("%d, %d\n", xmax, ymax);
+	add_bound_line(&boundariesList, 100, 0, 100, 100);
+	add_bound_line(&boundariesList, 100, 100, 0, 100);
+	add_bound_line(&boundariesList, 0, 100, 0, 0);
+	add_bound_line(&boundariesList, 0, 0, 100, 0);
+	getSize(boundariesList);
+	printf("%d, %d\n", XMAX, YMAX);
 
-	XROBOT = 20;
-	YROBOT = 20;
 	uint8_t * map = initializeMap(boundariesList);
 	print_map(map);
-	printf("issuing obstacles:\n");
-	print_bound_list(get_issuing_obstacles(map));
-}
+	add_line_of(map, 30, 50, 70, 50, 1);
+	print_map(map);
+	printf("%d\n", check_area_obstacle(map, 74, 74, 6, 6, 4));
+}*/
