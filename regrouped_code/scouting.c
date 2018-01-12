@@ -180,10 +180,10 @@ void scouting(){
 		add_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)), EMPTY);
 		//stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
+		print_map(map);
 		if(checkBoundary( (US_VAL/10*cos(relative_angle)+x_position), (y_position +(US_VAL/10*sin(relative_angle)) )) ){
 			//if it is a boundary according to our array do a 180 to scout another line
 			printf("Bounary met\n");
-			print_map(map);
 			move(SPEED_LINEAR, time*2, 0, 'B'); //goes back a little in order to have enough place to rotate
 			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);
 			former_x=x_position;

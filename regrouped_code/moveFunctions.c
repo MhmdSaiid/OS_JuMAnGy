@@ -273,6 +273,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	{
 		run_timed(-speed, -speed, timeInMs);
 		update_position(-timeInMs);//to have a negative distance
+		printf("x=%f,y=%f\n",x_position,y_position);
 		return 0;
 	}
 	//Calculating when the car must stop
