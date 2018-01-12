@@ -29,6 +29,7 @@
 extern int max_speed;
 extern float x_position, y_position;
 extern int relative_angle;
+extern float velocity;
 extern int COLOR_VAL;
 extern float INTENSITY_VAL;
 extern bool TOUCHED;
