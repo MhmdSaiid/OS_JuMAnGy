@@ -104,10 +104,6 @@ int main (void )
 	printf("Sensors online\n");
 	if( init_motors() > 0) return ( 1 );
 
-  int time = floor(70/velocity)*1000;
-  printf("time = %d\n",time);
-	//int elapsedTime = move(SPEED_LINEAR,time,0,'F');
-  //find_right_angle_obst();
 	map = small_stadium_map(100,70);
 	scouting();
 	TOUCHED = _check_pressed( sn_touch);
