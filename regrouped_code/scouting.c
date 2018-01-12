@@ -211,6 +211,7 @@ void scouting(){
 	float former_y = y_position;
 	float new_x;
 	float new_y;
+	char directionsGoingRight[2] = {'R','L'};
 	while(!finished){
 		boundaryMet=0;
 		while(!boundaryMet){
@@ -226,18 +227,18 @@ void scouting(){
 				//if it is a boundary according to our array
 				printf("Bounary met\n");
 				print_map(map);
-				if(goingRight){
+				/*if(goingRight){*/
 					move(SPEED_LINEAR, time/2, 0, 'B'); //goes back a little in order to have enough place to rotate
-					rotate_car(90,'L', SPEED_CIRCULAR);
+					rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);
 					former_x=x_position;
 					former_y=y_position;
 					move(SPEED_LINEAR,time, 0, 'F');
 					new_x=x_position;
 					new_y=y_position;
 					add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
-					rotate_car(90,'L', SPEED_CIRCULAR);
-					goingRight=0;
-				}
+					rotate_car(90,directionsGoingRight[(goingRight+1)%2], SPEED_CIRCULAR);
+					goingRight=(goingRight+1)%2;
+				}/*
 				else if(!goingRight){
 					move(SPEED_LINEAR, time/2, 0, 'B');
 					rotate_car(90,'R', SPEED_CIRCULAR);
@@ -249,7 +250,7 @@ void scouting(){
 					add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,'R', SPEED_CIRCULAR);
 					goingRight=1;
-				}
+				}*/
 				boundaryMet=1;
 			}
 			else {
