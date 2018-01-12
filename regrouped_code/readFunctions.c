@@ -149,6 +149,7 @@ void *readingSensors(void)
 		if(timeout)
 		{
 			printf("Timedout so stopping\n");
+			if(is_running()) stop_car();
 			return;
 		}
 		i++;
