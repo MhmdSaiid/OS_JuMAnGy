@@ -71,7 +71,7 @@ void find_right_angle_obst(){
 	US_VAL = read_US();
 	float dist_init_obj = US_VAL;
 	float thresh_dist_ang = 10;
-	int speed_circular = (int)floor(SPEED_CIRCULAR*2/3);
+	int speed_circular = (int)(SPEED_CIRCULAR*3/2);
 	int speed_linear = SPEED_LINEAR;
 	int bool_right=0 ; // boolean 1 is right 0 is left
 
@@ -92,7 +92,7 @@ void find_right_angle_obst(){
 	else{
 			run_forever(-speed_circular,speed_circular);
 	}
-	while (previous_dist > current_dist && current_dist > 35) {
+	while (previous_dist >= current_dist && current_dist > 35) {
 		US_VAL = 0;
 		uint8_t nb_avg = 4;
 		uint8_t i = 0;
