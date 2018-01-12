@@ -184,7 +184,7 @@ void scouting(){
 			//if it is a boundary according to our array do a 180 to scout another line
 			printf("Bounary met\n");
 			print_map(map);
-			move(SPEED_LINEAR, time/2, 0, 'B'); //goes back a little in order to have enough place to rotate
+			move(SPEED_LINEAR, time, 0, 'B'); //goes back a little in order to have enough place to rotate
 			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);
 			former_x=x_position;
 			former_y=y_position;
@@ -194,7 +194,6 @@ void scouting(){
 			add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);
 			goingRight=(goingRight+1)%2;
-			finished=1;
 		}
 		else {
 			obst=distinguish_obstacle();
