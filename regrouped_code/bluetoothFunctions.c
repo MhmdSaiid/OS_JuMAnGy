@@ -25,6 +25,8 @@
 #define Sleep( msec ) usleep(( msec ) * 1000 )
 
 uint16_t msgId = 0;
+extern int XMAX;
+extern int YMAX;
 
 int read_from_server (int sock, char *buffer, size_t maxSize) {
   int bytes_read = read (sock, buffer, maxSize);
