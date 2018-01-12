@@ -56,9 +56,15 @@
 #define SCOUT
 #include "scouting.h"
 #endif
-
-#include "linkedlist.h"
+#ifndef BOUND
+#define BOUND
 #include "Boundaries.h"
+#endif
+
+#ifndef LINKED
+#define LINKED
+#include "linkedlist.h"
+#endif
 
 
 //#include "Boundaries.c"

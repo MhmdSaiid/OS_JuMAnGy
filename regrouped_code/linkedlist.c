@@ -56,12 +56,16 @@
 #define SCOUT
 #include "scouting.h"
 #endif
-#ifndef LINKEDLIST
-#define LINKEDLIST
-#define LINKEDLIST
-#include "linkedlist.h"
 
+#ifndef LINKED
+#define LINKED
+#include "linkedlist.h"
+#endif
+
+#ifndef BOUND
+#define BOUND
 #include "Boundaries.h"
+#endif
 
 
 float THRESHROTATION = 8;		//mapcoordinates

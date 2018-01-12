@@ -56,9 +56,14 @@
 #define SCOUT
 #include "scouting.h"
 #endif
-
+#ifndef LINKED
+#define LINKED
 #include "linkedlist.h"
+#endif
+#ifndef BOUND
+#define BOUND
 #include "Boundaries.h"
+#endif
 
 #ifndef max
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
