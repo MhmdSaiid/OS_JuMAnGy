@@ -238,7 +238,7 @@ void scouting(){
 					add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
 					rotate_car(90,directionsGoingRight[(goingRight+1)%2], SPEED_CIRCULAR);
 					goingRight=(goingRight+1)%2;
-				}/*
+				/*}
 				else if(!goingRight){
 					move(SPEED_LINEAR, time/2, 0, 'B');
 					rotate_car(90,'R', SPEED_CIRCULAR);
