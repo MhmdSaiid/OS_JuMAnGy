@@ -142,6 +142,7 @@ void *readingSensors(void)
 	uint8_t sn_touch;
 	long int i=0;
 	update_sensors_value();
+	Sleep(100);
 	while (!detect_obstacle())
 	{
 		update_sensors_value();
@@ -152,8 +153,8 @@ void *readingSensors(void)
 		}
 		i++;
 	}
-	//printf("Nb Check = %d\n",i);
 	printf("Obstacle Detected!!\n ");
 	pthread_cond_signal(&obstacleDetected);
+	while(detect_obstacle()){pthread_cond_signal(&obstacleDetected);}
 	exit;
 }
