@@ -268,6 +268,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	struct timeval startDate;
 	struct timeval stopDate;
 	int elapsedTime;
+	timeout = false;
 	if(D=='B')
 	{
 		run_timed(-speed, -speed, timeInMs);
@@ -289,7 +290,6 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	gettimeofday(&startDate,NULL);
 	run_forever(speed,speed);
 	if(inf==0) {
-		timeout = false;
 		stopReason = pthread_cond_timedwait(&obstacleDetected, &myMutex, &absDateToStop);
 		timeout = true;
 		pthread_join(&sensorsThread);
