@@ -69,9 +69,9 @@ void send_map(map){
       string[2] = TEAM_ID;
       string[3] = 0xFF;
       string[4] = MSG_MAPDATA;
-      string[5] = i;          /* x */
+      string[5] = x;          /* x */
       string[6] = 0x00;
-      string[7] = y1;             /* y */
+      string[7] = y;             /* y */
       string[8]= 0x00;
       string[9]= mapPixel*20;
       string[10]=mapPixel*20;
