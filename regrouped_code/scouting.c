@@ -149,8 +149,7 @@ but after the obstacle in the same scouting line drawn
 
 int checkBoundary(int x,int y){
 	printf("x = %d, y = %d\n",x,y);
-	uint8_t valueFromMap=getFromMap(map,x,y);
-	if(valueFromMap == BOUNDARIES){
+	if(check_area_obstacle(map, x, y, x_dimension, y_dimension, BOUNDARIES)){
 		return 1;
 	}
 	return 0;
