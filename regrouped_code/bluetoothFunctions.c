@@ -63,6 +63,8 @@ void send_position(int s, float x,float y) {
 void send_map(int socket, uint8_t * map){
   uint8_t mapPixel;
   *((uint16_t *) string) = msgId++;
+  int x;
+  int y;
   for (x=0; x<XMAX; x++){
 		for (y=0; y<YMAX; y++) {
 			mapPixel = getFromMap(map,x,y);
