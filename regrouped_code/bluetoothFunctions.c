@@ -62,6 +62,7 @@ void send_position(int s, float x,float y) {
 
 void send_map(int socket, uint8_t * map){
   uint8_t mapPixel;
+  char string[58];
   *((uint16_t *) string) = msgId++;
   int x;
   int y;
