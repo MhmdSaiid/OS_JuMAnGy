@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <unistd.h>
 #include "ev3.h"
 #include "ev3_port.h"
 #include "ev3_sensor.h"
