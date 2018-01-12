@@ -95,7 +95,7 @@ but after the obstacle in the same scouting line drawn
 	float xDecal2;
 	float yDecal2;
 	//int side=1;
-	int time = (int)(distance/velocity*1000);
+	int timeToStop = (int)(distance/velocity*1000);
 	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
 	if (relative_angle<10) directionIndex = 1; //going right
@@ -106,7 +106,7 @@ but after the obstacle in the same scouting line drawn
 	int obstacleWhileMoving;
 	uint8_t side=1;
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
-		move(SPEED_LINEAR,time,0,'F');
+		move(SPEED_LINEAR,timeToStop,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 		US_VAL = read_US();
 		printf("y_position= %f\n",y_position);
@@ -117,9 +117,9 @@ but after the obstacle in the same scouting line drawn
 		if (!detect_obstacle()){
 				printf("No Obstacle detected Us = %f\n",US_VAL);
 				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
-				obstacleWhileMoving = move(SPEED_LINEAR,floor(time),0,'F');
+				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop),0,'F');
 				rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR); //get some distance from the obstacle
-				obstacleWhileMoving = move(SPEED_LINEAR,floor(time*1.5),0,'F');
+				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop*1.5),0,'F');
 				if(obstacleWhileMoving){
 					//find_right_angle_obst();
 					setOnMap(map, x_position, y_position, obstacleType);
@@ -131,9 +131,9 @@ but after the obstacle in the same scouting line drawn
 						printf("DONE\n");
 						//going back to end of obstacle
 						rotate_car(180, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
-						move(SPEED_LINEAR,floor(time*3),0,'F');
+						move(SPEED_LINEAR,floor(timeToStop*3),0,'F');
 						rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
-						move(SPEED_LINEAR,floor(time*3),0,'F');
+						move(SPEED_LINEAR,floor(timeToStop*3),0,'F');
 						rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 						return;
 					}
@@ -162,7 +162,7 @@ int checkBoundary(int x,int y){
 
 void scouting(){
 	int distance = 5; //in cm
-	int time = (int)(distance/velocity*1000);
+	int timeToStop = (int)(distance/velocity*1000);
 	int obst;
 	int finished=0;
 	int goingRight=1;
@@ -184,11 +184,11 @@ void scouting(){
 		if(checkBoundary( (US_VAL/10*cos(relative_angle)+x_position), (y_position +(US_VAL/10*sin(relative_angle)) )) ){
 			//if it is a boundary according to our array do a 180 to scout another line
 			printf("Bounary met\n");
-			move(SPEED_LINEAR, time*2, 0, 'B'); //goes back a little in order to have enough place to rotate
+			move(SPEED_LINEAR, timeToStop*2, 0, 'B'); //goes back a little in order to have enough place to rotate
 			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);
 			former_x=x_position;
 			former_y=y_position;
-			move(SPEED_LINEAR,time*2, 0, 'F');
+			move(SPEED_LINEAR,timeToStop*2, 0, 'F');
 			new_x=x_position;
 			new_y=y_position;
 			add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
