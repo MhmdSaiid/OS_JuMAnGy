@@ -84,7 +84,8 @@ void find_right_angle_obst(){
 	if (dist_init_obj>US_VAL) {
 		    bool_right = 1; // we choose the right direction to turn
 	}
-	if(US_VAL>400){
+	if(US_VAL>300){
+		float angle = 30/200*US_VAL +(40-300*30/200);
 		rotate_car(60,rotationDirection[bool_right],speed_circular);
 	}
 	//To improve next step first roation depending on new reading
@@ -102,7 +103,7 @@ void find_right_angle_obst(){
 	while (previous_dist >= current_dist && current_dist > 35) {
 		if(previous_dist==current_dist) sameDist++;
 		else sameDist=0;
-		if(sameDist==2){
+		if(sameDist==3){
 			break;
 		}
 		US_VAL = 0;
