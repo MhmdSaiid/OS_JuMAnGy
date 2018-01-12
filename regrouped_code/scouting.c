@@ -146,46 +146,6 @@ but after the obstacle in the same scouting line drawn
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
 	}
-/*
-
-
-	for(side=1;side<=5; side++){ //5 in order to do the missing part of the first side at the end
-		end=0;
-		printf("side : %d", side);
-		while(end==0){
-
-			move(SPEED_LINEAR,time,0,'F');
-			//printf("d :%d, velocity : %f, time : %f", distance, velocity, distance/velocity*1000);
-			//move(SPEED_LINEAR,2000,0,'F');
-			rotate_car(90, 'L', SPEED_CIRCULAR);
-			if(!detect_obstacle()){
-			//if there is no obstacle we reached the limit of this side
-				end=1;
-				if(side==1){
-					xDecal=abs(x_position-x_init);
-					yDecal=abs(y_position-y_init);
-					x_init=x_position;
-					y_init = y_position;
-//to save our relative position to the obstacle when we arrived to be able to continue moving straight the same line as we were following before encountering the obstacle
-				}
-				if (side==2){
-					xDecal2=abs(x_position-x_init);
-					yDecal2=abs(y_position-y_init);
-// to save the lenght of the seconde size in order to go after that at the end of the function
-				}
-			}
-			else{
-				//addToMap(obstacleType);
-				rotate_car(90, 'R', SPEED_CIRCULAR);
-			}
-
-
-		}
-	}/*
-	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity*1000, 0, 'F'); //longueur //go after the obstacle
-	rotate_car(90, 'L', SPEED_CIRCULAR);
-	move(SPEED_LINEAR, max(xDecal,yDecal)/velocity*1000,0, 'F'); //largeur //realignment with initial position
-	rotate_car(90, 'R', SPEED_CIRCULAR);*/
 }
 
 int checkBoundary(int x,int y){

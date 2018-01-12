@@ -299,6 +299,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 		stop_car(); // Make sure the car is stopped
 	}
 	else {
+		printf("Going infinetly\n";)
 		stopReason = pthread_cond_wait(&obstacleDetected, &myMutex);
 		pthread_join(&sensorsThread);
 		//printf("Succedded join\n");
