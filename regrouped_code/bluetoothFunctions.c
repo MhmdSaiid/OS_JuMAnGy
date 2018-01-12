@@ -60,7 +60,7 @@ void send_position(int s, float x,float y) {
 	write(s, string, 9);
 }
 
-void send_map(map){
+void send_map(int socket, uint8_t * map){
   uint8_t mapPixel;
   *((uint16_t *) string) = msgId++;
   for (x=0; x<XMAX; x++){
@@ -76,7 +76,7 @@ void send_map(map){
       string[9]= mapPixel*20;
       string[10]=mapPixel*20;
       string[11]= mapPixel*20;
-      write(s, string, 12);
+      write(socket, string, 12);
 		}
 	}
 }
