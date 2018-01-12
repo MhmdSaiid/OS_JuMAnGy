@@ -77,21 +77,6 @@ int YMAX;		//mapcoordinates
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
 
-typedef struct position {
-	int x;
-	int y;
-	uint8_t type;
-	struct position * next;
-} position_t;
-
-
-typedef struct boundary {
-	int x;
-	int y;
-	struct boundary * next;
-} boundary_t;
-
-
 position_t * push_to_last(position_t * last, int x, int y, uint8_t type) {
     last->next = malloc(sizeof(position_t));
     if (last->next == NULL) {
