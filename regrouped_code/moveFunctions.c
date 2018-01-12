@@ -296,9 +296,9 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 		stop_car();
 		timeout = true;
 		pthread_join(&sensorsThread);
-		timeout = false;
+		//timeout = false;
 		printf("Succedded join\n");
-		gettimeofday(&stopDate,NULL);
+		//gettimeofday(&stopDate,NULL);
 		//For optimisation purposes the thread checking for obstacle will stop the car if obstacle is detected
 		 // Make sure the car is stopped
 	}
