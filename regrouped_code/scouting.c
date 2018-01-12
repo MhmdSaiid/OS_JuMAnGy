@@ -192,7 +192,9 @@ int checkBoundary(int x,int y){
 	printf("x = %d, y = %d\n",x,y);
 	int x_dimension = 4;
 	int y_dimension = 4;
+	bool boundaryDetected= check_area_obstacle(map, x, y, x_dimension, y_dimension, BOUNDARIES);
 	if(check_area_obstacle(map, x, y, x_dimension, y_dimension, BOUNDARIES)){
+
 		return 1;
 	}
 	return 0;
