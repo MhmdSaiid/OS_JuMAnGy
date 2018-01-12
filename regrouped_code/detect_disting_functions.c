@@ -74,7 +74,7 @@ void find_right_angle_obst(){
 	int speed_circular = (int) (SPEED_CIRCULAR*2/3);
 	int speed_linear = SPEED_LINEAR;
 	int bool_right=0 ; // boolean 1 is right 0 is left
-	char rotationDirection=['L','R'];
+	char * rotationDirection=['L','R'];
 
 	int time = 1000;
 	rotate_car(20,'R', speed_circular);
@@ -98,7 +98,7 @@ void find_right_angle_obst(){
 	else{
 			run_forever(-speed_circular,speed_circular);
 	}
-	uint8_t sameDist; ://To keep track how many time the same dist
+	uint8_t sameDist; //To keep track how many time the same dist
 	while (previous_dist >= current_dist && current_dist > 35) {
 		if(previous_dist==current_dist) sameDist++;
 		else sameDist=0;
