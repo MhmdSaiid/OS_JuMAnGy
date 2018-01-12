@@ -76,7 +76,7 @@ void find_right_angle_obst(){
 	int bool_right=0 ; // boolean 1 is right 0 is left
 
 	int time = 1000;
-	rotate_car(10,'R', speed_circular);
+	rotate_car(20,'R', speed_circular);
 	Sleep(100);
 	US_VAL = read_US();
 	printf("\n dist_init= %f, value US = %f\n",dist_init_obj, US_VAL);
@@ -92,7 +92,7 @@ void find_right_angle_obst(){
 	else{
 			run_forever(-speed_circular,speed_circular);
 	}
-	while (previous_dist >= current_dist && current_dist > 35) {
+	while (previous_dist > current_dist && current_dist > 35) {
 		US_VAL = 0;
 		uint8_t nb_avg = 4;
 		uint8_t i = 0;
