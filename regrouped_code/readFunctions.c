@@ -156,9 +156,5 @@ void *readingSensors(void)
 	}
 	printf("Obstacle Detected!!\n ");
 	pthread_cond_signal(&obstacleDetected);
-	while(detect_obstacle()){
-		printf("Obstacle Detected!!\n ");
-		pthread_cond_signal(&obstacleDetected);
-	}
 	exit;
 }
