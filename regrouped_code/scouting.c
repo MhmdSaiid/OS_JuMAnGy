@@ -165,7 +165,6 @@ void scouting(){
 	int time = (int)(distance/velocity*1000);
 	int obst;
 	int finished=0;
-	int boundaryMet=0;
 	int goingRight=1;
 	float former_x = x_position;
 	float former_y = y_position;
@@ -173,7 +172,6 @@ void scouting(){
 	float new_y;
 	char directionsGoingRight[2] = {'R','L'};
 	while(!finished){
-		boundaryMet=0;
 		former_x=x_position;
 		former_y=y_position;
 		move(SPEED_LINEAR, 0, 1, 'F');
@@ -203,7 +201,6 @@ void scouting(){
 			printf("obstacle of type : %d", obst);
 			limitObst(obst);
 			finished=true;
-			return;
 		}
 	}
 }
