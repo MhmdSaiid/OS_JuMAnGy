@@ -88,9 +88,8 @@ void send_map(int socket, uint8_t * map){
       write(socket, string, 12);
 		}
 	}
-
 string[4] = MSG_MAPDONE;
-write(s, string, 5);
+write(socket, string, 5);
 }
 
 
@@ -99,8 +98,6 @@ void send_obstacle(int socket, uint8_t * map,bool act){
 uint8_t mapPixel;
 char string[58];
 *((uint16_t *) string) = msgId++;
-
-
 for (int x=0; x<XMAX; x++){
 		for (int y=0; y<YMAX; y++) {
 			mapPixel = getFromMap(map,x,y);
@@ -117,9 +114,6 @@ for (int x=0; x<XMAX; x++){
 						write(socket, string, 10);
 							}
 						}
-
-
-
 }
 
 
