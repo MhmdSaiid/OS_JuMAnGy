@@ -47,7 +47,7 @@ int detect_obstacle(void){
 	{
 		return 1;
 	}
-	if (TOUCHING) //idem if the button touch is activated. It means there is an obstacle but not in front of us 
+	if (TOUCHING) //idem if the button touch is activated. It means there is an obstacle but not in front of us
 	{
 		return 2;
 	}
@@ -81,12 +81,12 @@ void find_right_angle_obst(){
 	Sleep(100);
 	US_VAL = read_US();
 	printf("\n dist_init= %f, value US = %f\n",dist_init_obj, US_VAL);
-	if (dist_init_obj>US_VAL) { //if we get closer to the obstacle 
+	if (dist_init_obj>US_VAL) { //if we get closer to the obstacle
 		    bool_right = 1; // then we chose the right direction to turn
 	}
 	if(US_VAL>300){ //if we are far from reaching the angle we want we can turn faster
 		float angle = 30/200*US_VAL +(20-300*30/200);
-		rotate_car(60,rotationDirection[bool_right],speed_circular);
+		rotate_car(angle,rotationDirection[bool_right],speed_circular);
 	}
 	//To improve next step first roation depending on new reading
 
@@ -309,4 +309,3 @@ int distinguish_obstacle(void)
 	printf("unmovable");
 	return UNMOVABLE; //if is noting before, then it has to be an unmovable one
 }
-
