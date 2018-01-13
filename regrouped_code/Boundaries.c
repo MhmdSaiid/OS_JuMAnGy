@@ -43,8 +43,19 @@ float angle = 90.0;
 
 			}
 			else {
+
+				//rotate_car(10.0, 'R',SPEED_CIRCULAR);
+				int smtg = move(SPEED_LINEAR,1000,0,'F');
+				if(smtg==0){ // if boundary found
+					rotate_car(angle, 'R', SPEED_CIRCULAR);
+					move(SPEED_LINEAR, 0,1,'F');
+				}
+
+				find_right_angle_obst();
+				rotate_car(angle, 'L', SPEED_CIRCULAR);
 				start_boundary_x=x_position;
-				start_boundary_x=y_position;
+				start_boundary_y=y_position;
+
 				break; //maybe turn right ?
 			}
 			Sleep(150);
