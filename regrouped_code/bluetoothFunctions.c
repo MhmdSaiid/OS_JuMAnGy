@@ -67,21 +67,23 @@ void send_map(int socket, uint8_t * map){
   int x;
   int y;
   for (x=0; x<XMAX; x++){
-		for (y=0; y<YMAX; y++) {
-			mapPixel = getFromMap(map,x,y);
-      string[2] = TEAM_ID;
-      string[3] = 0xFF;
-      string[4] = MSG_MAPDATA;
-      string[5] = x;          /* x */
-      string[6] = 0x00;
-      string[7] = y;             /* y */
-      string[8]= 0x00;
-      string[9] = 255 - mapPixel*20;
-      string[10]= 255 - mapPixel*20;
-      string[11]= 255 - mapPixel*20;
-      write(socket, string, 12);
+	for (y=0; y<YMAX; y++) {
+		mapPixel = getFromMap(map,x,y);
+      		if(mapPixel != EMPTY){
+      			string[2] = TEAM_ID;
+      			string[3] = 0xFF;
+      			string[4] = MSG_MAPDATA;
+      			string[5] = x;          /* x */
+      			string[6] = 0x00;
+      			string[7] = y;             /* y */
+      			string[8]= 0x00;
+      			string[9] = 255 - mapPixel*20;
+      			string[10]= 255 - mapPixel*20;
+      			string[11]= 255 - mapPixel*20;
+      			write(socket, string, 12);
 		}
 	}
+  }
 }
 int init_bluetooth_game()
 {
