@@ -113,11 +113,15 @@ int main (void )
 	//move(SPEED_LINEAR,0,1,Direct);
 	//scouting();
 	//rotate_car(90,'R',SPEED_CIRCULAR);
-	bound();
+	move(SPEED_LINEAR,0,1,'F');
+	find_right_angle_obst();
 
-	getSize(boundaries);
-	uint8_t * map=initializeMap(boundaries);
-	print_map(map);
+
+	//bound();
+
+	//getSize(boundaries);
+	//uint8_t * map=initializeMap(boundaries);
+	//print_map(map);
 
 	//scouting();
 	TOUCHED = _check_pressed( sn_touch);
