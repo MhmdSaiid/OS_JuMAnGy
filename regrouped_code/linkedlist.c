@@ -1,8 +1,21 @@
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <string.h>
+#include <stdint.h>
+#include "math.h"
+#include "ev3.h"
+#include "ev3_port.h"
+#include "ev3_sensor.h"
+#include "ev3_tacho.h"
+#ifdef __WIN32__
+
+#include <windows.h>
+
+// UNIX //////////////////////////////////////////
+#else
 #include <unistd.h>
+#define Sleep( msec ) usleep(( msec ) * 1000 )
+
 
 float THRESHROTATION = 8;		//mapcoordinates
 float XROBOT;		//cms
@@ -230,7 +243,7 @@ void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int 
 	}
 }
 /*
-Old version	
+Old version
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
 	int xrel;
 	int yrel;
