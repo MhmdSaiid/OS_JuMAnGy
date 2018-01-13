@@ -219,7 +219,7 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 	return(is_there);
 }
 
-
+*/
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, int width, uint8_t type) {
 	/*Written by Armand PERON*/
 	//Check the rectangular area set from (x_offset, y_offset) as center of closest side, with parameters length and width
