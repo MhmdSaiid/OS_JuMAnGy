@@ -181,7 +181,7 @@ void scouting(){
 		new_y=y_position;
 		printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
 		add_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)), EMPTY);
-		//stops when there is an obstacle or a boundary
+		////stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
 		print_map(map);
 		if(checkBoundary( (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) )) ){
