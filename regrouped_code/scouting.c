@@ -216,7 +216,7 @@ void scouting(){
 		}
 		else {
 			obst=distinguish_obstacle(); // observe the type of obstacle it is
-			if(obst=ROBOT){
+			if(obst==ROBOT){
 				Sleep(1000);//Wait for 1 second for the robot to stop
 				continue;
 			}
