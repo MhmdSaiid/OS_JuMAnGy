@@ -13,6 +13,10 @@
 #include "ev3_port.h"
 #include "ev3_sensor.h"
 #include "ev3_tacho.h"
+#ifndef INITIALIZE
+#define INITIALIZE
+#include "defines.h"
+#endif
 //#define SERV_ADDR   "5C:51:4F:A9:25:76"     /* Whatever the address of the server is */
 //#define SERV_ADDR   "dc:53:60:ad:61:90"     /* Whatever the address of the server is */
 //#define SERV_ADDR   "54:27:1E:35:B8:D6"     /* Whatever the address of the server is */
