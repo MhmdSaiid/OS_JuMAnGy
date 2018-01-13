@@ -82,6 +82,7 @@ extern float ANG_VAL;
 
 extern uint8_t * map;
 void limitObst(int obstacleType){
+/*written by Justine Delomenie and improved a lot by Gautier Dervaux*/
 /*
 this function is supposed to be used after detecting an obstacle during scouting.
 it will turn around the obstacle then avoid it and put the robot towards the initial direction
@@ -148,6 +149,7 @@ but after the obstacle in the same scouting line drawn
 }
 
 int checkBoundary(int x,int y){
+	/*written by gautier Dervaux*/
 	printf("x = %d, y = %d\n",x,y);
 	int x_dimension = 20;
 	int y_dimension = 20;
@@ -160,6 +162,7 @@ int checkBoundary(int x,int y){
 }
 
 void scouting(){
+	/*written by Justine Delomenie and improved by Gautier Dervaux*/
 	int distance = 5; //in cm
 	int timeToStop = (int)(distance/velocity*1000);
 	int obst;
@@ -177,29 +180,29 @@ void scouting(){
 		new_x=x_position;
 		new_y=y_position;
 		printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-		add_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)), EMPTY);
+		add_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)), EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 		////stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
 		print_map(map);
 		if(checkBoundary( (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) )) ){
 			//if it is a boundary according to our array do a 180 to scout another line
-			printf("Bounary met\n");
+			printf("Boundary met\n");
 			move(SPEED_LINEAR, timeToStop*2, 0, 'B'); //goes back a little in order to have enough place to rotate
-			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);
+			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);//turn
 			former_x=x_position;
 			former_y=y_position;
-			move(SPEED_LINEAR,timeToStop*4, 0, 'F');
+			move(SPEED_LINEAR,timeToStop*4, 0, 'F');//move a little forward
 			new_x=x_position;
 			new_y=y_position;
 			add_line_of(map, (int)(floor(former_x/5)), (int)(floor(former_y/5)), (int)(floor(new_x/5)), (int)(floor(new_y/5)), EMPTY);
-			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);
+			rotate_car(90,directionsGoingRight[goingRight], SPEED_CIRCULAR);//turn to start exploring a new line
 			goingRight=(goingRight+1)%2;
 		}
 		else {
-			obst=distinguish_obstacle();
-			setOnMap(map, x_position, y_position, obst);
+			obst=distinguish_obstacle(); // observe the type of obstacle it is
+			setOnMap(map, x_position, y_position, obst);//add it on the map
 			printf("obstacle of type : %d", obst);
-			limitObst(obst);
+			limitObst(obst);//draw the shape of the obstacle and add it on the map
 		}
 	}
 }

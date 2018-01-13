@@ -71,6 +71,7 @@ void *readingSensors(void) {
 }
 */
 int moveThread(int speed, int timeInMs,int inf/*If we want to go until an obstacle is found*/,char D){
+	/*written by Gautier Dervaux*/
 	pthread_mutex_init(&myMutex , NULL ) ;
 	pthread_mutex_lock(&myMutex);
 	pthread_t sensorsThread;
