@@ -90,7 +90,7 @@ but after the obstacle in the same scouting line drawn
 */
 	float fullAngle = 360.0;
 	int end=0;
-	int distance = 5; //in cm
+	int distance = 10; //in cm
 	float x_init = x_position;
 	float y_init = y_position;
 	int timeToStop = (int)(distance/velocity*1000);
