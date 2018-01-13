@@ -186,6 +186,7 @@ uint8_t* initializeMap(boundary_t * obstacles) {
 void print_map(uint8_t * map) {
 	int xmax = XMAX;
 	int ymax = YMAX;
+	printf("xmax :%d, ymax : %d \n", xmax, ymax);
 	int y;
 	int x;
 	for (y=0; y<ymax; y++) {
