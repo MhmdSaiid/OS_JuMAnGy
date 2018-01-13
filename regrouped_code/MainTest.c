@@ -107,11 +107,11 @@ int main (void )
 	map = small_stadium_map(120,200);
 	//move(SPEED_LINEAR,0,1,'F');
 	//scouting();
-	rotate_car(90, 'R', speed_circular);
-	rotate_car(90, 'L', speed_circular);
-	rotate_car(90, 'R', speed_circular);
-	rotate_car(90, 'L', speed_circular);
-	
+	rotate_car(90, 'R', SPEED_CIRCULAR);
+	rotate_car(90, 'L', SPEED_CIRCULAR);
+	rotate_car(90, 'R', SPEED_CIRCULAR);
+	rotate_car(90, 'L', SPEED_CIRCULAR);
+
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
