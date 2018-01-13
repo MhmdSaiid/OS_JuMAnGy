@@ -172,11 +172,11 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	while(1)
 	{
 		ANG_VAL = read_ang();
-		if(D=='R' && ANG_VAL>final_angle-13) {
+		if(D=='R' && ANG_VAL>final_angle-15) {
 			stop_car();
 			break;
 		}
-		if(D=='L' && ANG_VAL<(final_angle+13)) {
+		if(D=='L' && ANG_VAL<(final_angle+15)) {
 			stop_car();
 			break;
 		}
