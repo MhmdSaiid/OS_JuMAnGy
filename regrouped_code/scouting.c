@@ -124,10 +124,6 @@ but after the obstacle in the same scouting line drawn
 				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop),0,'F');
 				rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR); //get some distance from the obstacle
-				drift = (read_ang() - relative_angle);//negative means drift to the right
-				printf("relative angle= %f drift = %f\n",relative_angle,drift);
-				if(drift<0) rotate_car(abs(fullAngle+drift),'L',SPEED_CIRCULAR);
-				else rotate_car(drift,'R',SPEED_CIRCULAR);
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop*1.5),0,'F');
 				if(obstacleWhileMoving){
 					////find_right_angle_obst();
