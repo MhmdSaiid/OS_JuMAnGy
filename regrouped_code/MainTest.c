@@ -107,10 +107,7 @@ int main (void )
 	map = small_stadium_map(120,200);
 	//move(SPEED_LINEAR,0,1,'F');
 	//scouting();
-	rotate_car(90, 'R', SPEED_CIRCULAR);
-	rotate_car(90, 'L', SPEED_CIRCULAR);
-	rotate_car(90, 'R', SPEED_CIRCULAR);
-	rotate_car(90, 'L', SPEED_CIRCULAR);
+	find_right_angle_obst();
 
 	run_timed(+SPEED_CIRCULAR,-SPEED_CIRCULAR,1100);
 	run_timed(-SPEED_CIRCULAR,+SPEED_CIRCULAR,1100);
