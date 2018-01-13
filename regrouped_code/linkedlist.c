@@ -307,3 +307,4 @@ void main() {
 	printf("Result of checking: %d\n", check_area_obstacle(map, 65, 70, 45, 10, 4));
 	print_map(map);
 }
+*/
