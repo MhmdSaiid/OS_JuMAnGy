@@ -112,6 +112,11 @@ int main (void )
 	rotate_car(90, 'R', SPEED_CIRCULAR);
 	rotate_car(90, 'L', SPEED_CIRCULAR);
 
+	run_timed(+SPEED_CIRCULAR,-SPEED_CIRCULAR,1100)
+	run_timed(-SPEED_CIRCULAR,+SPEED_CIRCULAR,1100)
+	run_timed(+SPEED_CIRCULAR,-SPEED_CIRCULAR,1100)
+	run_timed(-SPEED_CIRCULAR,+SPEED_CIRCULAR,1100)
+
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
