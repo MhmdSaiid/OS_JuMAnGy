@@ -203,7 +203,6 @@ void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int 
 		area += 2.5;
 	}
 }
-<<<<<<< HEAD
 /*
 Old version
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
@@ -222,8 +221,6 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 	}
 	return(is_there);
 }
-=======
->>>>>>> 234a314f92c3d8fe944007a054e234eadfd26b03
 
 
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, int width, uint8_t type) {
@@ -312,8 +309,4 @@ void main() {
 	relative_angle = 0.78;
 	printf("Result of checking: %d\n", check_area_obstacle(map, 65, 70, 45, 10, 4));
 	print_map(map);
-<<<<<<< HEAD
 }
-=======
-}*/
->>>>>>> 234a314f92c3d8fe944007a054e234eadfd26b03
