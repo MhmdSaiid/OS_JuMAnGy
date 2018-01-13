@@ -71,8 +71,8 @@
 extern const char const *color[];
 extern uint8_t motor[ 3 ];
 
-float x_position = 19.0;
-float y_position = 8.0;
+float x_position = 60.0;
+float y_position = 30.0;
 float relative_angle = 0;
 float velocity = SPEED_LINEAR/2; //25 cm.s per second for speed linear = 50
 float val=3.141592/180.0;
@@ -104,9 +104,9 @@ int main (void )
 	printf("Sensors online\n");
 	if( init_motors() > 0) return ( 1 );
 
-	map = small_stadium_map(100,70);
+	map = small_stadium_map(120,200);
 	move(SPEED_LINEAR,0,1,'F');
-	find_right_angle_obst();
+	scout();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
