@@ -105,7 +105,7 @@ int main (void )
 	if( init_motors() > 0) return ( 1 );
 
 	map = small_stadium_map(120,200);
-	move(SPEED_LINEAR,0,1,'F');
+	//move(SPEED_LINEAR,0,1,'F');
 	scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
