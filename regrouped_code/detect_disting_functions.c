@@ -103,10 +103,11 @@ void find_right_angle_obst(){
 	while (previous_dist >= current_dist && current_dist > 35) {
 		if(previous_dist==current_dist) sameDist++;
 		else sameDist=0;
-		if(sameDist==100){
+		if(sameDist==10){
 			break;
 		}
 		previous_dist = current_dist;
+		US_VAL = read_US();
 		current_dist = US_VAL;
 		printf("previous_dist = %f,current_dist =%f\n",previous_dist,current_dist);
 
