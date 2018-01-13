@@ -155,11 +155,11 @@ int checkBoundary(int x,int y){
 	int x_dimension = 4;
 	int y_dimension = 4;
 	if(check_area_obstacle(map, x, y, x_dimension, y_dimension, BOUNDARIES)){
-
+		print_map(map);
 		return 1;
 	}
+	print_map(map);
 	return 0;
-
 }
 
 void scouting(){
