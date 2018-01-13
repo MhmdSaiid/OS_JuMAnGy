@@ -169,6 +169,8 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 {
 	/*written by Gautier Dervaux*/
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
+	uint8_t sn_compass;
+	ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0)
 	set_sensor_mode( sn_compass, "GYRO-ANG" );
 	struct timeval startDate;
 	int elapsedTime;
