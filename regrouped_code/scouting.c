@@ -99,6 +99,7 @@ but after the obstacle in the same scouting line drawn
 	uint8_t directionIndex;
 	if (relative_angle<10) directionIndex = 1; //going right
 	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 0; //going left
+	printf("direction index = %d",directionIndex);
 	bool besideObstacle = true;
 	int angleTracker = relative_angle;
 	float x_first_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
