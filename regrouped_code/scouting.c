@@ -130,7 +130,7 @@ but after the obstacle in the same scouting line drawn
 					//setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obstacleType);//add it on the map
 					x_second_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
 					y_second_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
-					add_line_of(map,x_first_obstacle,y_first_obstacle,x_second_obstacle,y_second_obstacle,obstacleType);
+					add_line_of(map,(int) floor(x_first_obstacle),(int) floor(y_first_obstacle),(int)floor(x_second_obstacle),(int)floor(y_second_obstacle),obstacleType);
 					x_first_obstacle = x_second_obstacle;
 					y_first_obstacle = y_second_obstacle;
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
@@ -155,7 +155,7 @@ but after the obstacle in the same scouting line drawn
 			x_second_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
 			y_second_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
 			printf("Obstacle is still here \n");
-			add_line_of(map,x_first_obstacle,y_first_obstacle,x_second_obstacle,y_second_obstacle,obstacleType);
+			add_line_of(map,(int) floor(x_first_obstacle),(int) floor(y_first_obstacle),(int)floor(x_second_obstacle),(int)floor(y_second_obstacle),obstacleType);
 			//setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obstacleType);//add it on the map
 			x_first_obstacle=x_second_obstacle; //reset the coordinates of the obstacle
 			y_first_obstacle=y_second_obstacle;

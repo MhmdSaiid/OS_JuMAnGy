@@ -92,8 +92,8 @@ void find_right_angle_obst(){
 		Sleep(1000);
 	}
 	//To improve next step first roation depending on new reading
-	US_VAL=read_US;
-	bool_right = (bool_right + 1 + (US_VAL<dist_init_obj))%2;
+	US_VAL=read_US();
+	bool_right = (bool_right + 1 + (US_VAL<dist_init_obj) )%2;
 	printf("bool %d\n", bool_right);
 	float current_dist = US_VAL;
 	float previous_dist = current_dist+1;
