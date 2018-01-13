@@ -1,21 +1,8 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-#include "math.h"
-#include "ev3.h"
-#include "ev3_port.h"
-#include "ev3_sensor.h"
-#include "ev3_tacho.h"
-#ifdef __WIN32__
-
-#include <windows.h>
-
-// UNIX //////////////////////////////////////////
-#else
+#include <math.h>
 #include <unistd.h>
-#endif
-
 
 float THRESHROTATION = 8;		//mapcoordinates
 float XROBOT;		//cms
@@ -24,8 +11,7 @@ int XMAX;		//mapcoordinates
 int YMAX;		//mapcoordinates
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
-extern float relative_angle;
-extern float val;
+float relative_angle;
 
 typedef struct position {
 	int x;
@@ -171,12 +157,13 @@ uint8_t* initializeMap(boundary_t * obstacles) {
 		map[x*ymax*size+y] = 4;
 		current = current->next;
 	}
+	printf("%d\n", size);
 	int i;
 	int j;
 	for (i=0; i<xmax; i++){
 		for (j=0; j<ymax; j++) {
 			if (map[i*ymax*size+j] != 4) {
-				map[i*ymax*size+j] = 0;
+				map[i*ymax+j] = 0;
 			}
 		}
 	}
@@ -191,22 +178,25 @@ void print_map(uint8_t * map) {
 	int x;
 	for (y=0; y<ymax; y++) {
 		for(x=0; x<xmax; x++) {
-			printf("%u", map[x*ymax*sizeof(uint8_t)+y]);
+			printf("%u", map[x*ymax+y]);
 		}
 		printf("\n");
 	}
 	printf("\n\n");
+	for(int i = 0; i < xmax*ymax + 3; i++) {
+		printf("%u", map[i]);
+	} 
 }
 
 uint8_t getFromMap(uint8_t * map, int x, int y) {
 	//Returns the element of the map at position x,y
-	return(map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))]);
+	return(map[(int)(floor(x/5)*YMAX+floor(y/5))]);
 }
 
 void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	//Sets the element of the map at x,y to type value, or returns "out of bounds" if impossible
 	if (x>0 && floor(x/5)< XMAX && y>0 && floor(y/5)<YMAX) {
-		map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))] = type;
+		map[(int)(floor(x/5)*YMAX+floor(y/5))] = type;
 	} else {
 		//printf("out of bound: %d, %d\n", x, y);
 	}
@@ -245,7 +235,7 @@ void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int 
 	}
 }
 /*
-Old version
+Old version	
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
 	int xrel;
 	int yrel;
@@ -259,16 +249,15 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 				}
 			}
 		}
-	}
+	} 
 	return(is_there);
 }
 
 */
 
-bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, int width, uint8_t type) {
-	float dlx = cos(relative_angle*val);
-	float dly = sin(relative_angle*val);
-	printf("dl: %f, %f\n", dlx, dly);
+int check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, int width, uint8_t type) {
+	float dlx = cos(relative_angle);
+	float dly = sin(relative_angle);
 	float l = 0;		//length checked
 	float w = 0;		//Width checked on current l
 	float x;
@@ -276,14 +265,15 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, 
 	int i = - (int) floor(width/2);
 	int j = 0;
 
-	bool is_there = false;
+	int is_there = 0;
 	while(i <= width/2) {
 		while(j <= length) {
 			x = x_offset - i*dly + j*dlx;
 			y = y_offset + i*dlx + j*dly;
 			if (floor(x/5) < XMAX && floor(y/5) < YMAX) {
 				if(getFromMap(map,(int) round(x), (int) round(y)) == type) {
-					is_there = true;
+					setOnMap(map, (int) round(x), (int) round(y), 5);		//Uncomment to get checked area as 5s on the map
+					is_there = 1;
 					return(is_there);
 				}
 				setOnMap(map, (int) round(x), (int) round(y), 5);		//Uncomment to get checked area as 5s on the map
@@ -336,7 +326,7 @@ uint8_t * small_stadium_map(int x_dimension, int y_dimension){
 
 
 
-/*
+
 void main() {
 	uint8_t type = 1;
 	int x = 5;
@@ -355,7 +345,7 @@ void main() {
 	print_map(map);
 	add_big_line_of(map, 30, 50, 70, 50, 10, 1);
 	print_map(map);
-	relative_angle = 0.78;
-	printf("Result of checking: %d\n", check_area_obstacle(map, 65, 70, 45, 10, 4));
+	relative_angle = 40;
+	printf("Result of checking: %d\n", check_area_obstacle(map, 90, 90, 20, 20, 4));
 	print_map(map);
-}*/
+}

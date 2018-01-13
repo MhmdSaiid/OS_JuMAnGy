@@ -54,11 +54,12 @@ int read_from_server (int sock, char *buffer, size_t maxSize) {
 
 
 void send_position(int s, float x,float y) {
-  //char type;
+	/* written by Gautier Dervaux*/
+
 	char string[58];
 	int x_send= (int)ceil(x/5);
 	int y_send = (int)ceil(y/5);
-
+	/*according to the protocol*/
 	*((uint16_t *) string) = msgId++;
 	string[2] = TEAM_ID;
 	string[3] = 0xFF;
@@ -71,6 +72,7 @@ void send_position(int s, float x,float y) {
 }
 
 void send_map(int s, uint8_t * map){
+  /*written by Gautier Dervaux*/
   uint8_t mapPixel;
   char string[58];
   *((uint16_t *) string) = msgId++;
@@ -102,7 +104,7 @@ write(s, string, 5);
 
 
 void send_obstacle(int s, uint8_t * map,float x,float y,bool act){
-
+/*written by Mohammed Saeed*/
 char string[58];
 *((uint16_t *) string) = msgId++;
 
@@ -126,6 +128,7 @@ write(s, string, 10);
 
 int init_bluetooth_game()
 {
+  /*written by Gautier Dervaux*/
   char string[58];
   struct sockaddr_rc addr = { 0 };
   int status;
@@ -160,6 +163,7 @@ int init_bluetooth_game()
 }
 
 void close_comm(int s)
+/*written by Gautier Dervaux*/
 {
   close(s);
 }

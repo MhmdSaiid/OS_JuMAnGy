@@ -45,6 +45,7 @@ extern bool timeout;
 
 bool _check_pressed( uint8_t sn )
 {
+/*written by Gautier Dervaux*/
 	int val;
 
 	if ( sn == SENSOR__NONE_ ) {
@@ -52,33 +53,31 @@ bool _check_pressed( uint8_t sn )
 	}
 	return ( get_sensor_value( 0, sn, &val ) && ( val != 0 ));
 }
-//yolo
+
 int read_light_color()
 {
+	/*written by Gautier Dervaux*/
 	uint8_t sn_color;
 	int val;
 	while (!( ev3_search_sensor( LEGO_EV3_COLOR, &sn_color, 0 ))) printf("Searching for color sensor...");
-	//printf( "COLOR sensor is found, reading COLOR...\n" );
 	set_sensor_mode( sn_color, "COL-COLOR" );
 	if ( !get_sensor_value( 0, sn_color, &val ) || ( val < 0 ) || ( val >= COLOR_COUNT )) {
 		val = 0;
 	}
-	//printf( "\r(%s) \n", color[ val ]);
 	fflush( stdout );
 	return val;
 }
 
 float read_light_intensity()
 {
+	/*written by Gautier Dervaux*/
 	uint8_t sn_intensity;
 	float value;
 	while (!( ev3_search_sensor( LEGO_EV3_COLOR, &sn_intensity, 0 ))) printf("Searching for light intensity sensor...\n");
-	//printf( "Light intensity reflection sensor is found, reading value..\n");
 	set_sensor_mode( sn_intensity, "COL-REFLECT" );
 	if ( !get_sensor_value0(sn_intensity, &value )) {
 		value = 0;
 	}
-	//printf("\r Light senses (%f) \n",value);
 	fflush( stdout );
 	return value;
 }
@@ -86,33 +85,32 @@ float read_light_intensity()
 
 float read_US()
 {
+	/*written by Gautier Dervaux*/
 	uint8_t sn_sonar;
 	float value;
 	while (!(ev3_search_sensor(LEGO_EV3_US, &sn_sonar,0))) printf("Searching for US sensor...");
-	//printf("SONAR found, reading sonar...\n");
 	if ( !get_sensor_value0(sn_sonar, &value )) {
 		value = 0;
 	}
-	//printf( "\r US senses (%f) \n", value);
 	fflush( stdout );
 	return value;
 }
 float read_ang()
 {
+	/*written by Gautier Dervaux*/
 	uint8_t sn_compass;
 	float angle;
 	while (!(ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0))) printf("Searching for Compass sensor...");
-	//printf("COMPASS found, reading compass...\n");
 	if ( !get_sensor_value0( sn_compass, &angle )) {
 		angle = 0;
 	}
-	//printf( "\rAngle = (%f) \n", angle);
 	fflush( stdout );
 	return angle;
 }
 
 void calibrate_gyro() // set as 0 currant angle --> better rotations
 {
+	/*written by Gautier Dervaux*/
 	uint8_t sn_compass;
 	while (!(ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0))) printf("Searching for Compass sensor...");
 	set_sensor_mode( sn_compass, "GYRO-CAL" );
@@ -123,6 +121,7 @@ void calibrate_gyro() // set as 0 currant angle --> better rotations
 
 void update_sensors_value()
 {
+	/*written by Gautier Dervaux*/
 	//printf("Updating\n");
 	uint8_t sn_touch;
 	COLOR_VAL = read_light_color();
@@ -138,6 +137,7 @@ void update_sensors_value()
 
 void *readingSensors(void)
 {
+	/*written by Gautier Dervaux*/
 	printf("Hello from the thread\n");
 	uint8_t sn_touch;
 	long int i=0;

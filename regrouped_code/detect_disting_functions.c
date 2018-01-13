@@ -41,17 +41,17 @@ extern uint8_t motor[ 3 ];
 
 
 int detect_obstacle(void){
-	/* written by J.D*/
-	int dist_thresh = 120; //in mm
-	if ( US_VAL<= dist_thresh )
+	/* written by Justine Deloménie*/
+	int dist_thresh = 120; //distance threshold
+	if ( US_VAL<= dist_thresh ) //if we are too close from an obstacle according to the ultrasound sensor, then we say there is an obstacle
 	{
 		return 1;
 	}
-	if (TOUCHING)
+	if (TOUCHING) //idem if the button touch is activated. It means there is an obstacle but not in front of us 
 	{
 		return 2;
 	}
-	if (US_VAL > dist_thresh)
+	if (US_VAL > dist_thresh) //the next obstacle is still far we can continue to move
 	{
 		return 0;
 	}
@@ -59,6 +59,7 @@ int detect_obstacle(void){
 }
 
 void find_right_angle_obst(){
+	/*written first by Justine Deloménie, improved by Gautier Dervaux*/
 	/* I didnt take into account the fact that a second obstacle could touch the first one and so become a problem , I think if it is turning towards the second one it will stop in front of this one instead of the first one*/
 	uint8_t i = 0;
 	int distance = 3; //in cm
@@ -67,7 +68,6 @@ void find_right_angle_obst(){
 	calibrate_gyro();
 	ANG_VAL=0;
 	Sleep(1000);
-	//update_sensors_value();
 	US_VAL = read_US();
 	float dist_init_obj = US_VAL;
 	float thresh_dist_ang = 10;
@@ -77,14 +77,14 @@ void find_right_angle_obst(){
 	char rotationDirection[2]={'L','R'};
 
 	int time = 1000;
-	rotate_car(10,'R', speed_circular);
+	rotate_car(10,'R', speed_circular); //we rotate a little to the right
 	Sleep(100);
 	US_VAL = read_US();
 	printf("\n dist_init= %f, value US = %f\n",dist_init_obj, US_VAL);
-	if (dist_init_obj>US_VAL) {
-		    bool_right = 1; // we choose the right direction to turn
+	if (dist_init_obj>US_VAL) { //if we get closer to the obstacle 
+		    bool_right = 1; // then we chose the right direction to turn
 	}
-	if(US_VAL>300){
+	if(US_VAL>300){ //if we are far from reaching the angle we want we can turn faster
 		float angle = 30/200*US_VAL +(20-300*30/200);
 		rotate_car(60,rotationDirection[bool_right],speed_circular);
 	}
@@ -93,14 +93,15 @@ void find_right_angle_obst(){
 	printf("bool %d\n", bool_right);
 	float current_dist = US_VAL;
 	float previous_dist = current_dist+1;
+	/*then turns slower*/
 	if(bool_right==1) {
 			run_forever(speed_circular,-speed_circular);
 	}
 	else{
 			run_forever(-speed_circular,speed_circular);
 	}
-	uint8_t sameDist; //To keep track how many time the same dist
-	while (previous_dist >= current_dist && current_dist > 35) {
+	uint8_t sameDist; //To keep track how many times the same dist
+	while (previous_dist >= current_dist && current_dist > 35) { //we stop when the value did not change fast during the last small rotations
 		if(previous_dist==current_dist) sameDist++;
 		else sameDist=0;
 		if(sameDist==10){
@@ -149,109 +150,83 @@ void find_right_angle_obst(){
 }
 
 int find_obst_size(int max_size, int count){
-	/* written by J.D */
-	/* I also suppose that we just want to know if the size is higher than a limit to distinguish boundaries from unmovable objects */
-	/* finally I consider that it is not possible to meet a second obstacle while trying to define the size of the first one */
-	/*movable are only red balls*/
+	/* written by Justine Deloménie */
+	/* I suppose that we just want to know if the size is higher than a limit to distinguish boundaries from unmovable objects */
 
 	int thresh = 20;
 	int speed_circular=SPEED_CIRCULAR;
 	int speed_linear = SPEED_LINEAR;
 	int abs_speed_linear = MAX_SPEED*speed_linear/100;
 
-	//int speed=SPEED_LINEAR ; //en cm/s
-	//int start_x = x_position;
-	//int start_y = y_position;
 	float start_dist=US_VAL;
 
-	//float alpha = ANG_VAL;
 	find_right_angle_obst(); // after that we are at a 90° angle with the obstacle
 
 	rotate_car(90, 'L', speed_circular);
-	//go_to(start_x, start_y+max_size);
 
 	int d=max_size;//cm
 	int v = 25; //cm/s
 	int time = 2000; //ms
 	printf("\n max_size : %d, speed : %d, d : %d, time : %d \n", max_size, abs_speed_linear, d, time);
-	//printf("\ntime :%d \n", time);
 	int bool_move = move(speed_linear, time, 0,'F');
 	if (bool_move==0) //if there were no additional obstacle that blocked the movement
 	{
 		ANG_VAL=read_ang();
-		//printf("\nbefor rotating to the right : %f\n", ANG_VAL);
 		rotate_car(90, 'R', speed_circular);
 		ANG_VAL=read_ang();
-		//printf("\nafter rotating to the right : %f\n", ANG_VAL);
 		US_VAL=read_US();
 		if (abs(US_VAL-start_dist) < thresh) // if we are still in front of the obstacle
 		{
 				    /*then it is a boundary because the size is too high for all other types of objects*/
 				    /* come back to the original position */
 				    rotate_car(90,'R', speed_circular);
-				    //printf("time to move");
 				    bool_move = move(speed_linear, time, 0,'F');
 				    rotate_car(90,'L', speed_circular);
 				    return max_size+1;
 		}
+		/* else go back to the initial position and returns that it is not long enough to be a boundary*/
 		ANG_VAL=read_ang();
-		//printf(" \n\nbefore rotating to the right : %f\n\n", ANG_VAL);
 		rotate_car(90,'R', speed_circular);
 		ANG_VAL=read_ang();
-		//printf(" after rotating to the right : %f\n", ANG_VAL);
-		//printf("time to move");
 		bool_move = move(speed_linear, time, 0,'F');
 		rotate_car(90,'L', speed_circular);
 		ANG_VAL=read_ang();
-		//printf(" \nafter rotating to the left : %f\n", ANG_VAL);
 		return 0;
 
 	}
 	else{
 		//go back
 		rotate_car(180,'R', speed_circular);
-		//printf("time to move");
 		bool_move = move(speed_linear, bool_move, 0,'F');
-		//rotate_car2(90,'L', speed_circular);
 		//try the other side
-		//rotate_car2(90,'R', speed_circular);
-		//printf("time to move");
 		bool_move = move(speed_linear, time, 0,'F');
 		if(bool_move==0) {
 			ANG_VAL=read_ang();
-			//printf("\nbefor rotating to the left : %f\n", ANG_VAL);
 			rotate_car(90, 'L', speed_circular);
 			ANG_VAL=read_ang();
-			//printf("\nafter rotating to the left : %f\n", ANG_VAL);
 			US_VAL=read_US();
 			if (abs(US_VAL-start_dist) < thresh) // if we are still in front of the obstacle
 			{
 					    /*then it is a boundary because the size is too high for all other types of objects*/
 					    /* come back to the original position */
 					    rotate_car(90,'L', speed_circular);
-					    //printf("time to move");
 					    bool_move = move(speed_linear, time, 0,'F');
 					    rotate_car(90,'R', speed_circular);
 					    return max_size+1;
 			}
+			//go back and not a boundary cf first try before
 			ANG_VAL=read_ang();
-			//printf(" \n\nbefore rotating to the right : %f\n\n", ANG_VAL);
 			rotate_car(90,'L', speed_circular);
 			ANG_VAL=read_ang();
-			//printf(" after rotating to the right : %f\n", ANG_VAL);
-			//printf("time to move");
 			bool_move = move(speed_linear, time, 0,'F');
 			rotate_car(90,'R', speed_circular);
 			ANG_VAL=read_ang();
-			//printf(" \nafter rotating to the left : %f\n", ANG_VAL);
 			return 0;
 
 		}
-		//rotate_car2(90,'R', speed_circular);
 		else {
-			//go back and consider it as a boundary --> and then we should change thenext direction ?
+			//go back and consider it is a boundary
 			rotate_car(180,'L', speed_circular);
-			//printf("time to move");
 			bool_move = move(speed_linear, bool_move, 0,'F');
 			rotate_car(90,'R', speed_circular);
 			return max_size+1;
@@ -261,8 +236,8 @@ int find_obst_size(int max_size, int count){
 }
 
 int distinguish_obstacleOld(void)
-	/* written by J.D. */
-	/* unknown obstacles, we should also check at the beginning if there is not an obstacle already identified at this position */
+	/* written by Justine Deloménie. */
+
 {
 	int threshold = 50;
 	int max_size = 45; //45;
@@ -273,17 +248,13 @@ int distinguish_obstacleOld(void)
 	int val_color_object = COLOR_VAL;
 	update_sensors_value();
 
-	//if (COLOR_VAL == "RED")
+	//if the object is red it is unmovable
 	if(strcmp(color[val_color_object],"RED")==0)
 	{
 		printf("movable\n");
 		return MOVABLE;
 	}
-	/*if (!detect_obstacle())
-	{
-		printf("None\n");
-		return NONE;
-	}*/
+
 	printf("not red \n");
 	sleep(2); //wait for 2 seconds in order to see if the object has moved, if yes, it was a robot
 	update_sensors_value();
@@ -297,18 +268,19 @@ int distinguish_obstacleOld(void)
 	int object_size;
 	object_size = find_obst_size(max_size,0);
 	printf("obj size : %d \n", object_size);
-	if (object_size > max_size)
+	if (object_size > max_size) //if it is a long object then it is a boundary
 	{
 		printf("boundaries\n");
 		    return BOUNDARIES;
 	}
+	//otherwise it is an unmovable
 	printf("unmovable");
 	return UNMOVABLE;
 }
 
 int distinguish_obstacle(void)
-	/* written by J.D. */
-	/* unknown obstacles, we should also check at the beginning if there is not an obstacle already identified at this position */
+	/* written by Justine Deloménie */
+	//simplified version for all cases, we do not have to identify boundaries because we can check it before thanks to our map
 {
 	int threshold = 50;
 	float old_distance = US_VAL;
@@ -323,67 +295,18 @@ int distinguish_obstacle(void)
 		return ROBOT;
 	}
 
-	//if (COLOR_VAL == "RED")
-	if(strcmp(color[val_color_object],"RED")==0)
+	if(strcmp(color[val_color_object],"RED")==0) // if it is red
 	{
-		if(INTENSITY_VAL>=3){
+		if(INTENSITY_VAL>=3){ //if it is a high intensity then it is a ball
 			printf("movable\n");
 			return MOVABLE;
 		}
 		printf("red but unmovable");
-		return UNMOVABLE;
+		return UNMOVABLE; //else it must be an object released by an opponent (or us)
 	}
 
 	printf("not red \n");
 	printf("unmovable");
-	return UNMOVABLE;
+	return UNMOVABLE; //if is noting before, then it has to be an unmovable one
 }
-/*int main (void )
-{
-    uint8_t sn_touch;
-    int detected_obstacle;
-    char Direct ='F';
 
-    printf( "Waiting the EV3 brick online...\n" );
-    if ( ev3_init() < 1 )
-		return ( 1 );
-    printf( "*** ( EV3 ) Hello! ***\n" );
-    ev3_sensor_init();
-	ev3_tacho_init();
-        if(ev3_search_tacho_plugged_in( L_MOTOR_PORT,L_MOTOR_EXT_PORT,motor+L,0))
-        {
-                get_tacho_max_speed(motor[L],&max_speed);
-                set_tacho_command_inx(motor[L],TACHO_RESET);
-        } else {
-                printf("L NOT Found");
-                return (0);
-        }
-        if(ev3_search_tacho_plugged_in( R_MOTOR_PORT,R_MOTOR_EXT_PORT,motor+R,0))
-        {
-                set_tacho_command_inx(motor[R],TACHO_RESET);
-        } else {
-                printf("R NOT Found");
-                return (0);
-        }
-	printf("start2\n");
-    //rotate_car2(180,'R', SPEED_CIRCULAR);
-	//sleep(1);
-    /*move(speed, 10000, 0,'F');
-	sleep(1);
-    rotate_car2(90,'L', SPEED_CIRCULAR);
-	sleep(10);*/
-/*    moveinf(speed,Direct);
-    printf("Robot stopped because there is an obstacle\n");
-	int obst = distinguish_obstacle();
-	printf("next\n");
-	//printf("%d",obst);
-    TOUCHED = _check_pressed( sn_touch);
-    if( TOUCHED )
-    {
-            printf("*** ( EV3 ) Bye! ***\n");
-    }
-    Sleep(400);
-
-	return 1;
-}
-*/
