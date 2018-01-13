@@ -131,7 +131,7 @@ void* finish(void* arg)
 Sleep(4*60*1000);
 finished=1;
 //printf("FINISHED\n");
-return NULL:
+return NULL;
 }
 
 
