@@ -91,6 +91,7 @@ void send_map(int s, uint8_t * map){
        			 string[10]= 255 - mapPixel*20;
        			 string[11]= 255 - mapPixel*20;
        			 write(s, string, 12);
+			Åprintf("point sent");
       		}
 	}
   }
