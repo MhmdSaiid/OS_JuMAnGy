@@ -77,7 +77,7 @@ void find_right_angle_obst(){
 	char rotationDirection[2]={'L','R'};
 
 	int time = 1000;
-	rotate_car(20,'R', speed_circular);
+	rotate_car(10,'R', speed_circular);
 	Sleep(100);
 	US_VAL = read_US();
 	printf("\n dist_init= %f, value US = %f\n",dist_init_obj, US_VAL);

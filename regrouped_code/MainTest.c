@@ -106,7 +106,7 @@ int main (void )
 
 	map = small_stadium_map(120,200);
 	move(SPEED_LINEAR,0,1,'F');
-	scout();
+	scouting();
 	TOUCHED = _check_pressed( sn_touch);
         if( TOUCHED )
         {
