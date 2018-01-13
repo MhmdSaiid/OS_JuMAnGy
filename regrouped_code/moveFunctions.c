@@ -146,6 +146,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
 	struct timeval startDate;
 	int elapsedTime;
+	struct timeval stopDate;
 	uint8_t nb_values = 10;
 	uint8_t i;
 	ANG_VAL = read_ang();
@@ -176,10 +177,12 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 		ANG_VAL = read_ang();
 		if(D=='R' && ANG_VAL>final_angle-15) {
 			stop_car();
+			gettimeofday(&stopDate,NULL);
 			break;
 		}
 		if(D=='L' && ANG_VAL<(final_angle+15)) {
 			stop_car();
+			gettimeofday(&stopDate,NULL);
 			break;
 		}
 	}
