@@ -111,10 +111,10 @@ int main (void )
 	socket_number = init_bluetooth_game();
     	int x = 0;
     	int y = 0;
-    	//send_position(socket_number,x,y);
+    	send_position(socket_number,x,y);
     	//close_comm(socket_number);
 
-	sendMap(socket_number, map);
+	send_map(socket_number, map);
 	close_comm(socket_number);
 
 	TOUCHED = _check_pressed( sn_touch);
