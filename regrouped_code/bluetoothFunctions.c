@@ -125,12 +125,19 @@ write(s, string, 10);
 
 }
 
+void* finish(void* arg)
+{/*Written by Mohammed Saeed*/
+Sleep(4*60*1000);
+finished=1;
+//printf("FINISHED\n");
+return NULL:
+}
 
 
 
 int init_bluetooth_game()
 {
-  /*written by Gautier Dervaux*/
+  /*written by Gautier Dervaux,thread initialisation by Mohammed Saeed*/
   char string[58];
   struct sockaddr_rc addr = { 0 };
   int status;
@@ -153,7 +160,13 @@ int init_bluetooth_game()
     /* Wait for START message */
     read_from_server (s, string, 9);
     if (string[4] == MSG_START) printf ("Received start message!\n");
-
+    pthread_t tid;
+    int fini;
+    fini=pthread_create(&tid,NULL,&finish,NULL);
+    if(fini!=0)
+    {printf("Thread didn't initialise\n");
+     exit(EXIT_FAILURE);}
+    
    }
    else {
       fprintf (stderr, "Failed to connect to server...\n");

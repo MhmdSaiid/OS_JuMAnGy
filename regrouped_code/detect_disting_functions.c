@@ -104,7 +104,7 @@ void find_right_angle_obst(){
 	while (previous_dist >= current_dist && current_dist > 35) { //we stop when the value did not change fast during the last small rotations
 		if(previous_dist==current_dist) sameDist++;
 		else sameDist=0;
-		if(sameDist==10){
+		if(sameDist==0){
 			break;
 		}
 		previous_dist = current_dist;
