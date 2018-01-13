@@ -89,11 +89,11 @@ void find_right_angle_obst(){
 	if(US_VAL>300){ //if we are far from reaching the angle we want we can turn faster
 		float angle = 30/200*US_VAL +(20-300*30/200);
 		rotate_car(angle,rotationDirection[bool_right],speed_circular);
+		US_VAL=read_US();
+		bool_right = (bool_right + 1 + (US_VAL<dist_init_obj) )%2;
 		Sleep(1000);
 	}
 	//To improve next step first roation depending on new reading
-	US_VAL=read_US();
-	bool_right = (bool_right + 1 + (US_VAL<dist_init_obj) )%2;
 	printf("bool %d\n", bool_right);
 	float current_dist = US_VAL;
 	float previous_dist = current_dist+1;
