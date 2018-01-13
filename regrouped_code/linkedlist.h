@@ -41,3 +41,5 @@ void setOnMap(uint8_t * map, int x, int y, uint8_t type);
 void addLineOf(uint8_t * map, int xbeg, int ybeg, int xend, int yend, uint8_t type);
 
 uint8_t * small_stadium_map(int x_dimension, int y_dimension);
+
+void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int width, uint8_t type);
