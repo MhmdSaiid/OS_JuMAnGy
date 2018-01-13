@@ -144,6 +144,8 @@ while(is_running());
 void rotate_car(float angle,char D, int speed_circular) //Clockwise
 {
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
+	struct timeval startDate;
+	int elapsedTime;
 	uint8_t nb_values = 10;
 	uint8_t i;
 	ANG_VAL = read_ang();
@@ -162,7 +164,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	}
 	relative_angle -= angle; //Gyro opposite direction as gyro
 	//printf("In rotate relative_angle = %f\n",relative_angle);
-
+	gettimeofday(&startDate,NULL);
 	if(D=='R') run_forever(speed_circular,-speed_circular);
 	if(D=='L') run_forever(-speed_circular, speed_circular);
 
@@ -181,6 +183,8 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 			break;
 		}
 	}
+	elapsedTime =(stopDate.tv_sec*1000 + stopDate.tv_usec/1000) - (startDate.tv_sec*1000 + startDate.tv_usec/1000);
+	printf("elpased time =%d\n");
 	Sleep(500);
 }
 
