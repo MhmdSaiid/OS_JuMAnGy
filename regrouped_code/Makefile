@@ -15,6 +15,9 @@ Boundaries.o:  Boundaries.c
 MainTest: MainTest.c $(DEPENDENCIES) defines.h
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
 
+MainTestSendMap : MainTestSendMap.c $(DEPENDENCIES) defines.h
+	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
+
 mainTestScout: mainTestScout.c $(DEPENDENCIES) defines.h
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
 
