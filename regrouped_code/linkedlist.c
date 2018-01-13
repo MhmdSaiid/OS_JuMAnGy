@@ -1,72 +1,7 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-#include "math.h"
-#include "ev3.h"
-#include "ev3_port.h"
-#include "ev3_sensor.h"
-#include "ev3_tacho.h"
-// WIN32 /////////////////////////////////////////
-#ifdef __WIN32__
-
-#include <windows.h>
-
-// UNIX //////////////////////////////////////////
-#else
-#include <unistd.h>
-#define Sleep( msec ) usleep(( msec ) * 1000 )
-
-//////////////////////////////////////////////////
-#endif
-#ifndef DETECT_FUNC
-#define DETECT_FUNC
-#include "detect_disting_functions.h"
-#endif
-#ifndef MOVE_FUNC
-#define MOVE_FUNC
-#include "moveFunctions.h"
-#endif
-#ifndef READ_FUNC
-#define READ_FUNC
-#include "readFunctions.h"
-#endif
-
-#ifndef INITIALIZE
-#define INITIALIZE
-#include "defines.h"
-#endif
-
-#ifndef BT
-#define BT
-#include "bluetoothFunctions.h"
-#endif
-
-#ifndef POS_FUNC
-#define POS_FUNC
-#include "positionFunctions.h"
-#endif
-
-#ifndef THREADSEND
-#define THREADSEND
-#include "sendPositionThread.h"
-#endif
-
-#ifndef SCOUT
-#define SCOUT
-#include "scouting.h"
-#endif
-
-#ifndef LINKED
-#define LINKED
-#include "linkedlist.h"
-#endif
-
-#ifndef BOUND
-#define BOUND
-#include "Boundaries.h"
-#endif
-
+#include <math.h>
 
 float THRESHROTATION = 8;		//mapcoordinates
 float XROBOT;		//cms
@@ -75,6 +10,21 @@ int XMAX;		//mapcoordinates
 int YMAX;		//mapcoordinates
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
+float relative_angle;
+
+typedef struct position {
+	int x;
+	int y;
+	uint8_t type;
+	struct position * next;
+} position_t;
+
+
+typedef struct boundary {
+	int x;
+	int y;
+	struct boundary * next;
+} boundary_t;
 
 
 position_t * push_to_last(position_t * last, int x, int y, uint8_t type) {
@@ -155,7 +105,6 @@ position_t * initialize(int x, int y) {
 	push_to_first(&linkedList, x, y, 1);
 	return(linkedList);
 }
-
 
 
 
@@ -243,7 +192,7 @@ void setOnMap(uint8_t * map, int x, int y, uint8_t type) {
 	if (x>0 && floor(x/5)< XMAX && y>0 && floor(y/5)<YMAX) {
 		map[(int)(floor(x/5)*YMAX*sizeof(uint8_t)+floor(y/5))] = type;
 	} else {
-		printf("out of bound: %d, %d\n", x, y);
+		//printf("out of bound: %d, %d\n", x, y);
 	}
 }
 
@@ -261,7 +210,26 @@ void add_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, uint8_t 
 	}
 }
 
-
+void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int width, uint8_t type) {
+	//Gets width as cms
+	float dx = (xend - xbeg);
+	float dy = (yend - ybeg);
+	float l = (float) sqrt(dx*dx + dy*dy);
+	float widx = -dy/l;
+	float widy = dx/l;
+	//widx and widy defines a unitarian vector perpendicular to the line
+	float x = xbeg - widx*width/2;
+	float y = ybeg - widy*width/2;
+	float area = 0; 		//Gets the value of the width actually checked
+	while (area < width) {
+		add_line_of(map, (int) x, (int) y, (int) round(x+dx), (int) round(y+dy), type);
+		x += widx*2.5;
+		y += widy*2.5;
+		area += 2.5;
+	}
+}
+/*
+Old version
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
 	int xrel;
 	int yrel;
@@ -269,8 +237,6 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 	for(xrel = 0; xrel < x_dimension; xrel ++) {
 		for (yrel = 0; yrel < y_dimension; yrel ++) {
 			if (floor(x_offset/5) + xrel < XMAX && floor(y_offset/5) + yrel < YMAX) {
-				uint8_t mapValue=getFromMap(map, x_offset + 5*xrel, y_offset + 5*yrel);
-				printf("object in map = %d\n",mapValue);
 				if (getFromMap(map, x_offset + 5*xrel, y_offset + 5*yrel) == obstacle_type) {
 					is_there = true;
 					return(is_there);
@@ -281,7 +247,38 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 	return(is_there);
 }
 
+*/
 
+bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, int width, uint8_t type) {
+	float dlx = cos(relative_angle);
+	float dly = sin(relative_angle);
+	printf("dl: %f, %f\n", dlx, dly);
+	float l = 0;		//length checked
+	float w = 0;		//Width checked on current l
+	float x;
+	float y;
+	int i = - (int) floor(width/2);
+	int j = 0;
+
+	bool is_there = false;
+	while(i <= width/2) {
+		while(j <= length) {
+			x = x_offset - i*dly + j*dlx;
+			y = y_offset + i*dlx + j*dly;
+			if (floor(x/5) < XMAX && floor(y/5) < YMAX) {
+				if(getFromMap(map,(int) round(x), (int) round(y)) == type) {
+					is_there = true;
+					return(is_there);
+				}
+				//setOnMap(map, (int) round(x), (int) round(y), 5);		//Uncomment to get checked area as 5s on the map
+			}
+			j += 2.5;
+		}
+		j = 0;
+		i += 2.5;
+	}
+	return(is_there);
+}
 
 
 boundary_t * get_issuing_obstacles(uint8_t * map) {
@@ -305,6 +302,10 @@ boundary_t * get_issuing_obstacles(uint8_t * map) {
 	}
 	return(issuing_obstacles);
 }
+
+
+
+
 uint8_t * small_stadium_map(int x_dimension, int y_dimension){
 	boundary_t * boundariesList = NULL;
 	add_bound_line(&boundariesList, 0, 0, x_dimension, 0);
@@ -336,7 +337,9 @@ void main() {
 
 	uint8_t * map = initializeMap(boundariesList);
 	print_map(map);
-	add_line_of(map, 30, 50, 70, 50, 1);
+	add_big_line_of(map, 30, 50, 70, 50, 10, 1);
 	print_map(map);
-	printf("%d\n", check_area_obstacle(map, 74, 74, 6, 6, 4));
+	relative_angle = 0.78;
+	printf("Result of checking: %d\n", check_area_obstacle(map, 65, 70, 45, 10, 4));
+	print_map(map);
 }*/
