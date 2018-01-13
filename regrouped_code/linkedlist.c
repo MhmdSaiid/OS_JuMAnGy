@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <unistd.h>
 
 float THRESHROTATION = 8;		//mapcoordinates
 float XROBOT;		//cms
@@ -229,7 +230,7 @@ void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int 
 	}
 }
 /*
-Old version
+Old version	
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
 	int xrel;
 	int yrel;
