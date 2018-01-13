@@ -169,6 +169,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 {
 	/*written by Gautier Dervaux*/
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
+	set_sensor_mode( sn_compass, "GYRO-ANG" );
 	struct timeval startDate;
 	int elapsedTime;
 	struct timeval stopDate;
