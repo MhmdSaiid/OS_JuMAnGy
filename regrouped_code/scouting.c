@@ -103,10 +103,10 @@ but after the obstacle in the same scouting line drawn
 	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 0; //going left
 	bool besideObstacle = true;
 	int angleTracker = relative_angle;
+	move(SPEED_LINEAR,timeToStop,0,'B');
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 	int obstacleWhileMoving;
 	uint8_t side=1;
-	move(SPEED_LINEAR,timeToStop,0,'B');
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
 		move(SPEED_LINEAR,timeToStop,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
