@@ -24,7 +24,8 @@ int XMAX;		//mapcoordinates
 int YMAX;		//mapcoordinates
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
-float relative_angle;
+extern float relative_angle;
+extern float val;
 
 typedef struct position {
 	int x;
@@ -264,8 +265,8 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 */
 
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, int width, uint8_t type) {
-	float dlx = cos(relative_angle);
-	float dly = sin(relative_angle);
+	float dlx = cos(relative_angle*val);
+	float dly = sin(relative_angle*val);
 	printf("dl: %f, %f\n", dlx, dly);
 	float l = 0;		//length checked
 	float w = 0;		//Width checked on current l
