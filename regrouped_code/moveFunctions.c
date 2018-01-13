@@ -170,7 +170,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	/*written by Gautier Dervaux*/
 	calibrate_gyro(); // Set currant angle to 0 --> better rotate
 	uint8_t sn_compass;
-	ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0)
+	ev3_search_sensor(LEGO_EV3_GYRO, &sn_compass,0);
 	set_sensor_mode( sn_compass, "GYRO-ANG" );
 	struct timeval startDate;
 	int elapsedTime;
@@ -199,7 +199,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	//rotate_car(angle,D,speed_circular);
 	bool turning=true;
 	float small_angle_to_turn = 10.0;
-	float thresh_angle = angle*(20/90);
+	float thresh_angle = angle*(30/90);
 	printf("Rotation started thresh_angle = %f\n");
 	while(1)
 	{
