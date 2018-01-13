@@ -179,6 +179,7 @@ void scouting(){
 		move(SPEED_LINEAR, 0, 1, 'F');
 		new_x=x_position;
 		new_y=y_position;
+		printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
 		add_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)), EMPTY);
 		//stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
