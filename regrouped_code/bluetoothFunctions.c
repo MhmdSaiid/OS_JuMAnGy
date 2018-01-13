@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <time.h>
@@ -9,14 +8,6 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
 #include "bluetoothFunctions.h"
-#include "ev3.h"
-#include "ev3_port.h"
-#include "ev3_sensor.h"
-#include "ev3_tacho.h"
-#ifndef INITIALIZE
-#define INITIALIZE
-#include "defines.h"
-#endif
 //#define SERV_ADDR   "5C:51:4F:A9:25:76"     /* Whatever the address of the server is */
 //#define SERV_ADDR   "dc:53:60:ad:61:90"     /* Whatever the address of the server is */
 //#define SERV_ADDR   "54:27:1E:35:B8:D6"     /* Whatever the address of the server is */
@@ -70,57 +61,52 @@ void send_position(int s, float x,float y) {
 	write(s, string, 9);
 }
 
-void send_map(int socket, uint8_t * map){
+void send_map(int s, uint8_t * map){
   uint8_t mapPixel;
   char string[58];
   *((uint16_t *) string) = msgId++;
   int x;
   int y;
   for (x=0; x<XMAX; x++){
-	for (y=0; y<YMAX; y++) {
-		mapPixel = getFromMap(map,x,y);
-		if(mapPixel!=EMPTY){
-     			string[2] = TEAM_ID;
-      			string[3] = 0xFF;
-      			string[4] = MSG_MAPDATA;
-      			string[5] = x;          /* x */
-      			string[6] = 0x00;
-      			string[7] = y;             /* y */
-      			string[8]= 0x00;
-      			string[9] = 255 - mapPixel*20;
-      			string[10]= 255 - mapPixel*20;
-      			string[11]= 255 - mapPixel*20;
-      			write(socket, string, 12);
+		for (y=0; y<YMAX; y++) {
+			mapPixel = getFromMap(map,x,y);
+      string[2] = TEAM_ID;
+      string[3] = 0xFF;
+      string[4] = MSG_MAPDATA;
+      string[5] = x;          /* x */
+      string[6] = 0x00;
+      string[7] = y;             /* y */
+      string[8]= 0x00;
+      string[9] = 255 - mapPixel*20;
+      string[10]= 255 - mapPixel*20;
+      string[11]= 255 - mapPixel*20;
+      write(s, string, 12);
 		}
 	}
-  }
 
 string[4] = MSG_MAPDONE;
-write(socket, string, 5);
+write(s, string, 5);
 }
 
 
-void send_obstacle(int socket, uint8_t * map,bool act){
+void send_obstacle(int s, uint8_t * map,float x,float y,bool act){
 
-uint8_t mapPixel;
 char string[58];
 *((uint16_t *) string) = msgId++;
-for (int x=0; x<XMAX; x++){
-		for (int y=0; y<YMAX; y++) {
-			mapPixel = getFromMap(map,x,y);
-			if(mapPixel==UNMOVABLE){
-						string[2] = TEAM_ID;
-						string[3] = 0xFF;
-						string[4] = OBSTACLE;
-						string[5] = (char) act;          /* x */
-						string[6] = 0x00;
-						string[7] = x;             /* y */
-						string[8]= 0x00;
-						string[9] = y;
 
-						write(socket, string, 10);
-							}
-						}
+string[2] = TEAM_ID;
+string[3] = 0xFF;
+string[4] = OBSTACLE;
+string[5] = (char) act;          /* x */
+string[6] = 0x00;
+string[7] = x;             /* y */
+string[8]= 0x00;
+string[9] = y;
+
+write(s, string, 10);
+						
+
+
 }
 
 
