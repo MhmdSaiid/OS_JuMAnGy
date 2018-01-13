@@ -74,6 +74,7 @@ extern float y_position;
 extern float relative_angle;
 extern float velocity;
 extern int COLOR_VAL;
+extern float val;
 extern float INTENSITY_VAL;
 extern bool TOUCHING;
 extern float US_VAL;
@@ -182,7 +183,7 @@ void scouting(){
 		//stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
 		print_map(map);
-		if(checkBoundary( (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*var)) )) ){
+		if(checkBoundary( (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) )) ){
 			//if it is a boundary according to our array do a 180 to scout another line
 			printf("Bounary met\n");
 			move(SPEED_LINEAR, timeToStop*2, 0, 'B'); //goes back a little in order to have enough place to rotate
