@@ -6,8 +6,8 @@
 DEPENDENCIES = readFunctions.o moveFunctions.o detect_disting_functions.o positionFunctions.o bluetoothFunctions.o sendPositionThread.o scouting.o linkedlist.o Boundaries.o
 LIBRAIRIES = -lm  -lev3dev-c -lbluetooth -lpthread
 
-mainBoundaries : mainBoundaries.c $(DEPENDENCIES) linkedlist.o Boundaries.o defines.h
-		gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) linkedlist.o Boundaries.o -o $@
+mainBoundaries : mainBoundaries.c $(DEPENDENCIES) defines.h
+		gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
 
 Boundaries.o:  Boundaries.c
 	gcc -lev3dev-c -lpthread -c $< -o $@
