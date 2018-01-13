@@ -87,6 +87,7 @@ this function is supposed to be used after detecting an obstacle during scouting
 it will turn around the obstacle then avoid it and put the robot towards the initial direction
 but after the obstacle in the same scouting line drawn
 */
+	calibrate_gyro();
 	int end=0;
 	int distance = 5; //in cm
 	float x_init = x_position;
@@ -107,6 +108,7 @@ but after the obstacle in the same scouting line drawn
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 	int obstacleWhileMoving;
 	uint8_t side=1;
+	float drift;
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
 		move(SPEED_LINEAR,timeToStop,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
@@ -121,6 +123,10 @@ but after the obstacle in the same scouting line drawn
 				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop),0,'F');
 				rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR); //get some distance from the obstacle
+				drift = (read_ang() - relative_angle);//negative means drift to the right
+				printf("drift = %f\n",drift);
+				if(drift<0) rotate(drift,'L',SPEED_CIRCULAR);
+				else rotate(drift,'R',SPEED_CIRCULAR);
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop*1.5),0,'F');
 				if(obstacleWhileMoving){
 					//find_right_angle_obst();
