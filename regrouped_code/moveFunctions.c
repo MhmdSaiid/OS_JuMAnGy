@@ -187,7 +187,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 		}
 	}
 	elapsedTime =(stopDate.tv_sec*1000 + stopDate.tv_usec/1000) - (startDate.tv_sec*1000 + startDate.tv_usec/1000);
-	printf("elpased time =%d\n");
+	printf("elpased time =%d\n",elapsedTime);
 	Sleep(500);
 }
 
