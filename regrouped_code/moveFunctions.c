@@ -310,7 +310,7 @@ int move(int speed, int timeInMs,int inf/*If we want to go until an obstacle is 
 	else return 0; //TIMEDOUT
 }
 
-//test
+
 /*
 void moveinf(int speed,char D){
 	//written by Justine Deloménie

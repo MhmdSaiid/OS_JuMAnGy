@@ -27,8 +27,16 @@ float start_boundary_x = x_position;
 float start_boundary_y = y_position;
 float end_boundary_x;
 float end_boundary_y;
-//int compt=0;
 float angle = 90.0;
+
+//the first boundary may not be physical
+move(SPEED_LINEAR,0,1,'F');
+end_boundary_x=x_position;
+end_boundary_y=y_position;
+add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
+rotate_car(angle,'L',SPEED_CIRCULAR);
+start_boundary_x = x_position;
+start_boundary_y = y_position;
  	while(1){
 		while(read_US()>100){ //while we don't meet an obstacle that is to say when we dont reach the next boundary
 			move(SPEED_LINEAR,1000,0,'F');
