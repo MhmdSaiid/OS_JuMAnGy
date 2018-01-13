@@ -103,7 +103,7 @@ void find_right_angle_obst(){
 	while (previous_dist >= current_dist && current_dist > 35) {
 		if(previous_dist==current_dist) sameDist++;
 		else sameDist=0;
-		if(sameDist==3){
+		if(sameDist==8){
 			break;
 		}
 		previous_dist = current_dist;
