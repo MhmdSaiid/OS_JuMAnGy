@@ -106,15 +106,8 @@ void find_right_angle_obst(){
 		if(sameDist==3){
 			break;
 		}
-		US_VAL = 0;
-		uint8_t nb_avg = 4;
-		uint8_t i = 0;
-		for(;i<nb_avg;i++)
-		{
-			US_VAL +=read_US();
-		}
 		previous_dist = current_dist;
-		current_dist = US_VAL/nb_avg;
+		current_dist = US_VAL;
 		printf("previous_dist = %f,current_dist =%f\n",previous_dist,current_dist);
 
 		//printf("previous %f, new %f \n", previous_dist, current_dist);
