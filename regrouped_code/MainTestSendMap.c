@@ -88,7 +88,6 @@ pthread_cond_t obstacleDetected;
 bool timeout = false;
 uint8_t * map;
 boundary_t * boundaries=NULL;
-int *socket_number;
 //something
 int main (void )
 {
@@ -109,14 +108,13 @@ int main (void )
 	//move(SPEED_LINEAR,0,1,'F');
 	//scouting();
 
-	int s = init_bluetooth_game();
-    	socket_number = &s;
+	socket_number = init_bluetooth_game();
     	int x = 0;
     	int y = 0;
-    	//send_position(*socket_number,x,y);
+    	//send_position(socket_number,x,y);
     	//close_comm(socket_number);
 
-	sendMap(socket, map);
+	sendMap(socket_number, map);
 	close_comm(socket_number);
 
 	TOUCHED = _check_pressed( sn_touch);
