@@ -129,7 +129,7 @@ but after the obstacle in the same scouting line drawn
 				else rotate_car(drift,'R',SPEED_CIRCULAR);
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop*1.5),0,'F');
 				if(obstacleWhileMoving){
-					//find_right_angle_obst();
+					////find_right_angle_obst();
 					setOnMap(map, x_position, y_position, obstacleType);
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				}
