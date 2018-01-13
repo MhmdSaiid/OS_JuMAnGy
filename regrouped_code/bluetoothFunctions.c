@@ -76,9 +76,9 @@ void send_map(int socket, uint8_t * map){
       string[6] = 0x00;
       string[7] = y;             /* y */
       string[8]= 0x00;
-      string[9]= mapPixel*20;
-      string[10]=mapPixel*20;
-      string[11]= mapPixel*20;
+      string[9] = 255 - mapPixel*20;
+      string[10]= 255 - mapPixel*20;
+      string[11]= 255 - mapPixel*20;
       write(socket, string, 12);
 		}
 	}
