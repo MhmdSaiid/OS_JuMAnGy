@@ -284,7 +284,7 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, 
 					is_there = true;
 					return(is_there);
 				}
-				//setOnMap(map, (int) round(x), (int) round(y), 5);		//Uncomment to get checked area as 5s on the map
+				setOnMap(map, (int) round(x), (int) round(y), 5);		//Uncomment to get checked area as 5s on the map
 			}
 			j += 2.5;
 		}
