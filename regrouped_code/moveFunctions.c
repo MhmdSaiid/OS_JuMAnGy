@@ -161,7 +161,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 		final_angle = init_angle + angle;
 	}
 	relative_angle -= angle; //Gyro opposite direction as gyro
-	printf("In rotate relative_angle = %f\n",relative_angle);
+	//printf("In rotate relative_angle = %f\n",relative_angle);
 
 	if(D=='R') run_forever(speed_circular,-speed_circular);
 	if(D=='L') run_forever(-speed_circular, speed_circular);
@@ -172,7 +172,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	while(1)
 	{
 		ANG_VAL = read_ang();
-		if(D=='R' && ANG_VAL>final_angle-5) {
+		if(D=='R' && ANG_VAL>final_angle-13) {
 			stop_car();
 			break;
 		}
