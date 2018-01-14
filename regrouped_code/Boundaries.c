@@ -77,7 +77,7 @@ start_boundary_y = y_position;
 		}
 		rotate_car(angle,'R',SPEED_CIRCULAR);//get awaay from the corner
 		move(SPEED_LINEAR,timeToStop*2,0,'B');
-		rotate_car(180.0,'R',SPEED_CIRCULAR);
+		rotate_car(180.0,'L',SPEED_CIRCULAR);
 		start_boundary_x = x_position;
 		start_boundary_y = y_position;
 		if( (abs(x_position-initial_position_x)<20) && (abs(y_position-initial_position_y)<20) ) { //returned to initial position 
