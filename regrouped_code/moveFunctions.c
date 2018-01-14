@@ -207,7 +207,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	while(1)
 	{
 		ANG_VAL = read_ang();
-		printf("ANG_VAL=%f\n",ANG_VAL);
+		//printf("ANG_VAL=%f\n",ANG_VAL);
 		if(D=='R' && ANG_VAL>(final_angle-left_thresh_angle)) {
 			stop_car();
 			gettimeofday(&stopDate,NULL);

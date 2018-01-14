@@ -119,7 +119,7 @@ int main (void )
 
 
 	bound();
-	map  = small_stadium_map(,);
+	map  = small_stadium_map(120,100);
 	getSize(boundaries);
 	map=initializeMap(boundaries);
 	print_map(map);

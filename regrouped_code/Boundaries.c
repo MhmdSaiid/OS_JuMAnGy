@@ -76,28 +76,28 @@ start_boundary_y = y_position;
 			else {
 
 				//rotate_car(10.0, 'R',SPEED_CIRCULAR);
-        former_x=x_position;
-        former_y=y_position;
+			        former_x=x_position;
+			        former_y=y_position;
 
 				int smtg = move(SPEED_LINEAR,1700,0,'F');
 
-        new_x=x_position;
-        new_y=y_position;
-        printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-        add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+			        new_x=x_position;
+			        new_y=y_position;
+			        printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
+			        add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 
-        end_boundary_x=x_position;
-        end_boundary_y=y_position;
+			        end_boundary_x=x_position;
+			        end_boundary_y=y_position;
 				if(smtg==0){ // if boundary not found
 					rotate_car(60, 'R', SPEED_CIRCULAR);
 
-          former_x=x_position;
-          former_y=y_position;
+			        	former_x=x_position;
+			        	former_y=y_position;
 					move(SPEED_LINEAR, 0, 1,'F');
-          new_x=x_position;
-          new_y=y_position;
-          printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-          add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),10, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+				        new_x=x_position;
+				        new_y=y_position;
+	        			printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
+				        add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),10, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 				}
 				printf("smtg : %d\n", smtg);
 				find_right_angle_obst();
