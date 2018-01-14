@@ -14,8 +14,10 @@
 #include "scouting.h"
 extern float x_position;
 extern float y_position;
+extern float relative_angle;
+extern float velocity;
 extern boundary_t ** boundaries;
-
+extern float US_VAL;
 
 void bound(void )
 {
@@ -28,7 +30,8 @@ float start_boundary_y = y_position;
 float end_boundary_x;
 float end_boundary_y;
 float angle = 90.0;
-
+int distance = 10;
+int timeToStop = (int)(distance/velocity*1000);
 //the first boundary may not be physical
 move(SPEED_LINEAR,0,1,'F');
 end_boundary_x=x_position;
@@ -37,6 +40,7 @@ add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_
 rotate_car(angle,'L',SPEED_CIRCULAR);
 start_boundary_x = x_position;
 start_boundary_y = y_position;
+
  	while(1){
 		while(read_US()>100){ //while we don't meet an obstacle that is to say when we dont reach the next boundary
 			move(SPEED_LINEAR,1000,0,'F');
@@ -56,20 +60,24 @@ start_boundary_y = y_position;
 				int smtg = move(SPEED_LINEAR,1700,0,'F');
 				if(smtg==0){ // if boundary not found
 					rotate_car(60, 'R', SPEED_CIRCULAR);
-					move(SPEED_LINEAR, 0,1,'F');
+					move(SPEED_LINEAR, 0, 1,'F');
 				}
-				printf("smtg : %d", smtg);
+				printf("smtg : %d\n", smtg);
 				find_right_angle_obst();
+				printf("end right angle\n");
 				rotate_car(angle, 'L', SPEED_CIRCULAR);
+				printf("end rotateCar\n");
 				start_boundary_x=x_position;
 				start_boundary_y=y_position;
 
-				break; 
 			}
-			Sleep(150);
-		
+		Sleep(150);
+		US_VAL = read_US();
+		printf("US_VAL = %f\n",US_VAL);
 		}
-		rotate_car(angle,'L',SPEED_CIRCULAR);
+		rotate_car(angle,'R',SPEED_CIRCULAR);//get awaay from the corner
+		move(SPEED_LINEAR,timeToStop*2,0,'B');
+		rotate_car(180.0,'R',SPEED_CIRCULAR);
 		start_boundary_x = x_position;
 		start_boundary_y = y_position;
 		if( (abs(x_position-initial_position_x)<20) && (abs(y_position-initial_position_y)<20) ) { //returned to initial position 
