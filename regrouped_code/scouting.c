@@ -93,11 +93,6 @@ but after the obstacle in the same scouting line drawn
 	int distance = 5; //in cm
 	float x_init = x_position;
 	float y_init = y_position;
-	float xDecal;
-	float yDecal;
-	float xDecal2;
-	float yDecal2;
-	//int side=1;
 	int timeToStop = (int)(distance/velocity*1000);
 	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
