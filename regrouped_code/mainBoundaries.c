@@ -119,9 +119,9 @@ int main (void )
 
 
 	bound();
-
+	map  = small_stadium_map(,);
 	getSize(boundaries);
-	uint8_t * map=initializeMap(boundaries);
+	map=initializeMap(boundaries);
 	print_map(map);
 
 	//scouting();
