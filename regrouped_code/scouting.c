@@ -216,6 +216,10 @@ void scouting(){
 		}
 		else {
 			obst=distinguish_obstacle(); // observe the type of obstacle it is
+			if(obst=ROBOT){
+				Sleep(1000);//Wait for 1 second for the robot to stop
+				continue;
+			}
 			setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obst);//add it on the map
 			printf("obstacle of type : %d", obst);
 			limitObst(obst);//draw the shape of the obstacle and add it on the map
