@@ -108,7 +108,7 @@ but after the obstacle in the same scouting line drawn
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
 		float x_first_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
 		float y_first_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
-		float x_second_obsatcle = x_first_obstacle;
+		float x_second_obstacle = x_first_obstacle;
 		float y_second_obstacle = y_first_obstacle;
 		move(SPEED_LINEAR,timeToStop,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
@@ -153,7 +153,7 @@ but after the obstacle in the same scouting line drawn
 			add_line_of(map,x_first_obstacle,y_first_obstacle,x_second_obsatcle,y_second_obstacle,obstacleType);
 			//setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obstacleType);//add it on the map
 			printf("Obstacle is still here \n");
-			x_first_obstacle=x_second_obsatcle; //reset the coordinates of the obstacle
+			x_first_obstacle=x_second_obstacle; //reset the coordinates of the obstacle
 			y_first_obstacle=y_second_obstacle;
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
