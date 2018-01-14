@@ -54,16 +54,16 @@ rotate_car(angle,'L',SPEED_CIRCULAR);
 start_boundary_x = x_position;
 start_boundary_y = y_position;
 
- 	while(1){
+	while(1){
 		while(read_US()>100){ //while we don't meet an obstacle that is to say when we dont reach the next boundary
-      former_x=x_position;
-      former_y=y_position;
-      move(SPEED_LINEAR,1000,0,'F');
-      new_x=x_position;
-      new_y=y_position;
-      printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-      add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
-      end_boundary_x=x_position;
+			former_x=x_position;
+			former_y=y_position;
+			move(SPEED_LINEAR,1000,0,'F');
+			new_x=x_position;
+			new_y=y_position;
+			printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
+			add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+			end_boundary_x=x_position;
 			end_boundary_y=y_position;
 			add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
 			rotate_car(90.0,'R',SPEED_CIRCULAR);

@@ -89,11 +89,8 @@ bool timeout = false;
 uint8_t * map;
 boundary_t * boundaries=NULL;
 int finished=0;
-int XMAX = 24;
-int YMAX = 20;
-int
 
-int main (void )
+int main(void)
 {
 	uint8_t sn_touch;
 	int detected_obstacle;
@@ -121,9 +118,8 @@ int main (void )
 //	move(SPEED_LINEAR,0,1,'F');
 //	find_right_angle_obst();
 
-
-	bound();
 	map  = small_stadium_map(120,100);
+	bound();
 	getSize(boundaries);
 	map=initializeMap(boundaries);
 	print_map(map);

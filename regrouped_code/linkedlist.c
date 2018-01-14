@@ -20,8 +20,8 @@
 float THRESHROTATION = 8;		//mapcoordinates
 float XROBOT;		//cms
 float YROBOT;		//cms
-extern int XMAX;		//mapcoordinates
-extern int YMAX;		//mapcoordinates
+int XMAX;		//mapcoordinates
+int YMAX;		//mapcoordinates
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 extern float relative_angle;
