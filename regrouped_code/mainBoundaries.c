@@ -89,6 +89,10 @@ bool timeout = false;
 uint8_t * map;
 boundary_t * boundaries=NULL;
 int finished=0;
+int XMAX = 24;
+int YMAX = 20;
+int
+
 int main (void )
 {
 	uint8_t sn_touch;
