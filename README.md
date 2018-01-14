@@ -5,7 +5,7 @@ The Team
 Justine DELOMENIE Gautier DERVAUX Armand PERON Mohammed SAEED
 
 Below are instructions on how to use the code :
-/*parts between ** ** are command lines you have to write on the robot.
+bold parts are command lines you have to write on the robot.
 
 Step 1 : Download the code 
 	Just click on the button clone or download (at the top of this page) and copy the link given.
