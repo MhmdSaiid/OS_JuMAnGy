@@ -164,6 +164,7 @@ void add_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, uint8_t 
 	//Gets positions in cms
 	float dx = (xend - xbeg);
 	float dy = (yend - ybeg);
+	printf("dx = %f, dy = %f",dx,dy);
 	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
 	float x = xbeg;
 	float y = ybeg;

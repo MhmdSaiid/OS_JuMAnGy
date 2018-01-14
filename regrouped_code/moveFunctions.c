@@ -196,16 +196,16 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	//rotate_car(angle,D,speed_circular);
 	bool turning=true;
 	float small_angle_to_turn = 10.0;
-	float threash_angle = angle*(15/90)
+	float thresh_angle = angle*(15/90)
 	while(1)
 	{
 		ANG_VAL = read_ang();
-		if(D=='R' && ANG_VAL>final_angle-15) {
+		if(D=='R' && ANG_VAL>final_angle-thresh_angle) {
 			stop_car();
 			gettimeofday(&stopDate,NULL);
 			break;
 		}
-		if(D=='L' && ANG_VAL<(final_angle+15)) {
+		if(D=='L' && ANG_VAL<(final_angle+thresh_angle)) {
 			stop_car();
 			gettimeofday(&stopDate,NULL);
 			break;
