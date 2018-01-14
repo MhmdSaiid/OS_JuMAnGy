@@ -89,7 +89,7 @@ bool timeout = false;
 uint8_t * map;
 boundary_t * boundaries=NULL;
 int finished = 0;
-//something
+//
 int main (void )
 {
 	uint8_t sn_touch;
