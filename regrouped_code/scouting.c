@@ -79,6 +79,7 @@ extern float INTENSITY_VAL;
 extern bool TOUCHING;
 extern float US_VAL;
 extern float ANG_VAL;
+extern int finished;
 
 extern uint8_t * map;
 void limitObst(int obstacleType){
