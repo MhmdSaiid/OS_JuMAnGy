@@ -19,6 +19,7 @@ extern boundary_t ** boundaries;
 
 void bound(void )
 {
+/* written by Justine Deloménie(the else,update map, comments), Gautier Dervaux(stopping criterion and review) and Mohammed Saeed(squeleton of the code)*/
 float initial_position_x = x_position;
 float initial_position_y = y_position;
 
@@ -31,11 +32,10 @@ float angle = 90.0;
  	while(1){
 		while(read_US()>100){ //while we don't meet an obstacle that is to say when we dont reach the next boundary
 			move(SPEED_LINEAR,1000,0,'F');
-      end_boundary_x=x_position;
+      			end_boundary_x=x_position;
 			end_boundary_y=y_position;
-			add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y);
+			add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
 			rotate_car(90.0,'R',SPEED_CIRCULAR);
-			//Sleep(500);
 			if(read_US()<200){ //if the boundary is still there
 				rotate_car(angle,'L',SPEED_CIRCULAR);
 				start_boundary_x=x_position;
@@ -56,16 +56,15 @@ float angle = 90.0;
 				start_boundary_x=x_position;
 				start_boundary_y=y_position;
 
-				break; //maybe turn right ?
+				break; 
 			}
 			Sleep(150);
-			//compt+=1;
+		
 		}
 		rotate_car(angle,'L',SPEED_CIRCULAR);
 		start_boundary_x = x_position;
 		start_boundary_y = y_position;
-		if( (abs(x_position-initial_position_x)<20) && (abs(y_position-initial_position_y)<20) ) { //returned to initial position ?
-		//if(compt==3){
+		if( (abs(x_position-initial_position_x)<20) && (abs(y_position-initial_position_y)<20) ) { //returned to initial position 
 			break;
 		}
 	}
