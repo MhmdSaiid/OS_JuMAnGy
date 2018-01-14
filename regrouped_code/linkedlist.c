@@ -140,10 +140,6 @@ void print_map(uint8_t * map) {
 		printf("\n");
 	}
 	printf("\n\n");
-	int i;
-	for(i = 0; i < xmax*ymax + 3; i++) {
-		printf("%u", map[i]);
-	}
 }
 
 uint8_t getFromMap(uint8_t * map, int x, int y) {
