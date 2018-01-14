@@ -200,8 +200,8 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	//rotate_car(angle,D,speed_circular);
 	bool turning=true;
 	float small_angle_to_turn = 10.0;
-	float thresh_angle = angle*(30/90);
-	printf("Rotation started thresh_angle = %f\n");
+	float thresh_angle = angle*(15/90);
+	printf("Rotation started thresh_angle = %f\n",thresh_angle);
 	while(1)
 	{
 		ANG_VAL = read_ang();
