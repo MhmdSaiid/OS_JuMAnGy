@@ -182,9 +182,10 @@ void print_map(uint8_t * map) {
 		printf("\n");
 	}
 	printf("\n\n");
-	for(int i = 0; i < xmax*ymax + 3; i++) {
+	int i;
+	for(i = 0; i < xmax*ymax + 3; i++) {
 		printf("%u", map[i]);
-	} 
+	}
 }
 
 uint8_t getFromMap(uint8_t * map, int x, int y) {
@@ -234,7 +235,7 @@ void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int 
 	}
 }
 /*
-Old version	
+Old version
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
 	int xrel;
 	int yrel;
@@ -248,7 +249,7 @@ bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimensi
 				}
 			}
 		}
-	} 
+	}
 	return(is_there);
 }
 
