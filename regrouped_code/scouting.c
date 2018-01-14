@@ -101,16 +101,16 @@ but after the obstacle in the same scouting line drawn
 	if ((relative_angle>170) && (relative_angle<190)) directionIndex = 0; //going left
 	bool besideObstacle = true;
 	int angleTracker = relative_angle;
+	float x_first_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
+	float y_first_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
 	move(SPEED_LINEAR,timeToStop/2,0,'B');
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 	int obstacleWhileMoving;
 	uint8_t side=1;
 	float drift;
+	float x_second_obstacle = x_first_obstacle;
+	float y_second_obstacle = y_first_obstacle;
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
-		float x_first_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
-		float y_first_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
-		float x_second_obstacle = x_first_obstacle;
-		float y_second_obstacle = y_first_obstacle;
 		move(SPEED_LINEAR,timeToStop,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 		US_VAL = read_US();
@@ -131,6 +131,8 @@ but after the obstacle in the same scouting line drawn
 					x_second_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
 					y_second_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
 					add_line_of(map,x_first_obstacle,y_first_obstacle,x_second_obstacle,y_second_obstacle,obstacleType);
+					x_first_obstacle = x_second_obstacle;
+					y_first_obstacle = y_second_obstacle;
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				}
 				else{
