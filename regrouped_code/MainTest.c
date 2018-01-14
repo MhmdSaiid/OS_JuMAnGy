@@ -106,19 +106,6 @@ int main (void )
 	if( init_motors() > 0) return ( 1 );
 
 	map = small_stadium_map(120,100);
-	rotate_car(90,'R',SPEED_CIRCULAR);
-	Sleep(1000);
-	rotate_car(90,'L',SPEED_CIRCULAR);
-	Sleep(1000);
-	/*
-	rotate_car(45,'R',SPEED_CIRCULAR);
-	Sleep(500);
-	rotate_car(45,'R',SPEED_CIRCULAR);
-	Sleep(1000);
-	rotate_car(45,'L',SPEED_CIRCULAR);
-	Sleep(500);
-	rotate_car(45,'L',SPEED_CIRCULAR);
-	*/
-	//scouting();
+	scouting();
 	return 0;
 }
