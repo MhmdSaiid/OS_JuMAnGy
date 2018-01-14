@@ -106,6 +106,10 @@ but after the obstacle in the same scouting line drawn
 	uint8_t side=1;
 	float drift;
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
+		float x_first_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
+		float y_first_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
+		float x_second_obsatcle = x_first_obstacle;
+		float y_second_obstacle = y_first_obstacle;
 		move(SPEED_LINEAR,timeToStop,0,'F');
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 		US_VAL = read_US();
@@ -119,14 +123,17 @@ but after the obstacle in the same scouting line drawn
 				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop),0,'F');
 				rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR); //get some distance from the obstacle
-				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop*2),0,'F');
+				obstacleWhileMoving = move(SPEED_LINEAR,floor(timeToStop*2),0,'F');//Get closer to the obstacle or change side
 				if(obstacleWhileMoving){
 					////find_right_angle_obst();
-					setOnMap(map, x_position, y_position, obstacleType);
+					//setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obstacleType);//add it on the map
+					x_second_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
+					y_second_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
+					add_line_of(map,x_first_obstacle,y_first_obstacle,x_second_obsatcle,y_second_obstacle,obstacleType);
 					rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				}
 				else{
-					//setOnMap(map, x_position, y_position, obstacleType);
+					//setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obstacleType);//add it on the map
 					if (side==3){
 						printf("DONE\n");
 						//going back to end of obstacle
@@ -141,8 +148,13 @@ but after the obstacle in the same scouting line drawn
 				}
 		}
 		else{
-			setOnMap(map,x_position, y_position, obstacleType);
+			x_second_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
+			y_second_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
+			add_line_of(map,x_first_obstacle,y_first_obstacle,x_second_obsatcle,y_second_obstacle,obstacleType);
+			//setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obstacleType);//add it on the map
 			printf("Obstacle is still here \n");
+			x_first_obstacle=x_second_obsatcle; //reset the coordinates of the obstacle
+			y_first_obstacle=y_second_obstacle;
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 		}
 	}
@@ -180,7 +192,7 @@ void scouting(){
 		new_x=x_position;
 		new_y=y_position;
 		printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-		add_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)), EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+		add__big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),20, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 		////stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
 		print_map(map);
@@ -200,7 +212,7 @@ void scouting(){
 		}
 		else {
 			obst=distinguish_obstacle(); // observe the type of obstacle it is
-			setOnMap(map, x_position, y_position, obst);//add it on the map
+			setOnMap(map, (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) ), obst);//add it on the map
 			printf("obstacle of type : %d", obst);
 			limitObst(obst);//draw the shape of the obstacle and add it on the map
 		}
