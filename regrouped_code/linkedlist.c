@@ -195,8 +195,26 @@ void add_big_line_of(uint8_t * map, int xbeg, int ybeg, int xend, int yend, int 
 		area += 2.5;
 	}
 }
+/*
+Old version
+bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset,int x_dimension ,int y_dimension,uint8_t obstacle_type){
+	int xrel;
+	int yrel;
+	bool is_there = false;
+	for(xrel = 0; xrel < x_dimension; xrel ++) {
+		for (yrel = 0; yrel < y_dimension; yrel ++) {
+			if (floor(x_offset/5) + xrel < XMAX && floor(y_offset/5) + yrel < YMAX) {
+				if (getFromMap(map, x_offset + 5*xrel, y_offset + 5*yrel) == obstacle_type) {
+					is_there = true;
+					return(is_there);
+				}
+			}
+		}
+	}
+	return(is_there);
+}
 
-
+*/
 bool check_area_obstacle(uint8_t * map, int x_offset, int y_offset, int length, int width, uint8_t type) {
 	/*Written by Armand PERON*/
 	//Check the rectangular area set from (x_offset, y_offset) as center of closest side, with parameters length and width
@@ -283,4 +301,5 @@ void main() {
 	relative_angle = 0.78;
 	printf("Result of checking: %d\n", check_area_obstacle(map, 65, 70, 45, 10, 4));
 	print_map(map);
-}*/
+}
+*/

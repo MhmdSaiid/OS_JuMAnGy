@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdint.h>
 #include <time.h>
 #include <sys/socket.h>
 #include <math.h>
@@ -12,7 +13,7 @@
 #include "ev3_port.h"
 #include "ev3_sensor.h"
 #include "ev3_tacho.h"
-
+//
 #ifndef INITIALIZE
 #define INITIALIZE
 #include "defines.h"
@@ -90,7 +91,7 @@ void send_map(int s, uint8_t * map){
         		 string[6] = 0x00;
        			 string[7] = y;             /* y */
        			 string[8]= 0x00;
-       			 
+
 			 string[9] = 255 - mapPixel*20;
        			 string[10]= 255 - mapPixel*20;
        			 string[11]= 255 - mapPixel*20;
