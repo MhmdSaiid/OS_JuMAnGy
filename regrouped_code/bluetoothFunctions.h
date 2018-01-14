@@ -1,4 +1,3 @@
-#include <stdint.h>
 int read_from_server (int sock, char *buffer, size_t maxSize);
 
 void send_position(int s,float x,float y);

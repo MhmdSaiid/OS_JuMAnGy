@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,4 +27,3 @@ void *sending_process(void) {
                 Sleep(1700);
         }
 }
-
