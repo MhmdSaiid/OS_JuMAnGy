@@ -38,6 +38,7 @@
 uint16_t msgId = 0;
 extern int XMAX;
 extern int YMAX;
+extern int finished;
 
 int read_from_server (int sock, char *buffer, size_t maxSize) {
   /*written by Gautier Dervaux*/
@@ -166,7 +167,7 @@ int init_bluetooth_game()
     if(fini!=0)
     {printf("Thread didn't initialise\n");
      exit(EXIT_FAILURE);}
-    
+
    }
    else {
       fprintf (stderr, "Failed to connect to server...\n");

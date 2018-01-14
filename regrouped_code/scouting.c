@@ -179,7 +179,7 @@ void scouting(){
 	int distance = 5; //in cm
 	int timeToStop = (int)(distance/velocity*1000);
 	int obst;
-	int finished=0;
+	//int finished=0;
 	int goingRight=1;
 	float former_x = x_position;
 	float former_y = y_position;
