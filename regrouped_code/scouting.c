@@ -87,7 +87,6 @@ this function is supposed to be used after detecting an obstacle during scouting
 it will turn around the obstacle then avoid it and put the robot towards the initial direction
 but after the obstacle in the same scouting line drawn
 */
-	calibrate_gyro();
 	float fullAngle = 360.0;
 	int end=0;
 	int distance = 5; //in cm
