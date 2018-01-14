@@ -39,6 +39,7 @@ extern int XMAX;
 extern int YMAX;
 
 int read_from_server (int sock, char *buffer, size_t maxSize) {
+  /*written by Gautier Dervaux*/
   int bytes_read = read (sock, buffer, maxSize);
 
   if (bytes_read <= 0) {
