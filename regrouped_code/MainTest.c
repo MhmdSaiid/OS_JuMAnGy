@@ -105,26 +105,20 @@ int main (void )
 	printf("Sensors online\n");
 	if( init_motors() > 0) return ( 1 );
 
-	map = small_stadium_map(120,200);
-	//move(SPEED_LINEAR,0,1,'F');
+	map = small_stadium_map(120,100);
+	rotate_car(90,'R',SPEED_CIRCULAR);
+	Sleep(1000);
+	rotate_car(90,'L',SPEED_CIRCULAR);
+	Sleep(1000);
+	/*
+	rotate_car(45,'R',SPEED_CIRCULAR);
+	Sleep(500);
+	rotate_car(45,'R',SPEED_CIRCULAR);
+	Sleep(1000);
+	rotate_car(45,'L',SPEED_CIRCULAR);
+	Sleep(500);
+	rotate_car(45,'L',SPEED_CIRCULAR);
+	*/
 	//scouting();
-	scouting();
-
-	run_timed(+SPEED_CIRCULAR,-SPEED_CIRCULAR,1100);
-	run_timed(-SPEED_CIRCULAR,+SPEED_CIRCULAR,1100);
-	run_timed(+SPEED_CIRCULAR,-SPEED_CIRCULAR,1100);
-	run_timed(-SPEED_CIRCULAR,+SPEED_CIRCULAR,1100);
-
-	TOUCHED = _check_pressed( sn_touch);
-        if( TOUCHED )
-        {
-                printf("*** ( EV3 ) Bye! ***\n");
-//		break;
-        }
-
-
-
-
-
 	return 0;
 }
