@@ -1,4 +1,4 @@
-bool _check_pressed( uint8_t sn );
+int _check_pressed( uint8_t sn );
 
 int read_light_color();
 
