@@ -52,7 +52,7 @@ detect_disting_functions.o : detect_disting_functions.c
 	gcc -lev3dev-c -c $< -o $@
 
 bluetoothFunctions.o : bluetoothFunctions.c
-	gcc -lm -lev3dev-c -lbluetooth -c $< -o $@
+	gcc -lm -lev3dev-c -lbluetooth -lpthread -c $< -o $@
 
 positionFunctions.o : positionFunctions.c
 	gcc -lev3dev-c -c $< -o $@
