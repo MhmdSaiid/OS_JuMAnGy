@@ -128,7 +128,7 @@ write(s, string, 10);
 
 void* finish(void* arg)
 {/*Written by Mohammed Saeed*/
-Sleep(4*60*1000);
+Sleep(1*60*1000);
 finished=1;
 //printf("FINISHED\n");
 return NULL;
