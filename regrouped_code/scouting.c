@@ -168,7 +168,7 @@ but after the obstacle in the same scouting line drawn
 			x_first_obstacle=x_second_obstacle; //reset the coordinates of the obstacle
 			y_first_obstacle=y_second_obstacle;
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
-			if(lengthSide>100){ //What we detetced is acually a wall so go the other direction and continue scouting
+			if(lengthSide>50){ //What we detetced is acually a wall so go the other direction and continue scouting
 				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 				return;
 			}
