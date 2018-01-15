@@ -83,8 +83,7 @@ start_boundary_y = end_boundary_y;
         US_VAL = read_US();
         end_boundary_x=(US_VAL/10*cos(relative_angle*val)+x_position);//The boundary is definetly still here so we draw it form the start to the end
         end_boundary_y=(y_position +(US_VAL/10*sin(relative_angle*val)));
-        start_boundary_x = end_boundary_x;
-        start_boundary_y = end_boundary_y;
+        add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y);
         rotate_car(angle,'L',SPEED_CIRCULAR);
 			}
 			else {
@@ -115,8 +114,6 @@ start_boundary_y = end_boundary_y;
         end_boundary_x=(US_VAL/10*cos(relative_angle*val)+x_position);
         end_boundary_y=(y_position +(US_VAL/10*sin(relative_angle*val)));
         add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
-        start_boundary_x=end_boundary_x;
-        start_boundary_y=end_boundary_y;
 				rotate_car(angle, 'L', SPEED_CIRCULAR);
 			}
 		Sleep(150);
