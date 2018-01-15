@@ -105,7 +105,7 @@ but after the obstacle in the same scouting line drawn
 	int angleTracker = relative_angle;
 	float x_first_obstacle = (US_VAL/10*cos(relative_angle*val)+x_position);
 	float y_first_obstacle = (y_position +(US_VAL/10*sin(relative_angle*val)));
-	move(SPEED_LINEAR,timeToStop/2,0,'B');
+	move(SPEED_LINEAR,timeToStop/4,0,'B');
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 	int obstacleWhileMoving;
 	int side=1;
