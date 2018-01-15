@@ -120,8 +120,11 @@ int main(void)
 
 	map  = small_stadium_map(120,100);
 	bound();
+	printf("DEBUG bound finished getSize incomming\n");
 	getSize(boundaries);
+	printf("GET SIZE DONE\n");
 	map=initializeMap(boundaries);
+	printf("DEBUG map Initialized\n");
 	print_map(map);
 
 	//scouting();

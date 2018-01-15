@@ -95,6 +95,7 @@ but after the obstacle in the same scouting line drawn
 	float x_init = x_position;
 	float y_init = y_position;
 	int timeToStop = (int)(distance/velocity*1000);
+	int timeToReturn; //To return at the begining of third side of the obstacle
 	char directionsGoingRight[2] = {'R','L'};
 	uint8_t directionIndex;
 	if (relative_angle<10) directionIndex = 1; //going right
@@ -151,11 +152,15 @@ but after the obstacle in the same scouting line drawn
 						rotate_car(180, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 						move(SPEED_LINEAR,floor(timeToStop*3),0,'F');
 						rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
+						timeToReturn = (int)(lengthSide/velocity*1000);
 						move(SPEED_LINEAR,floor(timeToStop*3),0,'F');
 						rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 						return;
 					}
-					else side++;
+					else {
+						lengthSide=0;
+						side++;
+					}
 				}
 		}
 		else{
