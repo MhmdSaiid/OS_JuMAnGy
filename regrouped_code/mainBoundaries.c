@@ -118,7 +118,7 @@ int main(void)
 //	move(SPEED_LINEAR,0,1,'F');
 //	find_right_angle_obst();
 
-	map  = small_stadium_map(120,100);
+	//map  = small_stadium_map(120,100);
 	bound();
 	printf("DEBUG bound finished getSize incomming\n");
 	getSize(boundaries);
