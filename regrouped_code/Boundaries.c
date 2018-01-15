@@ -20,6 +20,7 @@ extern float val;
 extern boundary_t ** boundaries;
 extern float US_VAL;
 extern uint8_t * map;
+int BigStadiumWidth = 120;
 
 void bound(void )
 {
@@ -42,6 +43,11 @@ int timeToStop = (int)(distance/velocity*1000);
 int goingRight=1;
 
 move(SPEED_LINEAR,0,1,'F');
+if(x_position<(BigStadiumWidth-30)){
+	printf("Robot detected\n"); //No obstacle on start up zone
+	Sleep(2000);
+	move(SPEED_LINEAR,0,1,'F');
+}
 end_boundary_x=(US_VAL/10*cos(relative_angle*val)+x_position);
 end_boundary_y=0;
 add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
