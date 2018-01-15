@@ -193,7 +193,7 @@ void rotate_car(float angle,char D, int speed_circular) //Clockwise
 	{
 		final_angle = init_angle + angle;
 	}
-	relative_angle -= angle; //Gyro opposite direction as gyro
+	relative_angle -= angle; //Gyro opposite direction as map
 	gettimeofday(&startDate,NULL);
 	bool turning=true;
 	float left_thresh_angle = abs(angle*20.0/90.0);
