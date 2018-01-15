@@ -16,6 +16,7 @@ extern float x_position;
 extern float y_position;
 extern float relative_angle;
 extern float velocity;
+extern float val;
 extern boundary_t ** boundaries;
 extern float US_VAL;
 extern uint8_t * map;
@@ -31,7 +32,7 @@ float new_y;
 float initial_position_x = x_position;
 float initial_position_y = y_position;
 float start_boundary_x = x_position;
-float start_boundary_y = 0// at the start  of the routine the boundariie is 0 y_position;
+float start_boundary_y = 0;// at the start  of the routine the boundariie is 0 y_position;
 float end_boundary_x;
 float end_boundary_y;
 float angle = 90.0;
@@ -54,7 +55,7 @@ add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor
 rotate_car(angle,'L',SPEED_CIRCULAR);
 start_boundary_x = end_boundary_x;
 start_boundary_y = end_boundary_y;
-move(SPEED_LINEAR,timeToStop*2,0,'F'):
+move(SPEED_LINEAR,timeToStop*2,0,'F');
 end_boundary_y = y_position;
 add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y);
 start_boundary_x = end_boundary_x;
@@ -66,7 +67,7 @@ start_boundary_y = end_boundary_y;
       if( abs(y_position-initial_position_y)<20 ) { //returned to initial position
         if(relative_angle<0) rotate_car(relative_angle,'L',SPEED_CIRCULAR);
         else rotate_car(relative_angle,'R',SPEED_CIRCULAR);
-        return NULL;
+	return;
   		}
 			move(SPEED_LINEAR,1000,0,'F');
       /*
