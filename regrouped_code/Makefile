@@ -11,6 +11,11 @@ mainBoundaries : mainBoundaries.c $(DEPENDENCIES) defines.h
 
 Boundaries.o:  Boundaries.c
 	gcc -lev3dev-c -lpthread -c $< -o $@
+MainCompetitionBigStadium: MainCompetitionBigStadium.c $(DEPENDENCIES) defines.h
+	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
+
+MainCompetitionSmallStadium: MainCompetitionSmallStadium.c $(DEPENDENCIES) defines.h
+	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
 
 MainTest: MainTest.c $(DEPENDENCIES) defines.h
 	gcc $(LIBRAIRIES) $@.c $(DEPENDENCIES) -o $@
