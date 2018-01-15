@@ -65,7 +65,7 @@
 #define LINKED
 #include "linkedlist.h"
 #endif
-#include "Boundaries.c"
+
 
 extern const char const *color[];
 extern uint8_t motor[ 3 ];
@@ -113,6 +113,7 @@ int main (void )
         }
 	printf("thread launched\n");
 	bound();
+	print_map(map);
 	scouting(); //explore and identify obstacles 
 	
 	send_map(socket_number, map); //send the resulting map
