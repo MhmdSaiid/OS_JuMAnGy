@@ -56,7 +56,7 @@ void add_bound_line(boundary_t ** head, float xbeg, float ybeg, float xend, floa
 	//Saves a list of position into the boundary list
 	float dx = (xend - xbeg)/5;
 	float dy = (yend - ybeg)/5;
-	//printf("From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
+	printf("Add Bound line From %f, %f to %f, %f\n", xbeg, ybeg, xend, yend);
 	int nb_blocks = (int) (sqrt(dx*dx + dy*dy));
 	float x = (float) round(xbeg/5);
 	float y = round(ybeg/5);
