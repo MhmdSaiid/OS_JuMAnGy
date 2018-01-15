@@ -213,11 +213,11 @@ void scouting(){
 		new_x=x_position;
 		new_y=y_position;
 		printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-		add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),20, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+		add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),15, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 		////stops when there is an obstacle or a boundary
 		printf("US_VAL = %f\n",US_VAL);
 		print_map(map);
-		if(checkBoundary( (US_VAL/10*cos(relative_angle*val)+x_position), (y_position +(US_VAL/10*sin(relative_angle*val)) )) ){
+		if(checkBoundary(x_position, y_position)){
 			//if it is a boundary according to our array do a 180 to scout another line
 			printf("Boundary met\n");
 			move(SPEED_LINEAR, timeToStop*2, 0, 'B'); //goes back a little in order to have enough place to rotate
