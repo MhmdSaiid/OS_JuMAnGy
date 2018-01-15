@@ -85,6 +85,7 @@ pthread_mutex_t myMutex;
 pthread_cond_t obstacleDetected;
 bool timeout = false;
 uint8_t * map;
+int BigStadiumWidth=120;
 boundary_t * boundaries=NULL;
 int finished = 0;
 
@@ -119,6 +120,7 @@ int main (void )
 	
 	send_map(socket_number, map); //send the resulting map
 	//close thread
+	print_map(map);
         printf("Terminating thread... \n ");
         pthread_cancel(sendingthread);
         printf("thread TERMINATED\n");
