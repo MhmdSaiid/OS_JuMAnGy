@@ -31,7 +31,7 @@ float new_y;
 
 float initial_position_x = x_position;
 float initial_position_y = y_position;
-float start_boundary_x = x_position;
+float start_boundary_x = 0//x_position;
 float start_boundary_y = 0;// at the start  of the routine the boundariie is 0 y_position;
 float end_boundary_x;
 float end_boundary_y;
@@ -73,10 +73,11 @@ start_boundary_y = end_boundary_y;
 
 			new_x=x_position;
 			new_y=y_position;
-			printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
+
 			add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 			end_boundary_x=x_position;
 			end_boundary_y=y_position;
+      printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
 			add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
 
       rotate_car(90.0,'R',SPEED_CIRCULAR);
