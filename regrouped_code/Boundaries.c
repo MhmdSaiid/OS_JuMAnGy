@@ -31,7 +31,7 @@ float new_y;
 
 float initial_position_x = x_position;
 float initial_position_y = y_position;
-float start_boundary_x = 0//x_position;
+float start_boundary_x = 0;//x_position;
 float start_boundary_y = 0;// at the start  of the routine the boundariie is 0 y_position;
 float end_boundary_x;
 float end_boundary_y;
