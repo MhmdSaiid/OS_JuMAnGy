@@ -107,12 +107,19 @@ but after the obstacle in the same scouting line drawn
 	move(SPEED_LINEAR,timeToStop/2,0,'B');
 	rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
 	int obstacleWhileMoving;
-	uint8_t side=1;
+	int side=1;
+	int lengthSide=0;
 	float drift;
 	float x_second_obstacle = x_first_obstacle;
 	float y_second_obstacle = y_first_obstacle;
+	int boolMove;
 	while(1){ //Repeat routine of going alongside the obstacle and checking if still here and
-		move(SPEED_LINEAR,timeToStop,0,'F');
+		boolMove = move(SPEED_LINEAR,timeToStop,0,'F');
+		if(boolMove){
+			rotate_car(90,directionsGoingRight[directionIndex],SPEED_CIRCULAR);
+			side--;
+		}
+		lengthSide+=distance;
 		rotate_car(90, directionsGoingRight[(directionIndex+1)%2], SPEED_CIRCULAR);
 		US_VAL = read_US();
 		printf("y_position= %f\n",y_position);
@@ -161,6 +168,10 @@ but after the obstacle in the same scouting line drawn
 			x_first_obstacle=x_second_obstacle; //reset the coordinates of the obstacle
 			y_first_obstacle=y_second_obstacle;
 			rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
+			if(lengthSide>100){ //What we detetced is acually a wall so go the other direction and continue scouting
+				rotate_car(90, directionsGoingRight[directionIndex], SPEED_CIRCULAR);
+				return;
+			}
 		}
 	}
 }
