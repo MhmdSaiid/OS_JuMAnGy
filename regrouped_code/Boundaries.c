@@ -50,7 +50,7 @@ add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_
 new_x=x_position;
 new_y=y_position;
 printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+//add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 
 rotate_car(angle,'L',SPEED_CIRCULAR);
 start_boundary_x = end_boundary_x;
@@ -76,7 +76,7 @@ start_boundary_y = end_boundary_y;
 			new_x=x_position;
 			new_y=y_position;
       printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-			add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+			//add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 
       rotate_car(90.0,'R',SPEED_CIRCULAR);
 			if(read_US()<200){ //if the boundary is still there
@@ -97,7 +97,7 @@ start_boundary_y = end_boundary_y;
         new_x=x_position;
         new_y=y_position;
         printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-        add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+        //add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 
 
 				if(smtg==0){ // if boundary not found
