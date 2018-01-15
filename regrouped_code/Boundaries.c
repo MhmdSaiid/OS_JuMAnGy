@@ -45,12 +45,12 @@ end_boundary_x=(US_VAL/10*cos(relative_angle*val)+x_position);
 end_boundary_y=0;
 add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
 //keep track robot position
-/*
+
 new_x=x_position;
 new_y=y_position;
 printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle
-*/
+add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+
 rotate_car(angle,'L',SPEED_CIRCULAR);
 start_boundary_x = end_boundary_x;
 start_boundary_y = end_boundary_y;
@@ -69,15 +69,15 @@ start_boundary_y = end_boundary_y;
         return NULL;
   		}
 			move(SPEED_LINEAR,1000,0,'F');
-      /*
+
 			new_x=x_position;
 			new_y=y_position;
 			printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-			add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle
+			add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
 			end_boundary_x=x_position;
 			end_boundary_y=y_position;
 			add_bound_line(&boundaries,start_boundary_x,start_boundary_y,end_boundary_x,end_boundary_y); //update the map with the positions of the boundary
-      */
+
       rotate_car(90.0,'R',SPEED_CIRCULAR);
 			if(read_US()<200){ //if the boundary is still there
         US_VAL = read_US();
@@ -94,12 +94,12 @@ start_boundary_y = end_boundary_y;
 			  former_y=y_position;
 
 				int smtg = move(SPEED_LINEAR,1700,0,'F');
-        /*
+
         new_x=x_position;
         new_y=y_position;
         printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
-        add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle
-        */
+        add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),2, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
+
         end_boundary_x=(US_VAL/10*cos(relative_angle*val)+x_position);
         end_boundary_y=(y_position +(US_VAL/10*sin(relative_angle*val)));
 				if(smtg==0){ // if boundary not found
@@ -108,7 +108,7 @@ start_boundary_y = end_boundary_y;
         	former_x=x_position;
         	former_y=y_position;
 		      move(SPEED_LINEAR, 0, 1,'F');
-	        /*new_x=x_position;
+	        new_x=x_position;
 	        new_y=y_position;
     			printf("add line: %f, %f, into %f, %f", former_x, former_y, new_x, new_y);
 	        add_big_line_of(map, (int)(floor(former_x)), (int)(floor(former_y)), (int)(floor(new_x)), (int)(floor(new_y)),10, EMPTY);/*update the map with the places we explored without meeting an obstacle*/
@@ -132,6 +132,6 @@ start_boundary_y = end_boundary_y;
 		rotate_car(angle,'R',SPEED_CIRCULAR);//get awaay from the corner
 		move(SPEED_LINEAR,timeToStop*2,0,'B');
 		rotate_car(180.0,'L',SPEED_CIRCULAR);
-    //print_map(map);
+    print_map(map);
 	}
 }
