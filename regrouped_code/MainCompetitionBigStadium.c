@@ -113,21 +113,30 @@ int main (void )
         }
 	printf("thread launched\n");
 	bound();
+	getSize(boundaries);
+	if(XMAX==0 || YMAX==0)
+	{
+		x_position = 10.0;
+		map = small_stadium_map(80*5,80*5);
+	}
+	else{
+	map = initializeMap(boundaries);
+	}
 	print_map(map);
 	release();
-	scouting(); //explore and identify obstacles 
-	
+	scouting(); //explore and identify obstacles
+
 	send_map(socket_number, map); //send the resulting map
 	//close thread
         printf("Terminating thread... \n ");
         pthread_cancel(sendingthread);
         printf("thread TERMINATED\n");
-	
+
 	//close connection
 	printf("Close communication \n");
 	close_comm(socket_number);
 
 
-	
+
 	return 0;
 }

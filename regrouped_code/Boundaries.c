@@ -66,7 +66,7 @@ start_boundary_y = end_boundary_y;
 			former_y=y_position;
       if( abs(y_position-initial_position_y)<20 ) { //returned to initial position
 	printf("relative_angle = %f\n",relative_angle);
-	add_bound_line(&boundaries,start_boundary_x,start_boundary_y, start_boundary,0);
+	add_bound_line(&boundaries,start_boundary_x,y_position, start_boundary,0);
         if((relative_angle-180.0)<0) rotate_car(relative_angle,'R',SPEED_CIRCULAR);
         else rotate_car((360.0-relative_angle),'L',SPEED_CIRCULAR);
 				return;
@@ -130,6 +130,6 @@ start_boundary_y = end_boundary_y;
 		rotate_car(angle,'R',SPEED_CIRCULAR);//get awaay from the corner so turn to the charted obstacle move back then 180
 		move(SPEED_LINEAR,timeToStop*2,0,'B');
 		rotate_car(180.0,'L',SPEED_CIRCULAR);
-    print_map(map);
+    //print_map(map);
 	}
 }
