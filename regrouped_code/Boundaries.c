@@ -65,8 +65,10 @@ start_boundary_y = end_boundary_y;
 			former_x=x_position;
 			former_y=y_position;
       if( abs(y_position-initial_position_y)<20 ) { //returned to initial position
-        if(relative_angle<0) rotate_car(relative_angle,'L',SPEED_CIRCULAR);
-        else rotate_car(relative_angle,'R',SPEED_CIRCULAR);
+	printf("relative_angle = %f\n",relative_angle);
+	add_bound_line(&boundaries,start_boundary_x,start_boundary_y, start_boundary,0);
+        if((relative_angle-180.0)<0) rotate_car(relative_angle,'R',SPEED_CIRCULAR);
+        else rotate_car((360.0-relative_angle),'L',SPEED_CIRCULAR);
 				return;
   		}
       start_boundary_x=end_boundary_x; // We are to the right of the boundary
@@ -80,7 +82,7 @@ start_boundary_y = end_boundary_y;
 
       rotate_car(90.0,'R',SPEED_CIRCULAR);
 			if(read_US()<200){ //if the boundary is still there
-				printf("OBSTACLE IS STILL HERE!!\n",);
+				printf("OBSTACLE IS STILL HERE!!\n");
         US_VAL = read_US();
         end_boundary_x=((US_VAL/10*cos(relative_angle*val))+x_position);//The boundary is definetly still here so we draw it form the start to the end
         end_boundary_y=(y_position +(US_VAL/10*sin(relative_angle*val)));

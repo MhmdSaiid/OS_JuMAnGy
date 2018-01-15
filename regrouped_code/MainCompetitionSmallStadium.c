@@ -112,6 +112,9 @@ int main (void )
         }
 	printf("thread launched\n");
 	map = small_stadium_map(120,200);//create map
+	release();
+	printf("released");
+	print_map(map);
 	scouting(); //explore and identify obstacles 
 	
 	send_map(socket_number, map); //send the resulting map

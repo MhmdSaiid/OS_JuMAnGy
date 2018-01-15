@@ -89,6 +89,8 @@ bool timeout = false;
 uint8_t * map;
 boundary_t * boundaries=NULL;
 int finished=0;
+extern float XMAX;
+extern float YMAX;
 
 int main(void)
 {
@@ -122,10 +124,18 @@ int main(void)
 	bound();
 	printf("DEBUG bound finished getSize incomming\n");
 	getSize(boundaries);
+	if(XMAX==0 || YMAX==0)
+	{
+		x_position = 10.0;
+		map = small_stadium_map(80*5,80*5);
+	}
+	else{
 	printf("GET SIZE DONE\n");
-	map=initializeMap(boundaries);
+	map = initializeMap(boundaries);
 	printf("DEBUG map Initialized\n");
+	}
 	print_map(map);
+	
 
 	//scouting();
 	TOUCHED = _check_pressed( sn_touch);

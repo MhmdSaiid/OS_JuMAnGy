@@ -114,6 +114,7 @@ int main (void )
 	printf("thread launched\n");
 	bound();
 	print_map(map);
+	release();
 	scouting(); //explore and identify obstacles 
 	
 	send_map(socket_number, map); //send the resulting map

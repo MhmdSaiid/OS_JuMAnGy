@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "ev3.h"
 #include "ev3_port.h"
 #include "ev3_tacho.h"
@@ -37,7 +38,8 @@ extern float ANG_VAL;
 extern pthread_mutex_t myMutex;
 extern pthread_cond_t obstacleDetected;
 extern timeout;
-
+extern uint8_t * map;
+extern float val;
 
 /* Movement functions
 */
@@ -438,6 +440,11 @@ void release()
 {
 	/*written by Armand Peron*/
 	open_servo();
+	setOnMap(map,(int)floor(x_position-20*cos(relative_angle*val)),(int)floor(y_position-20*sin(relative_angle*val)),UNMOVABLE);
+	printf("positions obstacles : %d, Ã%d\n", (int)floor(x_position-20*cos(relative_angle*val)),(int)floor(y_position-20*sin(relative_angle*val)));
+ 	int xbegin = (int) floor(x_position);
+	int ybegin = (int)floor(y_position);
 	move(SPEED_LINEAR, 1000, 0, 'F');
+	add_big_line_of(map, xbegin, ybegin,  (int) floor(x_position), (int) floor(y_position), 20, EMPTY);
 	close_servo();
 }
