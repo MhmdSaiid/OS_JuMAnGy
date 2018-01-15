@@ -19,9 +19,10 @@
 #include "defines.h"
 #endif
 //#define SERV_ADDR   "5C:51:4F:A9:25:76"     /* Whatever the address of the server is */
-//#define SERV_ADDR   "dc:53:60:ad:61:90"     /* Whatever the address of the server is */
+//#define SERV_ADDR   "DC:53:60:AD:61:90"     /* Whatever the address of the server is */
 //#define SERV_ADDR   "54:27:1E:35:B8:D6"     /* Whatever the address of the server is */
 #define SERV_ADDR "54:27:1E:35:B8:D6" //justine's computer
+//#define SERV_ADDR "DC:1A:7D:DA:71:06"//
 //#define SERV_ADDR "00:1A:7D:DA:71:06" //teachers'one
 #define TEAM_ID     13                       /* Your team ID */
 
@@ -128,7 +129,7 @@ write(s, string, 10);
 
 void* finish(void* arg)
 {/*Written by Mohammed Saeed*/
-Sleep(3*60*1000+30*1000);
+Sleep(0*60*1000+20*1000);
 finished=1;
 //printf("FINISHED\n");
 return NULL;
