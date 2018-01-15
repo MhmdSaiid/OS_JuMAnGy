@@ -53,23 +53,7 @@ extern pthread_cond_t obstacleDetected;
 
 extern pthread_mutex_t myMutex;
 extern pthread_cond_t obstacleDetected;
-/*
-void *readingSensors(void) {
-        printf("Hello from the thread\n");
-	uint8_t sn_touch;
-	long int i=0;
-	update_sensors_value();
-        while (!detect_obstacle()) {
-		update_sensors_value();
-		i++;
 
-        }
-	printf("Nb Check = %d\n",i);
-	printf("Obstacle Detected!!\n ");
-	stop_car();
-	pthread_cond_signal(&obstacleDetected);
-}
-*/
 int moveThread(int speed, int timeInMs,int inf/*If we want to go until an obstacle is found*/,char D){
 	/*written by Gautier Dervaux*/
 	pthread_mutex_init(&myMutex , NULL ) ;

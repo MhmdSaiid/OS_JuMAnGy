@@ -20,7 +20,7 @@ extern float val;
 extern boundary_t ** boundaries;
 extern float US_VAL;
 extern uint8_t * map;
-int BigStadiumWidth = 120;
+extern int BigStadiumWidth;
 
 void bound(void )
 {
@@ -72,7 +72,7 @@ start_boundary_y = end_boundary_y;
 			former_y=y_position;
       if( abs(y_position-initial_position_y)<20 ) { //returned to initial position
 	printf("relative_angle = %f\n",relative_angle);
-	add_bound_line(&boundaries,start_boundary_x,y_position, start_boundary,0);
+	add_bound_line(&boundaries,start_boundary_x,y_position, start_boundary_x,0);
         if((relative_angle-180.0)<0) rotate_car(relative_angle,'R',SPEED_CIRCULAR);
         else rotate_car((360.0-relative_angle),'L',SPEED_CIRCULAR);
 				return;

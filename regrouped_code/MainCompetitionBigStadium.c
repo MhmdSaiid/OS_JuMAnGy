@@ -81,6 +81,8 @@ bool TOUCHED;
 float US_VAL;
 float ANG_VAL;
 bool TOUCHING;
+extern float XMAX;
+extern float YMAX;
 int socket_number; //Defined by the thread that handles the socket
 pthread_mutex_t myMutex;
 pthread_cond_t obstacleDetected;
@@ -88,6 +90,7 @@ bool timeout = false;
 uint8_t * map;
 boundary_t * boundaries=NULL;
 int finished = 0;
+int BigStadiumWidth = 120;
 
 int main (void )
 {
